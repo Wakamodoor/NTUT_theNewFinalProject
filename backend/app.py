@@ -10,6 +10,9 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         super(DecimalEncoder , self).default(o)
 
+db = mariadb.connect(host="localhost",user="root", passwd="root",db="forumors")
+
+cursor = db.cursor()
 
 app = Flask(__name__)
 CORS(app)
@@ -36,11 +39,6 @@ def get_stores():
 
 @app.route('/test')
 def get_test():
-    
-    db = mariadb.connect(host="localhost",user="root",
-                        passwd="root",db="forumors")
-
-    cursor = db.cursor()
 
     userid= "5351047"
 
@@ -53,19 +51,25 @@ def get_test():
 
     result = cursor.fetchall()
 
-    for raw in result:{
-        print(raw)
-    }
-
     return jsonify(result)
+
+@app.route('/chart_evergreen' , methods=['GET'])
+def get_chart_evergreen():
+
+    selectSQL = "SELECT year(date) AS 年份, MONTH(date) AS 月份 ,sum(volume),avg(closing),count(*) as 每月天數 FROM evergreen GROUP BY  月份,年份 order BY  date"
+
+    cursor.execute(selectSQL )
+
+    result = list(cursor.fetchall())
+
+    b=json.dumps(result , cls=DecimalEncoder ,ensure_ascii=False)
+
+    return b
 
 @app.route('/chart_1/<string:username>',methods=['GET'])
 def get_chart1(username):
 
     name = str(username)
-
-    db = mariadb.connect(host="localhost",user="root",
-                        passwd="root",db="forumors")
 
     cursor = db.cursor()
 
@@ -77,20 +81,6 @@ def get_chart1(username):
 
     cursor.execute(selectSQL %name)
 
-    listresult = list(cursor.fetchall())
+    result = list(cursor.fetchall())
 
-    selectSQL2 = "SELECT year(date) AS 年份, MONTH(date) AS 月份 ,sum(volume),avg(closing),count(*) as 每月天數 FROM evergreen GROUP BY  月份,年份 order BY  date"
-
-    cursor.execute(selectSQL2 )
-
-    result2 = list(cursor.fetchall())
-
-    listresult.append(result2)
-
-    print(listresult)
-
-    a=jsonify(listresult)
-
-    b=json.dumps(listresult , cls=DecimalEncoder ,ensure_ascii=False)
-
-    return b
+    return json.dumps(result , cls = DecimalEncoder)
