@@ -12,7 +12,7 @@ class DecimalEncoder(json.JSONEncoder):
 
 db = mariadb.connect(host="localhost",user="root", passwd="root",db="forumors")
 
-cursor = db.cursor()
+cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
 app = Flask(__name__)
 CORS(app)
@@ -42,12 +42,9 @@ def get_test():
 
     userid= "5351047"
 
-
     selectSQL = "SELECT articleid,time FROM comment WHERE userid=%s "
 
     cursor.execute(selectSQL %userid)
-
-    #cursor.execute("SELECT articleid,time FROM comment WHERE userid = 5351047")
 
     result = cursor.fetchall()
 
@@ -56,31 +53,23 @@ def get_test():
 @app.route('/chart_evergreen' , methods=['GET'])
 def get_chart_evergreen():
 
-    selectSQL = "SELECT year(date) AS 年份, MONTH(date) AS 月份 ,sum(volume),avg(closing),count(*) as 每月天數 FROM evergreen GROUP BY  月份,年份 order BY  date"
+    selectSQL = "SELECT year(date) AS year, MONTH(date) AS month ,sum(volume) AS sumVol ,avg(closing) as avgClose,count(*) as countDay FROM evergreen GROUP BY  month,year order BY  date"
 
     cursor.execute(selectSQL )
 
-    result = list(cursor.fetchall())
+    result = cursor.fetchall()
 
-    b=json.dumps(result , cls=DecimalEncoder ,ensure_ascii=False)
-
-    return b
+    return json.dumps(result , cls=DecimalEncoder ,ensure_ascii=False)
 
 @app.route('/chart_1/<string:username>',methods=['GET'])
 def get_chart1(username):
 
     name = str(username)
 
-    cursor = db.cursor()
-
-    #selectSQL = "SELECT * FROM comment WHERE username = "+" ' "+ "%s" +"'"
-
-    selectSQL = "SELECT year(TIME) AS 年份, MONTH(TIME) AS 月份 ,username,count(*) as 每月發文量 FROM `comment` where  username = " + "'"  + "%s" + "'"  + " GROUP BY 月份,username order BY  time,username"
-
-    print(selectSQL %name)
+    selectSQL = "SELECT year(TIME) AS year, MONTH(TIME) AS month ,username,count(*) as volOfMonth FROM `comment` where  username = " + "'"  + "%s" + "'"  + " GROUP BY year,month,username order BY  time,username"
 
     cursor.execute(selectSQL %name)
 
-    result = list(cursor.fetchall())
+    result = cursor.fetchall()
 
-    return json.dumps(result , cls = DecimalEncoder)
+    return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False)
