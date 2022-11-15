@@ -1,7 +1,15 @@
+import decimal
 from flask import Flask , jsonify , request ,render_template
 import MySQLdb as mariadb
 import json
 from flask_cors import CORS
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self,o):
+        if isinstance(o, decimal.Decimal):
+            return float(o)
+        super(DecimalEncoder , self).default(o)
+
 
 app = Flask(__name__)
 CORS(app)
@@ -65,6 +73,8 @@ def get_chart1(username):
 
     selectSQL = "SELECT year(TIME) AS 年份, MONTH(TIME) AS 月份 ,username,count(*) as 每月發文量 FROM `comment` where  username = " + "'"  + "%s" + "'"  + " GROUP BY 月份,username order BY  time,username"
 
+    print(selectSQL %name)
+
     cursor.execute(selectSQL %name)
 
     listresult = list(cursor.fetchall())
@@ -77,4 +87,10 @@ def get_chart1(username):
 
     listresult.append(result2)
 
-    return jsonify(listresult)
+    print(listresult)
+
+    a=jsonify(listresult)
+
+    b=json.dumps(listresult , cls=DecimalEncoder ,ensure_ascii=False)
+
+    return b
