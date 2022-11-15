@@ -1,7 +1,7 @@
 from flask import Flask , jsonify , request ,render_template
-from flask_cors import CORS
 import MySQLdb as mariadb
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
@@ -29,7 +29,8 @@ def get_stores():
 @app.route('/test')
 def get_test():
     
-    db = mariadb.connect(host="localhost",user="root",db="forumors")
+    db = mariadb.connect(host="localhost",user="root",
+                        passwd="root",db="forumors")
 
     cursor = db.cursor()
 
@@ -55,18 +56,25 @@ def get_chart1(username):
 
     name = str(username)
 
-    db = mariadb.connect(host="localhost",user="root",db="forumors")
+    db = mariadb.connect(host="localhost",user="root",
+                        passwd="root",db="forumors")
 
     cursor = db.cursor()
 
     #selectSQL = "SELECT * FROM comment WHERE username = "+" ' "+ "%s" +"'"
 
-    selectSQL = "SELECT year(TIME) AS 年份, MONTH(TIME) AS 月份 ,username,count(*) as 每月發文量 FROM `comment` where  username = "+"'"  + "%s"+"'"  + " GROUP BY  月份,username order BY  time,username"
-
-    print(selectSQL %name)
+    selectSQL = "SELECT year(TIME) AS 年份, MONTH(TIME) AS 月份 ,username,count(*) as 每月發文量 FROM `comment` where  username = " + "'"  + "%s" + "'"  + " GROUP BY 月份,username order BY  time,username"
 
     cursor.execute(selectSQL %name)
 
-    result = cursor.fetchall()
+    listresult = list(cursor.fetchall())
 
-    return jsonify(result)
+    selectSQL2 = "SELECT year(date) AS 年份, MONTH(date) AS 月份 ,sum(volume),avg(closing),count(*) as 每月天數 FROM evergreen GROUP BY  月份,年份 order BY  date"
+
+    cursor.execute(selectSQL2 )
+
+    result2 = list(cursor.fetchall())
+
+    listresult.append(result2)
+
+    return jsonify(listresult)
