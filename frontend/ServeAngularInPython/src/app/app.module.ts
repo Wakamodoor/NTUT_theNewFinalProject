@@ -8,6 +8,7 @@ import { HomeComponent } from './display/home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     NgxEchartsModule.forRoot({

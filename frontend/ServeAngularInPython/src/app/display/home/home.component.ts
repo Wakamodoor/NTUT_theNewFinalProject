@@ -3,7 +3,7 @@ import { ChartService } from '../../helper/services/chart.service';
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { TitleStrategy } from '@angular/router';
-import { map } from 'rxjs';
+import { concatMap, filter, forkJoin, map, range } from 'rxjs';
 
 type EChartsOption = echarts.EChartsOption;
 
@@ -11,7 +11,7 @@ type EChartsOption = echarts.EChartsOption;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
@@ -27,37 +27,45 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAPITest()
+    this.chr1DataBuild()
+    // this.socket.getCommonAPI().subscribe(rel => console.log(rel.response))
   }
 
-  getAPITest() {
+  chr1DataBuild() {
     this.socket.getAPI('chart_1', '阿土伯').pipe(
       map(arr => {
         let newArr: any = arr.response
-        newArr.forEach((ele: Array<string>) => {
-          ele.push(`${ele[0]}/${ele[1]}`)
+        newArr.forEach((obj: object) => {
+          obj['yearMonth'] = `${obj['year']}/${obj['month']}`
         });
         return newArr
-      }
-      )
+      }),
     ).subscribe(rel => {
-      this.chr1DataTran(rel)
+      let xData: Array<string> = []
+      let yData: object = {
+        "volOfMonth": [],
+        "avgClose": []
+      }
+      rel.map((obj: object) => {
+        xData.push(obj['yearMonth']),
+        yData['volOfMonth'].push(obj['volOfMonth'])
+      })
+      this.socket.getCommonAPI().pipe(map(arr2 => {
+        let newArr2: any = arr2.response
+        newArr2.forEach((obj: object) => {
+          obj['yearMonth'] = `${obj['year']}/${obj['month']}`
+        });
+        return newArr2
+      })
+      ).subscribe(rel2 => {
+        rel2.forEach(ele => {
+          if(xData.includes(ele['yearMonth'])) {
+            yData['avgClose'].push(Math.round(ele['avgClose']*100)/100)
+          }
+        })
+        this.options.push(this.cs.Chart1(xData, yData))
+      })
     })
-  }
-
-  chr1DataTran(rel: any) {
-    let xData: Array<string> = []
-    rel.map((arr: Array<string>) => xData.push(arr[4]))
-
-    let yData: Array<any> = []
-    let postNum: Array<string> = []
-
-    rel.map((arr: Array<string>) => {
-      yData.push(arr[3])
-    })
-    // yData.push(postNum)
-
-    this.options.push(this.cs.Chart1(xData, yData))
   }
 
 }

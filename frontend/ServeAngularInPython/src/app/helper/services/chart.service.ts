@@ -10,7 +10,7 @@ export class ChartService {
 
   constructor() { }
 
-  Chart1(xData: Array<string>, yData: Array<string>) {
+  Chart1(xData: Array<string>, yData: object) {
     let options: EChartsOption = {
       tooltip: {
         trigger: 'axis',
@@ -19,7 +19,7 @@ export class ChartService {
         }
       },
       legend: {
-        data: ['成交量', '股價']
+        data: ['月發文量', '平均月收盤價']
       },
       xAxis: {
         type: 'category',
@@ -28,7 +28,7 @@ export class ChartService {
       yAxis:[
         {
           type: 'value',
-          name: '成交量',
+          name: '月發文量',
           position: 'left',
           axisLine: {
             show: true,
@@ -39,7 +39,7 @@ export class ChartService {
         },
         {
           type: 'value',
-          name: '股價',
+          name: '平均月收盤價',
           position: 'right',
           axisLine: {
             show: true
@@ -52,15 +52,15 @@ export class ChartService {
       ,
       series: [
         {
-          data: yData,
-          name: '成交量',
+          data: yData['volOfMonth'],
+          name: '月發文量',
           type: 'line',
           yAxisIndex: 1,
           smooth: true
         },
         {
-          data: [820, 932, 901, 934, 1290, 1330, 200, 500, 256, 1280, 579, 847],
-          name: '股價',
+          data: yData['avgClose'],
+          name: '平均月收盤價',
           type: 'bar',
         }
       ]
