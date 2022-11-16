@@ -12,5 +12,13 @@
     <div class="words"></div>
   </div>
 </div> -->
-<div echarts [options]="options[0]" id="linechart" style="width: 600px;height:400px;"></div>
+<mat-form-field appearance="outline">
+  <mat-label>選擇作者</mat-label>
+  <mat-select #author>
+    <mat-option value="阿土伯">阿土伯</mat-option>
+    <mat-option value="E神">E神</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-button (click)="chr1DataBuild(author.value)">搜尋</button>
+<div echarts [options]="options" id="linechart" style="width: 600px;height:400px;"></div>
 

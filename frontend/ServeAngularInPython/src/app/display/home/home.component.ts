@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { TitleStrategy } from '@angular/router';
 import { concatMap, filter, forkJoin, map, range } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 type EChartsOption = echarts.EChartsOption;
 
@@ -15,24 +16,30 @@ type EChartsOption = echarts.EChartsOption;
 })
 export class HomeComponent implements OnInit {
 
+  formData: FormGroup
+
   chartDom = document.getElementById('linechart')!;
 
   chartData: any
 
-  options: Array<EChartsOption> = []
+  options: EChartsOption = {}
 
   constructor(
     private cs: ChartService,
-    private socket: SocketService
+    private socket: SocketService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.chr1DataBuild()
+    // this.chr1DataBuild()
+    this.formData = this.createQueryForm()
     // this.socket.getCommonAPI().subscribe(rel => console.log(rel.response))
   }
 
-  chr1DataBuild() {
-    this.socket.getAPI('chart_1', '阿土伯').pipe(
+  chr1DataBuild(author: any) {
+    // const author = this.formData.getRawValue().autohor
+    console.log(author)
+    this.socket.getAPI('chart_1', author).pipe(
       map(arr => {
         let newArr: any = arr.response
         newArr.forEach((obj: object) => {
@@ -41,6 +48,7 @@ export class HomeComponent implements OnInit {
         return newArr
       }),
     ).subscribe(rel => {
+      console.log(rel)
       let xData: Array<string> = []
       let yData: object = {
         "volOfMonth": [],
@@ -63,9 +71,15 @@ export class HomeComponent implements OnInit {
             yData['avgClose'].push(Math.round(ele['avgClose']*100)/100)
           }
         })
-        this.options.push(this.cs.Chart1(xData, yData))
+        this.options = this.cs.Chart1(xData, yData)
       })
     })
+  }
+
+  private createQueryForm(): FormGroup {
+    return this.fb.group({
+      author: ['阿土伯']
+    });
   }
 
 }

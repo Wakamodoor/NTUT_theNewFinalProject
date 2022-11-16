@@ -9,7 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShareMaterialsModule } from './helper/material/share-materials.module'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,13 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
+    ShareMaterialsModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
