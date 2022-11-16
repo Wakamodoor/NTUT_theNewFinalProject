@@ -33,7 +33,7 @@ export class ChartService {
           axisLine: {
             show: true,
             lineStyle: {
-              color: '#ff0000'
+              color: '#4C9E75'
             }
           }
         },
@@ -42,7 +42,10 @@ export class ChartService {
           name: '平均月收盤價',
           position: 'right',
           axisLine: {
-            show: true
+            show: true,
+            lineStyle: {
+              color: '#9E3326'
+            }
           },
           axisLabel: {
             formatter: '{value} 元'
@@ -54,14 +57,16 @@ export class ChartService {
         {
           data: yData['volOfMonth'],
           name: '月發文量',
-          type: 'line',
+          type: 'bar',
           yAxisIndex: 1,
-          smooth: true
+          color: "#4C9E75"
         },
         {
           data: yData['avgClose'],
           name: '平均月收盤價',
-          type: 'bar',
+          type: 'line',
+          smooth: true,
+          color: '#9E3326'
         }
       ]
     };

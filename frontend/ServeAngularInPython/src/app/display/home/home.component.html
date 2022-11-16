@@ -1,3 +1,20 @@
+<div class="home">
+  <div class="chart1">
+    <div class="form">
+      <mat-label class="lebel">選擇作者</mat-label>
+      <mat-form-field appearance="outline" [formGroup]="formData">
+        <mat-select formControlName="author" (selectionChange)="chr1DataBuild($event.value)">
+          <mat-option *ngFor="let name of everGreenKOL" [value]="name">{{name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- <button mat-button (click)="chr1DataBuild(author.value)">搜尋</button> -->
+    <div echarts class="chart" id="chart"
+      [options]="options"
+      style="width: 600px;height: 400px;">
+    </div>
+  </div>
+</div>
 <!-- <div class="storyList">
   <div class="story story1">
     <div class="image"></div>
@@ -12,13 +29,5 @@
     <div class="words"></div>
   </div>
 </div> -->
-<mat-form-field appearance="outline">
-  <mat-label>選擇作者</mat-label>
-  <mat-select #author>
-    <mat-option value="阿土伯">阿土伯</mat-option>
-    <mat-option value="E神">E神</mat-option>
-  </mat-select>
-</mat-form-field>
-<button mat-button (click)="chr1DataBuild(author.value)">搜尋</button>
-<div echarts [options]="options" id="linechart" style="width: 600px;height:400px;"></div>
+
 

@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
 
   formData: FormGroup
 
-  chartDom = document.getElementById('linechart')!;
+  everGreenKOL = ['阿土伯', 'E神']
+  // chartDom = document.getElementById('linechart')!;
 
   chartData: any
 
@@ -31,9 +32,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.chr1DataBuild()
     this.formData = this.createQueryForm()
-    // this.socket.getCommonAPI().subscribe(rel => console.log(rel.response))
+    this.chr1DataBuild(this.formData.getRawValue().author)
   }
 
   chr1DataBuild(author: any) {
