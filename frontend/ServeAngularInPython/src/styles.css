@@ -1,9 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
+
 * {
   padding: 0;
   margin: 0;
 }
 
+/* icon font改字體的話會壞掉 */
+:not(i) {
+  /* 黑體 */
+  /* font-family: 'Noto Sans TC', sans-serif; */
+
+  /* 明體 */
+  font-family: 'Noto Serif TC', serif;
+}
+
+.body {
+  background-color: #F7F1F0 ;
+  min-height: 100%;
+  padding-top: 70px;
+}
+
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+
+}

@@ -8,6 +8,11 @@
   display: flex;
   justify-content: space-between;
   z-index: 1;
+  transition: all 0.5s;
+}
+
+div.nav--hidden {
+  transform: translateY(-100%);
 }
 
 .logo {

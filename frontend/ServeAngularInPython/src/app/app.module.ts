@@ -12,13 +12,17 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShareMaterialsModule } from './helper/material/share-materials.module'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
+import { ApologizeComponent } from './display/features/apologize/apologize.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    ApologizeComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ShareMaterialsModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxHideOnScrollModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
