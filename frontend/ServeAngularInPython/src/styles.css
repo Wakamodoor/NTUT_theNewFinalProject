@@ -1,6 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
+:root {
+  --main-color: #F4BB0E;
+  --deco-color: #006E61;
+
+  /* 預備色
+    藍色: #00C2E4;
+    綠色: #409130 #00AF98;
+    灰色: #DFE0DF;
+  */
+}
 
 * {
   padding: 0;
@@ -17,7 +27,8 @@
 }
 
 .body {
-  background-color: #F7F1F0 ;
+  /* background-color: #DFE0DF; */
+  background-color: #fff;
   min-height: 100%;
   padding-top: 70px;
 }

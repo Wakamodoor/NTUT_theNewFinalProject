@@ -3,26 +3,39 @@
   height: 70px;
   position: fixed;
   top: 0;
-  background: #A15C38;
+  background: #fff;
   opacity: 1;
   display: flex;
   justify-content: space-between;
   z-index: 1;
   transition: all 0.5s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, .1);
+  /* box-shadow: 0px 2px 4px rgba(194, 150, 0, .3); */
+  /* outline: 1px solid rgba(0, 0, 0, .1); */
 }
-
 div.nav--hidden {
   transform: translateY(-100%);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 }
 
 .logo {
   /* outline: 1px solid #fff; */
 }
 
+.deco {
+  border-color: var(--main-color) transparent transparent transparent;
+  border-style: solid;
+  border-width: 30px;
+  width: 200px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
 .funBtn {
   height: 100%;
   max-width: 50%;
-  /* outline: 1px solid #fff; */
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -44,4 +57,6 @@ div.nav--hidden {
   background: transparent;
   font-weight: 900;
   font-size: 16px;
+  color: var(--main-color);
+  text-decoration: underline var(--main-color) dotted 2.5px;
 }

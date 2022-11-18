@@ -17,7 +17,7 @@
 .form .lebel {
   font-size: 18px;
   font-weight: 900;
-  border-bottom: 2px solid #409130;
+  border-bottom: 5px solid var(--deco-color);
   margin-bottom: 5px;
 }
 
