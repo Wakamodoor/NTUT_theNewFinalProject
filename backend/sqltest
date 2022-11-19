@@ -1,0 +1,28 @@
+import decimal
+import MySQLdb as mariadb
+import json
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self,o):
+        if isinstance(o, decimal.Decimal):
+            return float(o)
+        super(DecimalEncoder , self).default(o)
+
+db = mariadb.connect(host="localhost",user="root", passwd="root",db="forumors")
+
+cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
+
+selectSQL = "SELECT year(date) AS 年份, MONTH(date) AS 月份 ,sum(volume),avg(closing),count(*) as 每月天數 FROM evergreen GROUP BY  月份,年份 order BY  date"
+
+cursor.execute(selectSQL )
+
+result = cursor.fetchall()
+
+print(result)
+
+print(type(result))
+
+print('---------------')
+
+#print(json.dumps(result , cls=DecimalEncoder))
+
