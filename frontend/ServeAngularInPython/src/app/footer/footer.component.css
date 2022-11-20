@@ -17,7 +17,8 @@
 }
 
 .msg {
-  color: #fff;
+  color: var(--reverse-grey-text-color);
+  /* color: #fff; */
   margin: 0;
   text-decoration: none;
   transition: all 0.3s;
@@ -34,7 +35,7 @@
 .copyright {
   width: fit-content;
   height: fit-content;
-  color: #fff;
+  color: var(--reverse-grey-text-color);
   position: absolute;
   left: 0;
   right: 0;
@@ -57,10 +58,10 @@
 }
 
 .icons i {
-  color: #fff;
+  color: var(--reverse-grey-text-color);
   font-size: 24px;
   margin: auto;
-  transition: all .2s, border-radius 0s;
+  transition: all .2s, border-radius 0s, color 0s;
 }
 
 .icons i:hover {
@@ -75,6 +76,7 @@
 .icons i.fa-instagram:hover {
   background-image: linear-gradient(to bottom left, #833AB4, #FFDC80);
   border-radius: 23%;
+  color: #fff
 }
 
 .icons i.fa-twitter:hover {

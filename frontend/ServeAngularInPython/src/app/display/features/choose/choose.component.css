@@ -1,0 +1,32 @@
+.body {
+  overflow: hidden;
+}
+
+.imgGroup {
+  outline: 1px solid #000;
+
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.stock2603 {
+  background-image: url("../../../../assets/image/tiger.jpg");
+  background-repeat: no-repeat;
+  outline: 1px solid #000;
+  width: 50%;
+  height: 80%;
+}
+
+/* img {
+  width: 65%;
+  height: 100%;
+  object-fit: cover;
+} */

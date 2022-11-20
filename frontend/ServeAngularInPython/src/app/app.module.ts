@@ -14,6 +14,8 @@ import { ShareMaterialsModule } from './helper/material/share-materials.module'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
 import { ApologizeComponent } from './display/features/apologize/apologize.component';
+import { ChooseComponent } from './display/features/choose/choose.component';
+import { SnakebarComponent } from './helper/tools/snakebar/snakebar.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { ApologizeComponent } from './display/features/apologize/apologize.compo
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    ApologizeComponent
+    ApologizeComponent,
+    ChooseComponent,
+    SnakebarComponent
   ],
   imports: [
     BrowserModule,
