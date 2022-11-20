@@ -4,6 +4,7 @@
 :root {
   --main-color: #F4BB0E;
   --deco-color: #006E61;
+  --reverse-grey-text-color: #4E4637;
 
   /* 預備色
     藍色: #00C2E4;
@@ -38,5 +39,20 @@ html, body { height: 100%; }
 body {
   margin: 0;
   /* font-family: Roboto, "Helvetica Neue", sans-serif; */
-
 }
+
+.snakebar-panel {
+  /* margin: 0 !important; */
+  padding: 0 !important;
+  /* background: #fff; */
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, .3);
+  transition: all 1s !important;
+  position: relative;
+  z-index: 1 !important;
+  overflow: hidden;
+}
+
+/* .snakebar-panel:hover { */
+  /* background: var(--main-color); */
+  /* cursor: pointer;
+} */

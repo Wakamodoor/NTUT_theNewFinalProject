@@ -1,0 +1,41 @@
+.snakebar-panel {
+  width: 344px;
+  height: 48px;
+  background: #fff;
+  z-index: 100;
+  outline: 1px solid #fff;
+}
+
+.snakebar-panel:hover {
+  /* background: var(--main-color); */
+  cursor: pointer;
+}
+
+
+.main-word {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  color: var(--main-color);
+}
+
+.cancel {
+  width: 100%;
+  height: 7px;
+  background: red;
+  position: absolute;
+  bottom: -7px;
+  transition: all .3s;
+}
+
+.snakebar-panel:hover .cancel{
+  bottom: 0;
+}
+
+
+
