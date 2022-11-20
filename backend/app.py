@@ -10,7 +10,7 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         super(DecimalEncoder , self).default(o)
 
-db = mariadb.connect(host="localhost",user="root",db="forumors")
+db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
@@ -53,7 +53,7 @@ def get_test():
 @app.route('/chart_evergreen' , methods=['GET'])
 def get_chart_evergreen():
 
-    selectSQL = "SELECT year(date) AS year, MONTH(date) AS month ,sum(volume) AS sumVol ,avg(closing) as avgClose,count(*) as countDay FROM evergreen GROUP BY  month,year order BY  date"
+    selectSQL = "SELECT year(datetime) AS year, MONTH(datetime) AS month ,sum(volume) AS sumVol ,round(avg(endprice),2) as avgClose,count(*) as countDay FROM evergreenprice GROUP BY  month,year order BY  datetime"
 
     cursor.execute(selectSQL )
 
@@ -66,7 +66,7 @@ def get_chart1(username):
 
     name = str(username)
 
-    selectSQL = "SELECT year(TIME) AS year, MONTH(TIME) AS month ,username,count(*) as volOfMonth FROM `comment` where  username = " + "'"  + "%s" + "'"  + " GROUP BY year,month,username order BY  time,username"
+    selectSQL = "SELECT year(datetime) AS year, MONTH(datetime) AS month ,username,count(*) as volOfMonth FROM `evergreencomment` where  username = " + "'"  + "%s" + "'"  + " GROUP BY year,month,username order BY  datetime,username"
 
     cursor.execute(selectSQL %name)
 
