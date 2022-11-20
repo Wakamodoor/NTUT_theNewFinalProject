@@ -1,0 +1,17 @@
+<div class="body">
+  <div class="chart1">
+    <div class="form">
+      <mat-label class="lebel">選擇作者</mat-label>
+      <mat-form-field appearance="outline" [formGroup]="formData">
+        <mat-select formControlName="author" (selectionChange)="chr1DataBuild($event.value)">
+          <mat-option *ngFor="let name of everGreenKOL" [value]="name">{{name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- <button mat-button (click)="chr1DataBuild(author.value)">搜尋</button> -->
+    <div echarts class="chart" id="chart"
+      [options]="options"
+      style="width: 600px;height: 400px;">
+    </div>
+  </div>
+</div>

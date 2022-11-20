@@ -1,6 +1,6 @@
-import { SocketService } from '../../helper/services/socket.service';
-import { ChartService } from '../../helper/services/chart.service';
 import { Component, OnInit } from '@angular/core';
+import { SocketService } from '../../../helper/services/socket.service';
+import { ChartService } from '../../../helper/services/chart.service';
 import * as echarts from 'echarts';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { concatMap, filter, forkJoin, map, range } from 'rxjs';
@@ -8,13 +8,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 type EChartsOption = echarts.EChartsOption;
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-kolchart-p1',
+  templateUrl: './kolchart-p1.component.html',
+  styleUrls: ['./kolchart-p1.component.css']
 })
-export class HomeComponent implements OnInit {
+export class KolchartP1Component implements OnInit {
 
   formData: FormGroup
 
@@ -84,4 +83,3 @@ export class HomeComponent implements OnInit {
     });
   }
 }
-

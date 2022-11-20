@@ -3,30 +3,104 @@
 }
 
 .imgGroup {
-  outline: 1px solid #000;
-
+  margin: 0;
   width: 90%;
+  height: 90%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   position: absolute;
-  top: 0;
+  top: 70px;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
 }
 
-.stock2603 {
-  background-image: url("../../../../assets/image/tiger.jpg");
-  background-repeat: no-repeat;
-  outline: 1px solid #000;
-  width: 50%;
+.stock2317 {
+  width: 40%;
   height: 80%;
+  border-radius: 2%;
+  position: relative;
+  overflow: hidden;
+  transition: width .3s, height .3s .3s;
 }
 
-/* img {
-  width: 65%;
-  height: 100%;
-  object-fit: cover;
-} */
+.stock2317::before {
+  content: "";
+  background-image: url("../../../../assets/image/tiger.jpg");
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: .4;
+}
+
+.stock2317:hover{
+  width: 50%;
+  height: 95%;
+  cursor: pointer;
+}
+
+.stock2317:hover::before{
+  opacity: 1;
+}
+
+.stock2317:hover .stock{
+  color: lightgoldenrodyellow;
+}
+
+.stock2603 {
+  width: 40%;
+  height: 80%;
+  border-radius: 2%;
+  position: relative;
+  overflow: hidden;
+  transition: width .3s, height .3s .3s;
+}
+
+.stock2603::before {
+  content: "";
+  background-image: url("../../../../assets/image/dragon.jpg");
+  background-repeat: no-repeat;
+  background-size: 105%;
+  background-position-x: -8px;
+  background-position-y: -160px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: .4;
+}
+
+.stock2603:hover{
+  width: 50%;
+  height: 95%;
+  cursor: pointer;
+}
+
+.stock2603:hover::before{
+  opacity: 1;
+}
+
+.stock2603:hover .stock{
+  color: lightgoldenrodyellow;
+}
+
+.stock {
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  font-size: 145px;
+  font-weight: 900;
+  color: black;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}

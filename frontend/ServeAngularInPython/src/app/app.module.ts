@@ -16,6 +16,7 @@ import { NgxHideOnScrollModule } from 'ngx-hide-on-scroll';
 import { ApologizeComponent } from './display/features/apologize/apologize.component';
 import { ChooseComponent } from './display/features/choose/choose.component';
 import { SnakebarComponent } from './helper/tools/snakebar/snakebar.component';
+import { KolchartP1Component } from './display/features/kolchart-p1/kolchart-p1.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SnakebarComponent } from './helper/tools/snakebar/snakebar.component';
     FooterComponent,
     ApologizeComponent,
     ChooseComponent,
-    SnakebarComponent
+    SnakebarComponent,
+    KolchartP1Component
   ],
   imports: [
     BrowserModule,
