@@ -13,7 +13,7 @@ import {
 })
 export class ChooseComponent implements OnInit {
 
-  durationInSeconds: number = 2.5;
+  durationInSeconds: number = 3;
 
   constructor(
     private _snackBar: MatSnackBar
