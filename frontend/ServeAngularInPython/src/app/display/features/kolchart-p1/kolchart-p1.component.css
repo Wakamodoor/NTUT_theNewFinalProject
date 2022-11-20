@@ -1,0 +1,99 @@
+.chart1 {
+  position: relative;
+  padding-top: 20px;
+  max-width: 40%;
+  height: 500px;
+  /* outline: 1px solid #000; */
+}
+
+.form {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 8%;
+}
+
+.form .lebel {
+  font-size: 18px;
+  font-weight: 900;
+  border-bottom: 5px solid var(--deco-color);
+  margin-bottom: 5px;
+}
+
+mat-form-field {
+  font-size: 8px;
+}
+
+.form mat-select {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.chart {
+  position: absolute;
+  bottom: 0;
+}
+
+/* .storyList {
+  border: 1px solid #000;
+  background: brown;
+  height: 2367px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.story {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story1 {
+  background: yellow;
+  outline: 1px solid #000;
+}
+
+.story2 {
+  background: blue;
+  outline: 1px solid #000;
+  flex-direction: row-reverse;
+}
+
+.story3 {
+  background: green;
+  outline: 1px solid #000;
+
+}
+
+.image {
+  height: 80%;
+  width: 55%;
+  outline: 3px solid pink;
+  margin-right: 20px;
+  transition: all 0.5s;
+}
+
+.image:hover {
+  height: 85%;
+  width: 60%;
+}
+
+.words {
+  height: 80%;
+  width: 45%;
+  outline: 3px solid floralwhite;
+  transition: all 0.5s;
+}
+
+.words:hover {
+  height: 85%;
+  width: 50%;
+} */
+

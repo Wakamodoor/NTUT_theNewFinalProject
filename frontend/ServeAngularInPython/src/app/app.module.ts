@@ -17,6 +17,7 @@ import { ApologizeComponent } from './display/features/apologize/apologize.compo
 import { ChooseComponent } from './display/features/choose/choose.component';
 import { SnakebarComponent } from './helper/tools/snakebar/snakebar.component';
 import { KolchartP1Component } from './display/features/kolchart-p1/kolchart-p1.component';
+import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { KolchartP1Component } from './display/features/kolchart-p1/kolchart-p1.
     ApologizeComponent,
     ChooseComponent,
     SnakebarComponent,
-    KolchartP1Component
+    KolchartP1Component,
+    KolchartP2Component
   ],
   imports: [
     BrowserModule,
