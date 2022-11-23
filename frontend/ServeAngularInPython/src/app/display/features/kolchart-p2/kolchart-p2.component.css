@@ -1,0 +1,52 @@
+mat-form-field {
+  font-size: 8px;
+}
+
+.date mat-form-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+input{
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.date mat-hint {
+  font-size: 10px;
+}
+
+.date .dateIcon {
+  position: absolute;
+  top: -5px;
+  right: 0;
+}
+
+.queryform {
+  max-width: 50%;
+  display: flex;
+}
+
+.queryform .author {
+  margin-right: 3%;
+}
+
+.queryform .date {
+  margin-left: 3%;
+}
+
+.queryform button.submit {
+  background: var(--grey-color);
+  color: var(--reverse-grey-text-color);
+  margin-left: 2%;
+  margin-top: 0.35%;
+  transition: all .1s;
+}
+
+.queryform button.submit:hover {
+  background: var(--main-color);
+  color: #fff;
+  font-weight: 600;
+}

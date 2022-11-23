@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ajax } from 'rxjs/ajax';
+import { catchError, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +34,16 @@ export class SocketService {
     })
   }
 
-  getWordcloudAPI() {
+   /** GET: 文字雲詞與詞頻
+    * @param author 作者名稱
+    * @param startDate 起始日期
+    * @param endDate 終止日期
+    * @param stock? 股票名稱 foxconn | evergreen
+  */
+  getWordcloudAPI(author: string, startDate: string, endDate: string, stock?: string) {
     // stock: string = 'evergreen'
     return ajax({
-      url: 'http://localhost:5000/evergreen/wordcloud/E神?starttime=2021-01-01&endtime=2021-7-31',
+      url: `http://localhost:5000/evergreen/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`,
       method: 'GET',
       responseType: 'json'
     })
