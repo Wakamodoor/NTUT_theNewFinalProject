@@ -119,3 +119,14 @@ def get_wordcould(username):
     sorted_word_cnt = sorted(word_cnt.items(), key=lambda kv: kv[1], reverse=True)
 
     return(json.dumps(sorted_word_cnt))
+
+@app.route("/test02")
+def testSQL():
+
+    selectSQL = "SELECT year(datetime) AS year, MONTH(DATETIME) AS month , username , count(COMMENT) FROM foxconncomment WHERE username = 'kewei' group by year ,month "
+
+    cursor.execute(selectSQL)
+
+    result = cursor.fetchall()
+
+    return(json.dumps(result))

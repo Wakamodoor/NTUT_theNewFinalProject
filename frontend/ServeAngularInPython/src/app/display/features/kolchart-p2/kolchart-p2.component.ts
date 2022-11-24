@@ -41,7 +41,7 @@ export class KolchartP2Component implements OnInit {
   maskImage  = new Image();
   wordcloudOp = {}
 
-  authorList = ['阿土伯', 'E神']
+  authorList = ['阿土伯', 'E神', '趨勢King', '小曼姐姐', '中華英雄', 'kenviwang', '趨勢再走 勇氣要有(空軍司令)']
   option: string = ''
 
   filteredOptions: Observable<string[]>;
@@ -79,7 +79,7 @@ export class KolchartP2Component implements OnInit {
     startDate = `${startDate.year}-${startDate.month+1}-${startDate.date}`
     let endDate = form.endDate['_i']
     endDate = `${endDate.year}-${endDate.month+1}-${endDate.date}`
-
+    console.log(author)
     this.buildWordCloud(author, startDate, endDate)
   }
 

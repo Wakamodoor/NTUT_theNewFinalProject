@@ -8,11 +8,11 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         super(DecimalEncoder , self).default(o)
 
-db = mariadb.connect(host="localhost",user="root", passwd="root",db="forumors")
+db = mariadb.connect(host="localhost",user="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
-selectSQL = "SELECT year(date) AS 年份, MONTH(date) AS 月份 ,sum(volume),avg(closing),count(*) as 每月天數 FROM evergreen GROUP BY  月份,年份 order BY  date"
+selectSQL = "SELECT year(datetime) AS year, MONTH(DATETIME) AS month , username , count(COMMENT) FROM foxconncomment WHERE username = 'kewei' group by year ,month "
 
 cursor.execute(selectSQL )
 

@@ -50,3 +50,7 @@ body {
   z-index: 1 !important;
   overflow: hidden;
 }
+
+h1 {
+  margin: 0;
+}

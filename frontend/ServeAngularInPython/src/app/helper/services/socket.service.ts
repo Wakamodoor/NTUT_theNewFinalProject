@@ -42,6 +42,7 @@ export class SocketService {
   */
   getWordcloudAPI(author: string, startDate: string, endDate: string, stock?: string) {
     // stock: string = 'evergreen'
+    console.log(`http://localhost:5000/evergreen/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`)
     return ajax({
       url: `http://localhost:5000/evergreen/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`,
       method: 'GET',
