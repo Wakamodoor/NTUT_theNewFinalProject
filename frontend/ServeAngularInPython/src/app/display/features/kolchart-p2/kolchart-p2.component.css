@@ -1,3 +1,4 @@
+
 .lebel {
   font-size: 18px;
   font-weight: 900;
@@ -11,11 +12,11 @@ mat-form-field {
   font-size: 8px;
 }
 
-.date mat-form-field {
+/* .date mat-form-field {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-}
+} */
 
 input{
   color: #000;

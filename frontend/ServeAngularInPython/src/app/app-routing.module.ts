@@ -19,14 +19,18 @@ const routes: Routes = [
   {
     path: 'home/:stock',
     component: HomeComponent,
-    // children: [
-
-    //   {}
-    // ]
+  },
+  {
+    path: 'home/:stock/:author/kolchart1',
+    component: KolchartP1Component
   },
   {
     path: 'kolchart1',
     component: KolchartP1Component
+  },
+  {
+    path: 'home/:stock/:author/kolchart2',
+    component: KolchartP2Component,
   },
   {
     path: 'kolchart2',
@@ -38,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'choose',
     pathMatch: 'full'
   }
 ];

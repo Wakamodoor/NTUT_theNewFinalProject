@@ -13,6 +13,7 @@ import {
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import 'moment/locale/ja';
+import { ActivatedRoute } from '@angular/router';
 
 interface wordcloudData {
   name: string,
@@ -25,7 +26,7 @@ interface wordcloudData {
   templateUrl: './kolchart-p2.component.html',
   styleUrls: ['./kolchart-p2.component.css'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'ja-JP'},
+    {provide: MAT_DATE_LOCALE, useValue: 'zh-tw'},
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -44,6 +45,9 @@ export class KolchartP2Component implements OnInit {
   authorList = ['阿土伯', 'E神', '趨勢King', '小曼姐姐', '中華英雄', 'kenviwang', '趨勢再走 勇氣要有(空軍司令)']
   option: string = ''
 
+  fromKOL = false
+  date: string
+
   filteredOptions: Observable<string[]>;
 
   constructor(
@@ -51,6 +55,7 @@ export class KolchartP2Component implements OnInit {
     private cs: ChartService,
     private fb: FormBuilder,
     private _adapter: DateAdapter<any>,
+    private route: ActivatedRoute,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
   ) { }
 
@@ -58,7 +63,13 @@ export class KolchartP2Component implements OnInit {
     this.queryForm = this.createForm()
     // this.buildWordCloud()
 
-
+    this.route.queryParamMap.subscribe((paramsMap) => {
+      if (paramsMap['params']['date']) {
+        this.date = paramsMap['params']['date']
+      }else if (paramsMap['params']['fromKOL']) {
+        this.fromKOL = true
+      }
+    })
 
     this.filteredOptions = this.queryForm.controls['author'].valueChanges.pipe(
       startWith(''),

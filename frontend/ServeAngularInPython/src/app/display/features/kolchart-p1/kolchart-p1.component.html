@@ -9,7 +9,7 @@
       </mat-form-field>
     </div>
     <!-- <button mat-button (click)="chr1DataBuild(author.value)">搜尋</button> -->
-    <div echarts class="chart" id="chart"
+    <div echarts class="chart" id="chart" (chartClick)="sendBarClick($event)"
       [options]="options"
       style="width: 600px;height: 400px;">
     </div>

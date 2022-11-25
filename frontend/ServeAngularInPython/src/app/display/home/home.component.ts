@@ -1,10 +1,34 @@
 import { SocketService } from '../../helper/services/socket.service';
 import { ChartService } from '../../helper/services/chart.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { concatMap, filter, forkJoin, map, range } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import 'moment/locale/ja';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { Moment } from 'moment';
+import * as moment from 'moment';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'YYYY/MM',
+  },
+  display: {
+    dateInput: 'YYYY/MM',
+    monthYearLabel: 'YYYY MMM',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY MMMM',
+  },
+};
+
 
 type EChartsOption = echarts.EChartsOption;
 
@@ -13,6 +37,15 @@ type EChartsOption = echarts.EChartsOption;
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'zh-tw'},
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ],
 })
 export class HomeComponent implements OnInit {
 
@@ -25,63 +58,42 @@ export class HomeComponent implements OnInit {
 
   options: EChartsOption = {}
 
+  stock: string
+
+  title_text: string
+
+
   constructor(
     private cs: ChartService,
     private socket: SocketService,
     private fb: FormBuilder,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private _adapter: DateAdapter<any>,
+    @Inject(MAT_DATE_LOCALE) private _locale: string,
   ) { }
 
   ngOnInit(): void {
     this.formData = this.createQueryForm()
-    this.chr1DataBuild(this.formData.getRawValue().author)
-    console.log(this.router.snapshot.paramMap.get('stock'))
-  }
-
-  chr1DataBuild(author: any) {
-    // const author = this.formData.getRawValue().autohor
-    // console.log(author)
-    this.socket.getAPI('chart_1', author).pipe(
-      map(arr => {
-        let newArr: any = arr.response
-        newArr.forEach((obj: object) => {
-          obj['yearMonth'] = `${obj['year']}/${obj['month']}`
-        });
-        return newArr
-      }),
-    ).subscribe(rel => {
-      // console.log(rel)
-      let xData: Array<string> = []
-      let yData: object = {
-        "volOfMonth": [],
-        "avgClose": []
-      }
-      rel.map((obj: object) => {
-        xData.push(obj['yearMonth']),
-        yData['volOfMonth'].push(obj['volOfMonth'])
-      })
-      this.socket.getCommonAPI().pipe(map(arr2 => {
-        let newArr2: any = arr2.response
-        newArr2.forEach((obj: object) => {
-          obj['yearMonth'] = `${obj['year']}/${obj['month']}`
-        });
-        return newArr2
-      })
-      ).subscribe(rel2 => {
-        rel2.forEach(ele => {
-          if(xData.includes(ele['yearMonth'])) {
-            yData['avgClose'].push(Math.round(ele['avgClose']*100)/100)
-          }
-        })
-        this.options = this.cs.Chart1(xData, yData)
-      })
-    })
+    this.setMonthAndYear(this.formData.getRawValue().date)
+    this.stock = this.router.snapshot.paramMap.get('stock')
+    this._adapter.setLocale(this._locale);
   }
 
   private createQueryForm(): FormGroup {
     return this.fb.group({
-      author: ['阿土伯']
+      date: [moment(new Date('2022/07/31')), Validators.required]
     });
+  }
+
+  setMonthAndYear(normalizedMonthAndYear?: Moment, datepicker?: MatDatepicker<Moment>) {
+    const ctrlValue = this.formData.getRawValue()['date']!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.formData.get('date').setValue(ctrlValue);
+    this.title_text = `${normalizedMonthAndYear.year()}年${normalizedMonthAndYear.month()+1}月發文量排行榜`
+    if(datepicker) {
+      datepicker.close();
+    }
   }
 }
 
