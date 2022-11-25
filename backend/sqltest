@@ -12,9 +12,18 @@ db = mariadb.connect(host="localhost",user="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
+<<<<<<< HEAD
 selectSQL = "SELECT year(datetime) AS year, MONTH(DATETIME) AS month , username , count(COMMENT) FROM foxconncomment WHERE username = 'kewei' group by year ,month "
+=======
+starttime="2021-01-01"
+endtime="2021-01-31"
+    
+selectSQL = "SELECT * FROM (select YEAR(datetime) as 年份,month(datetime) as 月份,username ,count(*) as commentbymonth , ROW_NUMBER() over (order by COUNT(*) DESC) as ranking from evergreencomment WHERE (DATETIME BETWEEN '" + " %s " + "' AND '" + " %s " + "')   GROUP BY 年份,月份,username order by ranking ) AS a WHERE a.ranking <=5"
+>>>>>>> 65357666dcfd38f59b54b8bbaa2ca2007b1f899d
 
-cursor.execute(selectSQL )
+print(selectSQL %(starttime , endtime))
+
+cursor.execute(selectSQL %(starttime , endtime))
 
 result = cursor.fetchall()
 

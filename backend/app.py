@@ -14,12 +14,15 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         super(DecimalEncoder , self).default(o)
 
-db = mariadb.connect(host="localhost",user="root",db="forumors")
+#db = mariadb.connect(host="localhost",user="root",db="forumors")
+db = mariadb.connect(host="localhost",user="root", password="root" ,db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
-jieba.load_userdict(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\jieba dict.txt')
-stopwords = [line.strip() for line in open(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\stopwords.txt', 'r', encoding='utf-8').readlines()]
+# jieba.load_userdict(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\jieba dict.txt')
+# stopwords = [line.strip() for line in open(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\stopwords.txt', 'r', encoding='utf-8').readlines()]
+jieba.load_userdict(r'D:\北科\專題\NTUT_theNewFinalProject\backend\jieba dict.txt')
+stopwords = [line.strip() for line in open(r'D:\北科\專題\NTUT_theNewFinalProject\backend\stopwords.txt', 'r', encoding='utf-8').readlines()]
 
 app = Flask(__name__)
 app.debug=True
@@ -120,6 +123,7 @@ def get_wordcould(username):
 
     return(json.dumps(sorted_word_cnt))
 
+<<<<<<< HEAD
 @app.route("/test02")
 def testSQL():
 
@@ -129,4 +133,23 @@ def testSQL():
 
     result = cursor.fetchall()
 
+=======
+@app.route('/evergreen/ranking')
+def get_rankbymonth():
+
+    starttime=request.args.get('starttime')
+    endtime=request.args.get('endtime')
+
+    
+    selectSQL = "SELECT * FROM (select YEAR(datetime) as 年份,month(datetime) as 月份,username ,count(*) as commentbymonth , ROW_NUMBER() over (order by COUNT(*) DESC) as ranking from evergreencomment WHERE (DATETIME BETWEEN '" + " %s " + "' AND '" + " %s " + "')   GROUP BY 年份,月份,username order by ranking ) AS a WHERE a.ranking <=5"
+
+    print(selectSQL %(starttime , endtime))
+
+    cursor.execute(selectSQL %(starttime , endtime))
+
+    result = cursor.fetchall()
+
+    print(result)
+
+>>>>>>> 65357666dcfd38f59b54b8bbaa2ca2007b1f899d
     return(json.dumps(result))
