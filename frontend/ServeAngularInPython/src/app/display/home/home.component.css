@@ -4,7 +4,7 @@
 }
 
 .datepicker {
-  margin-left: 5%;
+  margin-left: 10%;
   padding-top: 3%;
 }
 
@@ -54,5 +54,129 @@ input{
   width: 90%;
   height: 1000px;
   margin: 0 auto;
-  background-image: linear-gradient(to bottom, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7d3a3f, #73363e, #68333d, #60313f, #592f3f, #502e3f, #482c3e);
+  padding-top: 10vh;
+  /* background-image: linear-gradient(to top, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7d3a3f, #73363e, #68333d, #60313f, #592f3f, #502e3f, #482c3e); */
+  background-image: radial-gradient(circle, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7c363f, #702f3f, #63293e, #552241, #441d42, #2f1942, #141740);
+}
+
+.container-leaderboard-wrapper {
+  width: 80%;
+  height: 90vh;
+  margin: 0 auto;
+  background-color: rgba(256, 256, 256, 1);
+  border-radius: 10px;
+}
+
+.leaderboard-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 3px 2px var(--main-color) ;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.leaderboard-rankcard-wrapper {
+  width: 80%;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.leaderboard-rankcard {
+  width: 100%;
+  height: 75px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  display: flex;
+  transition: all .3s;
+  position: relative;
+  /* outline: 2px solid var(--main-color); */
+}
+
+.leaderboard-rankcard:hover {
+  cursor: pointer;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, .3);
+  transform: translateY(-0.25em) translateX(-0.25rem);
+}
+
+.leaderboard-rankcard:hover .rankcard-hover-info{
+  right: 0;
+}
+
+.deco-rank {
+  background-color: red;
+  width: 10%;
+  height: 100%;
+  display: inline-block;
+  margin-right: 5%;
+  transition: all 1s;
+}
+
+.deco-rank h2 {
+  font-size: 54px;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+  padding-top: 28%;
+}
+
+.rankcard-author {
+  width: 70%;
+  /* max-width: 50%; */
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.rankcard-author h3 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 600;
+  text-decoration: var(--deco-color) underline 5px;
+  white-space: nowrap;
+}
+
+.rankcard-postAmount {
+  width: 20%;
+  height: 100%;
+  margin-left: auto; /* 取代justify-self: flex-end */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 15px;
+}
+
+.rankcard-postAmount h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.rankcard-postAmount h4 span{
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.rankcard-hover-info {
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  right: -22%;
+  background-color: var(--main-color);
+  transition: all .5s;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 2%;
+}
+
+.rankcard-hover-info h4 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.rankcard-hover-info h4 span {
+  font-size: 18px;
+  font-weight: 900;
 }
