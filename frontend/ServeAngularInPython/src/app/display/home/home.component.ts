@@ -16,6 +16,7 @@ import 'moment/locale/ja';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import SimpleParallax from 'simple-parallax-js';
 
 export const MY_FORMATS = {
   parse: {
@@ -77,6 +78,7 @@ export class HomeComponent implements OnInit {
     this.setMonthAndYear(this.formData.getRawValue().date)
     this.stock = this.router.snapshot.paramMap.get('stock')
     this._adapter.setLocale(this._locale);
+    this.parallax()
   }
 
   private createQueryForm(): FormGroup {
@@ -95,5 +97,18 @@ export class HomeComponent implements OnInit {
       datepicker.close();
     }
   }
+
+  private parallax() {
+    let img1 = document.getElementsByClassName("parallax_img")
+    new SimpleParallax(img1, {
+      scale: 1.8,
+      orientation: "down",
+      overflow: true,
+      delay: .5,
+      transition: 'cubic-bezier(0,0,.58,1)'
+    })
+  }
+
+
 }
 

@@ -18,7 +18,7 @@ import { ChooseComponent } from './display/features/choose/choose.component';
 import { SnakebarComponent } from './helper/tools/snakebar/snakebar.component';
 import { KolchartP1Component } from './display/features/kolchart-p1/kolchart-p1.component';
 import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.component';
-
+import { NgxSimpleParallaxJsModule } from 'ngx-simple-parallax-js';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.
     ChooseComponent,
     SnakebarComponent,
     KolchartP1Component,
-    KolchartP2Component
+    KolchartP2Component,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +45,7 @@ import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
     BrowserAnimationsModule,
+    NgxSimpleParallaxJsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -22,10 +22,10 @@
 /* icon font改字體的話會壞掉 */
 :not(i) {
   /* 黑體 */
-  /* font-family: 'Noto Sans TC', sans-serif; */
+  font-family: 'Noto Sans TC', sans-serif;
 
   /* 明體 */
-  font-family: 'Noto Serif TC', serif;
+  /* font-family: 'Noto Serif TC', serif; */
 }
 
 .body {

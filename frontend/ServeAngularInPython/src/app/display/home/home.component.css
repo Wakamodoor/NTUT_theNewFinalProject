@@ -1,8 +1,12 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
 .datepicker {
   margin-left: 5%;
   padding-top: 3%;
 }
-
 
 .lebel {
   font-size: 18px;
@@ -33,129 +37,22 @@ input{
   right: 0;
 }
 
-.container {
-  /* outline: 1px solid #000; */
-  max-width: 80%;
-  padding: 50px 30px;
-  margin: auto;
-  /* margin-top: 3%; */
-  border-radius: 164px;
-  background-color: rgba(0, 117, 75, .8);
-
-  height: 500px;
-  margin-bottom: 5%;
+.container_chart {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /*超重要*/
 }
 
-.contain-title {
+.parallax_img {
+  width: 100%;
+  height: 100%;
+  background: url(../../../assets/image/star-night.jpg) no-repeat 50% 75%;
+  background-size: 90% 124%;
+}
+
+.container_leaderboard {
+  width: 90%;
+  height: 1000px;
   margin: 0 auto;
-  width: 50%;
-  height: 6rem;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 3%;
-  border-radius: 50px;
-  padding: 0 5%;
-  position: relative;
-  overflow: hidden;
-  /* border: 1px solid #000; */
-}
-
-.title {
-  text-align: center;
-  font-size: 3rem;
-  margin: 0;
-}
-
-.title-deco-l {
-  width: 13%;
-  height: 100%;
-  background: var(--main-color);
-  border-radius: 50%;
-  position: absolute;
-  left: -1%;
-  box-shadow: 0 0 100px var(--main-color);
-}
-
-.title-deco-r {
-  width: 13%;
-  height: 100%;
-  background: var(--main-color);
-  border-radius: 50%;
-  position: absolute;
-  right: -1%;
-  box-shadow: 0 0 100px var(--main-color);
-}
-
-.contain-card {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-
-}
-
-.card {
-  width: 20%;
-  height: 60%;
-  margin: 0 1%;
-  border-radius: 50% 50% 50% 50% / 10% 10% 50% 50% ;
-  background-color: #fff;
-  overflow: hidden;
-  box-shadow: 3px 2px rgba(0, 0, 0, .5);
-  position: relative;
-}
-
-.card:hover {
-  cursor: pointer;
-  /* box-shadow: 5px 5px 15px rgba(0, 0, 0, .6); */
-  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, .4); */
-  box-shadow: 0px 0px 50px rgba(244, 187, 14, 1);
-}
-
-.contain-rank {
-  background-color: red;
-  height: 20%;
-  width: 100%;
-  overflow: hidden;
-  position: absolute;
-  bottom: 0;
-}
-
-.rank {
-  text-align: center;
-  font-size: 4.5rem;
-  padding-top: 8%;
-}
-
-.fa-user-tie {
-  font-size: 5vw;
-  padding-left: 5%;
-  padding-top: 5%;
-}
-
-.contain1 {
-  width: 100%;
-  height: 30%;
-  position: relative;
-}
-
-.authorName {
-  font-weight: 600;
-  border-bottom: 5px solid var(--deco-color);
-  margin-bottom: 5px;
-  width: 50%;
-  position: absolute;
-  right: 16px;
-  top: 14px;
-}
-
-.level {
-  position: absolute;
-  right: 15px;
-  top: 55px;
-  font-size: 1.25vw;
-  width: 50%;
+  background-image: linear-gradient(to bottom, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7d3a3f, #73363e, #68333d, #60313f, #592f3f, #502e3f, #482c3e);
 }
