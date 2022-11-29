@@ -21,8 +21,8 @@ cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
 # jieba.load_userdict(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\jieba dict.txt')
 # stopwords = [line.strip() for line in open(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\stopwords.txt', 'r', encoding='utf-8').readlines()]
-jieba.load_userdict(r'D:\北科\專題\NTUT_theNewFinalProject\backend\jieba dict.txt')
-stopwords = [line.strip() for line in open(r'D:\北科\專題\NTUT_theNewFinalProject\backend\stopwords.txt', 'r', encoding='utf-8').readlines()]
+jieba.load_userdict(r'./jieba dict.txt')
+stopwords = [line.strip() for line in open(r'./stopwords.txt', 'r', encoding='utf-8').readlines()]
 
 app = Flask(__name__)
 app.debug=True
@@ -88,11 +88,6 @@ def get_chart1(username):
 @app.route('/evergreen/wordcloud/<string:username>')
 def get_wordcould(username):
 
-    # request_data=request.get_json()
-
-    # starttime=request_data['starttime']
-    # endtime=request_data['endtime']
-
     starttime=request.args.get('starttime')
     endtime=request.args.get('endtime')
 
@@ -123,33 +118,22 @@ def get_wordcould(username):
 
     return(json.dumps(sorted_word_cnt))
 
-<<<<<<< HEAD
-@app.route("/test02")
-def testSQL():
-
-    selectSQL = "SELECT year(datetime) AS year, MONTH(DATETIME) AS month , username , count(COMMENT) FROM foxconncomment WHERE username = 'kewei' group by year ,month "
-
-    cursor.execute(selectSQL)
-
-    result = cursor.fetchall()
-
-=======
 @app.route('/evergreen/ranking')
 def get_rankbymonth():
 
-    starttime=request.args.get('starttime')
-    endtime=request.args.get('endtime')
+    year=request.args.get('year')
+    month=request.args.get('month')
 
     
-    selectSQL = "SELECT * FROM (select YEAR(datetime) as 年份,month(datetime) as 月份,username ,count(*) as commentbymonth , ROW_NUMBER() over (order by COUNT(*) DESC) as ranking from evergreencomment WHERE (DATETIME BETWEEN '" + " %s " + "' AND '" + " %s " + "')   GROUP BY 年份,月份,username order by ranking ) AS a WHERE a.ranking <=5"
+    selectSQL = "SELECT * FROM (select YEAR(datetime) as 年份,month(datetime) as 月份,username ,count(*) as commentbymonth , SUM(commentlike) , SUM(commentresponse) , ROW_NUMBER() over (order by COUNT(*) DESC) as ranking from evergreencomment WHERE (YEAR(datetime) = " + "'" + "%s" + "'" + "AND MONTH(datetime) = " + "%s" + " ) GROUP BY 年份,月份,username order by ranking ) AS a WHERE a.ranking <=5"
 
-    print(selectSQL %(starttime , endtime))
+    print(selectSQL %(year , month))
 
-    cursor.execute(selectSQL %(starttime , endtime))
+    cursor.execute(selectSQL %(year , month))
 
     result = cursor.fetchall()
 
     print(result)
 
->>>>>>> 65357666dcfd38f59b54b8bbaa2ca2007b1f899d
-    return(json.dumps(result))
+    return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False)
+
