@@ -151,3 +151,36 @@ def get_dailypost(username):
     print(result)
 
     return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False ,default=str)
+
+@app.route('/evegreen/monthlywordcloud')
+def get_monthlywordcloud():
+
+    year=request.args.get('year')
+    month=request.args.get('month')
+
+    selectSQL = "SELECT comment FROM `evergreencomment` where  YEAR(DATETIME) = " + "'" + "%s" + "'" + " AND MONTH(DATETIME) = " + "'" + "%s" + "'"
+
+    cursor.execute(selectSQL %(year ,month))
+
+    result = cursor.fetchall()
+
+    totalstring=''
+
+    for dic in result:
+        totalstring+=dic['comment']
+
+    sentence_list = re.split(r'[^\w ]', totalstring)
+
+    word_list=[]
+    for i in sentence_list:
+        seg_list = jieba.lcut(i)
+        for r in seg_list:
+            if r not in stopwords and r != ' ':
+                word_list.append(r)
+    word_cnt = {}  #定義字典，鍵:值
+    for word in word_list:       
+        word_cnt[word] = word_cnt.get(word, 0) + 1
+
+    sorted_word_cnt = sorted(word_cnt.items(), key=lambda kv: kv[1], reverse=True)
+
+    return(json.dumps(sorted_word_cnt))
