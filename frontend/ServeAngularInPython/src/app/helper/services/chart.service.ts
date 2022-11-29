@@ -11,6 +11,7 @@ export class ChartService {
 
   constructor() { }
 
+  // 發文量x平均月收盤價
   Chart1(xData: Array<string>, yData: object) {
     let options: EChartsOption = {
       tooltip: {
@@ -18,6 +19,9 @@ export class ChartService {
         axisPointer: {
           type: 'cross'
         }
+      },
+      grid: {
+        right: '8%'
       },
       legend: {
         data: ['月發文量', '平均月收盤價']
@@ -74,6 +78,7 @@ export class ChartService {
     return options
   }
 
+  // 文字雲
   wordCloud(data: Array<wordcloudData>, maskImage) {
     // console.log(data)
     return {
@@ -177,6 +182,8 @@ export class ChartService {
       }]
     };
   }
+
+
 }
 
 interface wordcloudData {

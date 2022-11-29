@@ -15,7 +15,7 @@ class DecimalEncoder(json.JSONEncoder):
         super(DecimalEncoder , self).default(o)
 
 #db = mariadb.connect(host="localhost",user="root",db="forumors")
-db = mariadb.connect(host="localhost",user="root", password="root" ,db="forumors")
+db = mariadb.connect(host="localhost",user="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
@@ -23,6 +23,7 @@ cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 # stopwords = [line.strip() for line in open(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\stopwords.txt', 'r', encoding='utf-8').readlines()]
 jieba.load_userdict(r'./jieba dict.txt')
 stopwords = [line.strip() for line in open(r'./stopwords.txt', 'r', encoding='utf-8').readlines()]
+
 
 app = Flask(__name__)
 app.debug=True
@@ -118,6 +119,7 @@ def get_wordcould(username):
 
     return(json.dumps(sorted_word_cnt))
 
+
 @app.route('/evergreen/ranking')
 def get_rankbymonth():
 
@@ -134,6 +136,7 @@ def get_rankbymonth():
     result = cursor.fetchall()
 
     print(result)
+
 
     return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False)
 

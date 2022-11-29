@@ -9,7 +9,7 @@
 
   /* 預備色
     藍色: #00C2E4;
-    綠色: #409130 #00AF98;
+    綠色: #409130 #00AF98 #00754B #4C9E75;
     灰色: #DFE0DF;
   */
 }
@@ -22,10 +22,10 @@
 /* icon font改字體的話會壞掉 */
 :not(i) {
   /* 黑體 */
-  /* font-family: 'Noto Sans TC', sans-serif; */
+  font-family: 'Noto Sans TC', sans-serif;
 
   /* 明體 */
-  font-family: 'Noto Serif TC', serif;
+  /* font-family: 'Noto Serif TC', serif; */
 }
 
 .body {
@@ -54,3 +54,5 @@ body {
 h1 {
   margin: 0;
 }
+
+

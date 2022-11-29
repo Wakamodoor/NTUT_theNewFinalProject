@@ -1,25 +1,38 @@
 <div class="body">
-  <div class="container">
-    <div class="card">
-      <div class="deco"></div>
-      <div class="contain-rank">
-        <h2 class="rank">1</h2>
-      </div>
-      <div class="contain1">
-        <i class="fa-solid fa-user-tie"></i>
-        <h1 class="authorName">阿土伯</h1>
-        <p class="level">Lv：87</p>
-      </div>
+
+  <div class="container_chart">
+    <div class="parallax_img">
+
     </div>
-    <div class="card">
-      <div class="deco"></div>
-      <div class="contain-rank">
-        <h2 class="rank">2</h2>
+  </div>
+  <div class="container_leaderboard">
+    <div class="container-leaderboard-wrapper">
+      <!-- 選擇日期 -->
+      <div class="datepicker">
+        <mat-label class="lebel">選擇日期</mat-label>
+        <mat-form-field appearance="outline" [formGroup]="formData" class="date">
+          <input matInput [matDatepicker]="dp" formControlName="date">
+          <mat-hint>YYYY/MM</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="dp" class="dateIcon"></mat-datepicker-toggle>
+          <mat-datepicker #dp
+                          startView="multi-year"
+                          (monthSelected)="setMonthAndYear($event, dp)"
+                          panelClass="example-month-picker">
+          </mat-datepicker>
+        </mat-form-field>
       </div>
-      <div class="contain1">
-        <i class="fa-solid fa-user-tie"></i>
-        <h1 class="authorName">E神</h1>
-        <p class="level">Lv：：250</p>
+
+      <!-- 標題 -->
+      <h1 class="leaderboard-title">{{title_text}}</h1>
+
+      <!-- 發文量排行榜 -->
+      <div class="leaderboard-rankcard-wrapper">
+        <div class="leaderboard-rankcard">
+          <div class="deco-rank"><h2>1</h2></div>
+          <div class="rankcard-author"><h3>Dr.Selena楊倩琳11111111</h3></div>
+          <div class="rankcard-postAmount"><h4>發文量：<span>{{ 25000000 | number }}</span></h4></div>
+          <div class="rankcard-hover-info"><h4>按讚數：<span>{{ 1599 | number }}</span><br>留言數：<span>{{ 15999999 | number}}</span></h4></div>
+        </div>
       </div>
     </div>
   </div>

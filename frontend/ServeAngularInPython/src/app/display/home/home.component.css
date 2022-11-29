@@ -1,107 +1,183 @@
-.container {
-  outline: 1px solid #000;
-  max-width: 75%;
-  padding: 50px 0;
-  margin: auto;
-  margin-top: 3%;
-  border-radius: 10px;
+*{
+  padding: 0;
+  margin: 0;
 }
 
-.card {
-  outline: 1px solid #000;
-
-  width: 90%;
-  height: 200px;
-  position: relative;
-  margin: auto;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, .1);
-  transition: all .1s;
-  overflow: hidden;
-  margin-bottom: 3%;
+.datepicker {
+  margin-left: 10%;
+  padding-top: 3%;
 }
 
-.card:first-of-type::before {
-  content: url('../../../assets/image/crown-solid.svg');
-  position: absolute;
-  width: 5%;
-  transform: rotate(-30deg);
-  top: 8%;
-  left: 18%;
-  z-index: 101;
-}
-
-.card:hover {
-  cursor: pointer;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, .6);
-  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, .4); */
-}
-
-.deco {
-  width: 100%;
-  height: 25px;
-  background-color: var(--main-color);
-  position: absolute;
-  top: -25px;
-  transition: all .2s;
-  z-index: 2;
-}
-
-.card:hover .deco {
-  top: 0;
-}
-
-.contain-rank {
-  width: 10%;
-  height: 100%;
-  background-color: red;
-  position: absolute;
-  z-index: 1;
-  box-shadow: 1px 0 2px rgba(0, 0, 0, .4);
-}
-
-.rank {
-  font-size: 150px;
-  position: absolute;
-  top: 117px;
-  z-index: 100;
-}
-
-.contain1 {
-  outline: 1px solid #000;
-
-  width: 30%;
-  height: 90%;
-  position: relative;
-  margin-top: 1%;
-  margin-left: 15%;
-  padding-left: 10%;
-}
-
-.fa-user-tie {
-  font-size: 125px;
-  position: absolute;
-  top: 20%;
-  bottom: 20%;
-  margin: auto;
-  left: 20px;
-}
-
-.authorName {
-  width: 45%;
-  font-size: 36px;
-  font-weight: 600;
-  position: absolute;
-  left: 35%;
-  top: 20%;
+.lebel {
+  font-size: 18px;
+  font-weight: 900;
   border-bottom: 5px solid var(--deco-color);
   margin-bottom: 5px;
+  max-width: 16%;
+  display: block;
 }
 
-.level {
-  width: 30%;
+mat-form-field {
+  font-size: 8px;
+}
+
+input{
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.date mat-hint {
+  font-size: 10px;
+}
+
+.date .dateIcon {
   position: absolute;
-  top: 40%;
-  right: 34.5%;
-  text-align: left;
+  top: -5px;
+  right: 0;
+}
+
+.container_chart {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /*超重要*/
+}
+
+.parallax_img {
+  width: 100%;
+  height: 100%;
+  background: url(../../../assets/image/star-night.jpg) no-repeat 50% 75%;
+  background-size: 90% 124%;
+}
+
+.container_leaderboard {
+  width: 90%;
+  height: 1000px;
+  margin: 0 auto;
+  padding-top: 10vh;
+  /* background-image: linear-gradient(to top, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7d3a3f, #73363e, #68333d, #60313f, #592f3f, #502e3f, #482c3e); */
+  background-image: radial-gradient(circle, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7c363f, #702f3f, #63293e, #552241, #441d42, #2f1942, #141740);
+}
+
+.container-leaderboard-wrapper {
+  width: 80%;
+  height: 90vh;
+  margin: 0 auto;
+  background-color: rgba(256, 256, 256, 1);
+  border-radius: 10px;
+}
+
+.leaderboard-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 3px 2px var(--main-color) ;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.leaderboard-rankcard-wrapper {
+  width: 80%;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.leaderboard-rankcard {
+  width: 100%;
+  height: 75px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  display: flex;
+  transition: all .3s;
+  position: relative;
+  /* outline: 2px solid var(--main-color); */
+}
+
+.leaderboard-rankcard:hover {
+  cursor: pointer;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, .3);
+  transform: translateY(-0.25em) translateX(-0.25rem);
+}
+
+.leaderboard-rankcard:hover .rankcard-hover-info{
+  right: 0;
+  box-shadow: -0.25rem 0 .25rem rgba(244, 187, 14, .3);
+}
+
+.deco-rank {
+  background-color: red;
+  width: 10%;
+  height: 100%;
+  display: inline-block;
+  margin-right: 5%;
+  transition: all 1s;
+}
+
+.deco-rank h2 {
+  font-size: 54px;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+  padding-top: 28%;
+}
+
+.rankcard-author {
+  width: 70%;
+  /* max-width: 50%; */
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.rankcard-author h3 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 600;
+  text-decoration: var(--deco-color) underline 5px;
+  white-space: nowrap;
+}
+
+.rankcard-postAmount {
+  width: 20%;
+  height: 100%;
+  margin-left: auto; /* 取代justify-self: flex-end */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 15px;
+}
+
+.rankcard-postAmount h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.rankcard-postAmount h4 span{
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.rankcard-hover-info {
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  right: -22%;
+  background-color: var(--main-color);
+  transition: all .5s;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 2%;
+}
+
+.rankcard-hover-info h4 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.rankcard-hover-info h4 span {
+  font-size: 18px;
+  font-weight: 900;
 }

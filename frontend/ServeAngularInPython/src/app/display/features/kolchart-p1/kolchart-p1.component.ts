@@ -28,13 +28,14 @@ export class KolchartP1Component implements OnInit {
     private cs: ChartService,
     private socket: SocketService,
     private fb: FormBuilder,
-    private router: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.formData = this.createQueryForm()
     this.chr1DataBuild(this.formData.getRawValue().author)
-    console.log(this.router.snapshot.paramMap.get('stock'))
+    console.log(this.route.snapshot.paramMap)
   }
 
   chr1DataBuild(author: any) {
@@ -74,6 +75,16 @@ export class KolchartP1Component implements OnInit {
         })
         this.options = this.cs.Chart1(xData, yData)
       })
+    })
+  }
+
+  sendBarClick($event) {
+    console.log($event.name)
+    this.router.navigate(['kolchart2'], {
+      queryParams: {
+        date: $event.name,
+        fromKOL: true
+      }
     })
   }
 
