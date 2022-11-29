@@ -23,6 +23,7 @@
     "@angular/router": "^14.2.0",
     "echarts": "^5.4.0",
     "echarts-wordcloud": "^2.0.0",
+    "jquery": "^3.6.1",
     "moment": "^2.29.4",
     "ngx-echarts": "^14.0.0",
     "ngx-hide-on-scroll": "^0.2.1",

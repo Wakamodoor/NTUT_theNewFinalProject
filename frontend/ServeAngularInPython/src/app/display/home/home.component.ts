@@ -5,7 +5,6 @@ import * as echarts from 'echarts';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { concatMap, filter, forkJoin, map, range } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import {
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
@@ -63,7 +62,6 @@ export class HomeComponent implements OnInit {
 
   title_text: string
 
-
   constructor(
     private cs: ChartService,
     private socket: SocketService,
@@ -71,7 +69,16 @@ export class HomeComponent implements OnInit {
     private router: ActivatedRoute,
     private _adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
-  ) { }
+  ) {
+    if( window.localStorage ) {
+      if( !localStorage.getItem('firstLoad') ) {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }else {
+        localStorage.removeItem('firstLoad');
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.formData = this.createQueryForm()
@@ -101,7 +108,7 @@ export class HomeComponent implements OnInit {
   private parallax() {
     let img1 = document.getElementsByClassName("parallax_img")
     new SimpleParallax(img1, {
-      scale: 1.8,
+      scale: 1.5,
       orientation: "down",
       overflow: true,
       delay: .5,

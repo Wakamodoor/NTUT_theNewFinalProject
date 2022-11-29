@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnakebarComponent } from './../../../helper/tools/snakebar/snakebar.component';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -15,12 +16,16 @@ export class ChooseComponent implements OnInit {
 
   durationInSeconds: number = 3;
 
+  isHome: boolean
+
   constructor(
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.openSnackBar()
+    this.isHome = false
   }
 
   openSnackBar() {

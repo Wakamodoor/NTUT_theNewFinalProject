@@ -35,7 +35,7 @@ export class KolchartP1Component implements OnInit {
   ngOnInit(): void {
     this.formData = this.createQueryForm()
     this.chr1DataBuild(this.formData.getRawValue().author)
-    console.log(this.route.snapshot.paramMap.get('stock'))
+    console.log(this.route.snapshot.paramMap)
   }
 
   chr1DataBuild(author: any) {

@@ -20,6 +20,9 @@ export class ChartService {
           type: 'cross'
         }
       },
+      grid: {
+        right: '8%'
+      },
       legend: {
         data: ['月發文量', '平均月收盤價']
       },
@@ -180,7 +183,7 @@ export class ChartService {
     };
   }
 
-  
+
 }
 
 interface wordcloudData {

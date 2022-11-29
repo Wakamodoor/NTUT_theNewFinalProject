@@ -101,6 +101,7 @@ input{
 
 .leaderboard-rankcard:hover .rankcard-hover-info{
   right: 0;
+  box-shadow: -0.25rem 0 .25rem rgba(244, 187, 14, .3);
 }
 
 .deco-rank {
