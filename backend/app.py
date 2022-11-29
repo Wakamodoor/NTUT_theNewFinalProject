@@ -15,7 +15,7 @@ class DecimalEncoder(json.JSONEncoder):
         super(DecimalEncoder , self).default(o)
 
 #db = mariadb.connect(host="localhost",user="root",db="forumors")
-db = mariadb.connect(host="localhost",user="root",db="forumors")
+db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
@@ -129,14 +129,25 @@ def get_rankbymonth():
     
     selectSQL = "SELECT * FROM (select YEAR(datetime) as 年份,month(datetime) as 月份,username ,count(*) as commentbymonth , SUM(commentlike) , SUM(commentresponse) , ROW_NUMBER() over (order by COUNT(*) DESC) as ranking from evergreencomment WHERE (YEAR(datetime) = " + "'" + "%s" + "'" + "AND MONTH(datetime) = " + "%s" + " ) GROUP BY 年份,月份,username order by ranking ) AS a WHERE a.ranking <=5"
 
-    print(selectSQL %(year , month))
 
     cursor.execute(selectSQL %(year , month))
 
     result = cursor.fetchall()
 
-    print(result)
-
-
     return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False)
 
+@app.route('/evegreen/dailypost/<string:username>')
+def get_dailypost(username):
+
+    year=request.args.get('year')
+    month=request.args.get('month')
+
+    selectSQL = "SELECT DATE(DATETIME) AS 日期 ,username, COUNT(`comment`) AS 日發文數 FROM evergreencomment WHERE username = " + "'" + "%s" +  "'" + "AND YEAR(DATETIME) = " + "'" + "%s" + "'" + " AND MONTH(DATETIME) = " + "'" + "%s" + "'" + "GROUP BY  DATE(datetime)"
+
+    cursor.execute(selectSQL %(username ,year , month))
+
+    result = cursor.fetchall()
+
+    print(result)
+
+    return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False ,default=str)
