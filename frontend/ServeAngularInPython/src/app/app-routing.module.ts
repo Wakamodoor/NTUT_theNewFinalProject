@@ -1,3 +1,4 @@
+import { WordcloudComponent } from './display/features/wordcloud/wordcloud.component';
 import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.component';
 import { KolchartP1Component } from './display/features/kolchart-p1/kolchart-p1.component';
 import { ChooseComponent } from './display/features/choose/choose.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'kolchart2',
     component: KolchartP2Component,
+  },
+  {
+    path: 'wordcloud/:stock',
+    component: WordcloudComponent
   },
   {
     path: 'sorry',

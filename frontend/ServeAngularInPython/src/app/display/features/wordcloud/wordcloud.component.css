@@ -1,0 +1,111 @@
+.container {
+  position: relative;
+  padding-top: 20px;
+  margin: 0 auto;
+  margin-top: 70px;
+  width: 90%;
+  /* height: 500px; */
+  height: 80vh;
+  background-color: #fff;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-form {
+  width: 100%;
+  position: relative;
+}
+
+.container-form-author {
+  width: 23.5%;
+  margin-right: 7%;
+}
+
+.container-form-date {
+  width: 60%;
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start; */
+}
+
+.container-form-date-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: -3%;
+}
+
+.lebel {
+  font-size: 18px;
+  font-weight: 900;
+  border-bottom: 5px solid var(--deco-color);
+  margin-bottom: 5px;
+  max-width: 100%;
+  display: block;
+}
+
+mat-form-field {
+  font-size: 8px;
+}
+
+/* .date mat-form-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+} */
+
+input{
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.date mat-hint {
+  font-size: 10px;
+}
+
+.date .dateIcon {
+  position: absolute;
+  top: -5px;
+  right: 0;
+}
+
+.queryform {
+  max-width: 60%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding-left: 8%;
+}
+
+.queryform .author {
+  margin-right: 3%;
+}
+
+.queryform .date {
+  margin-left: 3%;
+}
+
+.container-form-btn {
+  position: relative;
+  margin-left: 5%;
+  padding: 10px 0 auto;
+}
+
+button.submitBtn {
+  background: var(--grey-color);
+  color: var(--reverse-grey-text-color);
+
+  margin-left: 2%;
+  margin-top: 3%;
+  transition: all .1s;
+}
+
+button.submitBtn:hover {
+  background: var(--main-color);
+  color: #fff;
+  font-weight: 600;
+}

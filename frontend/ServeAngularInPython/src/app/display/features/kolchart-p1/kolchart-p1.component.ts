@@ -15,6 +15,8 @@ type EChartsOption = echarts.EChartsOption;
 })
 export class KolchartP1Component implements OnInit {
 
+  fromKOL: string
+
   formData: FormGroup
 
   everGreenKOL = ['阿土伯', 'E神']
@@ -36,6 +38,7 @@ export class KolchartP1Component implements OnInit {
     this.formData = this.createQueryForm()
     this.chr1DataBuild(this.formData.getRawValue().author)
     console.log(this.route.snapshot.paramMap)
+    // this.route.
   }
 
   chr1DataBuild(author: any) {

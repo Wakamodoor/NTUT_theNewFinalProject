@@ -19,6 +19,7 @@ import { SnakebarComponent } from './helper/tools/snakebar/snakebar.component';
 import { KolchartP1Component } from './display/features/kolchart-p1/kolchart-p1.component';
 import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.component';
 import { NgxSimpleParallaxJsModule } from 'ngx-simple-parallax-js';
+import { WordcloudComponent } from './display/features/wordcloud/wordcloud.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NgxSimpleParallaxJsModule } from 'ngx-simple-parallax-js';
     SnakebarComponent,
     KolchartP1Component,
     KolchartP2Component,
+    WordcloudComponent,
   ],
   imports: [
     BrowserModule,
