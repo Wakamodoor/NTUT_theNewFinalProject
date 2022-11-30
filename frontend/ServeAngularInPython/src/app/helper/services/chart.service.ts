@@ -79,7 +79,7 @@ export class ChartService {
   }
 
   // 文字雲
-  wordCloud(data: Array<wordcloudData>, maskImage) {
+  wordCloud(data: Array<wordcloudData>, maskImage?) {
     // console.log(data)
     return {
       tooltip: {
@@ -119,8 +119,8 @@ export class ChartService {
 
           left: 'center',
           top: 'center',
-          width: '70%',
-          height: '80%',
+          width: '90%',
+          height: '90%',
           right: null,
           bottom: null,
 

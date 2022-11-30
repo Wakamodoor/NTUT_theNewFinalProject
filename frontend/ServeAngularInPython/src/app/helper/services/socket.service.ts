@@ -50,4 +50,21 @@ export class SocketService {
     })
   }
 
+  getKOLRankAPI(year: string, month: string) {
+    console.log(`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`)
+    return ajax({
+      url:`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`,
+      method: 'GET',
+      responseType: 'json'
+    })
+  }
+
+  getMonthWordcloudAPI(year: string, month: string) {
+    return ajax({
+      url:`http://localhost:5000/evegreen/monthlywordcloud?year=${year}&month=${month}`,
+      method: 'GET',
+      responseType: 'json'
+    })
+  }
+
 }

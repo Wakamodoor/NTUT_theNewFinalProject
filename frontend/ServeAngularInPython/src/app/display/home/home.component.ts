@@ -32,6 +32,11 @@ export const MY_FORMATS = {
 
 type EChartsOption = echarts.EChartsOption;
 
+interface wordcloudData {
+  name: string,
+  value: number
+}
+
 
 @Component({
   selector: 'app-home',
@@ -50,6 +55,10 @@ type EChartsOption = echarts.EChartsOption;
 export class HomeComponent implements OnInit {
 
   formData: FormGroup
+
+  wordcloudOp = {}
+
+  leaderboardData = []
 
   everGreenKOL = ['阿土伯', 'E神']
   // chartDom = document.getElementById('linechart')!;
@@ -70,14 +79,14 @@ export class HomeComponent implements OnInit {
     private _adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
   ) {
-    if( window.localStorage ) {
-      if( !localStorage.getItem('firstLoad') ) {
-        localStorage['firstLoad'] = true;
-        window.location.reload();
-      }else {
-        localStorage.removeItem('firstLoad');
-      }
-    }
+    // if( window.localStorage ) {
+    //   if( !localStorage.getItem('firstLoad') ) {
+    //     localStorage['firstLoad'] = true;
+    //     window.location.reload();
+    //   }else {
+    //     localStorage.removeItem('firstLoad');
+    //   }
+    // }
   }
 
   ngOnInit(): void {
@@ -85,12 +94,35 @@ export class HomeComponent implements OnInit {
     this.setMonthAndYear(this.formData.getRawValue().date)
     this.stock = this.router.snapshot.paramMap.get('stock')
     this._adapter.setLocale(this._locale);
-    this.parallax()
+    // this.parallax()
+  }
+
+  queryKolrank(year: string, month: string) {
+    this.socket.getKOLRankAPI(year, month).subscribe((rel) => {
+      this.leaderboardData = JSON.parse(JSON.stringify(rel.response))
+    })
+  }
+
+  queryMonthWordcloud(year: string, month: string) {
+    this.socket.getMonthWordcloudAPI(year, month).subscribe(rel => {
+      console.log(rel.response)
+      const data: any = JSON.parse(JSON.stringify(rel.response))
+      let WCData: Array<wordcloudData> = []
+
+      data.forEach(arr => {
+        const tmpObj = {
+          name: arr[0],
+          value: arr[1]
+        }
+        WCData.push(tmpObj)
+      });
+      this.wordcloudOp = this.cs.wordCloud(WCData)
+    })
   }
 
   private createQueryForm(): FormGroup {
     return this.fb.group({
-      date: [moment(new Date('2022/07/31')), Validators.required]
+      date: [moment(new Date('2022/05/31')), Validators.required]
     });
   }
 
@@ -99,10 +131,13 @@ export class HomeComponent implements OnInit {
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.formData.get('date').setValue(ctrlValue);
-    this.title_text = `${normalizedMonthAndYear.year()}年${normalizedMonthAndYear.month()+1}月發文量排行榜`
+    this.title_text = `${normalizedMonthAndYear.year()}年${normalizedMonthAndYear.month()+1}月`
     if(datepicker) {
       datepicker.close();
     }
+
+    this.queryKolrank((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
+    this.queryMonthWordcloud((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
   }
 
   private parallax() {
