@@ -1,5 +1,8 @@
+.body {
+  background-image: radial-gradient(circle, #ffffff, #fdebfb, #ffd3e3, #ffbdb7, #ffb281, #f9b970, #edc360, #dacd56, #cdd67e, #c9dca4, #cee0c5, #dfe0df);
+}
+
 .container {
-  outline: 1px solid #000;
   position: relative;
   margin: 0 auto;
   margin-top: 70px;
@@ -15,13 +18,24 @@
   border-radius: 20px; */
 }
 
+.authorName {
+  position: absolute;
+  top: -5%;
+  left: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
 .container-daily-post-chart {
-  outline: 1px solid #000;
   width: 55%;
   height: 100%;
   background-color: #fff;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .chart-title {
@@ -29,12 +43,27 @@
   font-size: 2.5rem;
   font-weight: 600;
   text-shadow: 3px 2px var(--main-color) ;
+  /* text-shadow: 3px 2px #F8DC8B; */
   text-align: center;
-  
 }
 
+.container-wordcloud {
+  width: 40%;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -1px 1px 3px rgba(0, 0, 0, .3);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
 
-.lebel {
+.container-wordcloud .chart-title {
+
+}
+
+/*.lebel {
   font-size: 18px;
   font-weight: 900;
   border-bottom: 5px solid var(--deco-color);
@@ -43,15 +72,9 @@
   display: block;
 }
 
-mat-form-field {
+ mat-form-field {
   font-size: 8px;
 }
-
-/* .date mat-form-field {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-} */
 
 input{
   color: #000;
@@ -94,4 +117,4 @@ input{
   background: var(--main-color);
   color: #fff;
   font-weight: 600;
-}
+} */

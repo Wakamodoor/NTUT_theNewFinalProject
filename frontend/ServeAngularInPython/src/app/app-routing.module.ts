@@ -46,6 +46,10 @@ const routes: Routes = [
     component: ApologizeComponent,
   },
   {
+    path: 'wordcloud',
+    component: WordcloudComponent
+  },
+  {
     path: '**',
     redirectTo: 'choose',
     pathMatch: 'full'

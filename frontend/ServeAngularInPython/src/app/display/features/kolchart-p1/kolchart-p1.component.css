@@ -1,3 +1,6 @@
+.body {
+  background-image: radial-gradient(circle, #ffffff, #fdebfb, #ffd3e3, #ffbdb7, #ffb281, #f9b970, #edc360, #dacd56, #cdd67e, #c9dca4, #cee0c5, #dfe0df);
+}
 .chart1 {
   position: relative;
   padding-top: 20px;

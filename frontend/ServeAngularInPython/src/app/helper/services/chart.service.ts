@@ -186,18 +186,40 @@ export class ChartService {
   dailyPost(xData: Array<string>, yData: Array<number>) {
 
     let options: EChartsOption = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      grid: {
+        right: '8%'
+      },
+      legend: {
+        data: ['每日發文量', '日期']
+      },
       xAxis: {
         type: 'category',
         data: [...xData]
       },
       yAxis: {
-        type: 'value'
+        type: 'value',
+          name: '每日發文量',
+          position: 'left',
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#9E3326'
+            }
+          }
       },
       series: [
         {
           data: [...yData],
+          name: '每日發文量',
           type: 'line',
-          smooth: true
+          smooth: true,
+          color: '#9E3326'
         }
         ]
       };

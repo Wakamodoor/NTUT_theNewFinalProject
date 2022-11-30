@@ -74,6 +74,7 @@ export class KolchartP2Component implements OnInit {
       const year = this.queryDate.slice(0,4)
       const month = this.queryDate.slice(5,6)
       this.queryDailyPostChart(this.author, year, month)
+      this.queryWordcloud(this.author, this.queryDate)
     }else {
       this.fromKOL = false
       this.queryForm = this.createForm()
@@ -110,18 +111,12 @@ export class KolchartP2Component implements OnInit {
     })
   }
 
-  queryWC() {
-    const form = this.queryForm.getRawValue()
-    if(!this.queryForm.valid) {
-      console.log('欄位檢核錯誤')
-      return
-    }
-    const author = form.author
-    let startDate = form.startDate['_i']
-    startDate = `${startDate.year}-${startDate.month+1}-${startDate.date}`
-    let endDate = form.endDate['_i']
-    endDate = `${endDate.year}-${endDate.month+1}-${endDate.date}`
-    console.log(author)
+  queryWordcloud(author: string, date: string) {
+    const year = date.slice(0, 4)
+    const month = date.slice(5, 6)
+    let startDate = `${year}-${month}-01`
+    let endDate = `${year}-${month}-31`
+
     this.buildWordCloud(author, startDate, endDate)
   }
 
@@ -129,7 +124,7 @@ export class KolchartP2Component implements OnInit {
     this.socket.getWordcloudAPI(author, startDate, endDate).subscribe(rel => {
       const data: any = rel.response
       let WCData: Array<wordcloudData> = []
-
+      console.log(data)
       data.forEach(arr => {
         const tmpObj = {
           name: arr[0],
