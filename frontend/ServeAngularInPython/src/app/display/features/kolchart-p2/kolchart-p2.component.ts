@@ -14,6 +14,7 @@ import {
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import 'moment/locale/ja';
 import { ActivatedRoute } from '@angular/router';
+import { EChartsOption } from 'echarts';
 
 interface wordcloudData {
   name: string,
@@ -46,7 +47,12 @@ export class KolchartP2Component implements OnInit {
   option: string = ''
 
   fromKOL = false
-  date: string
+
+  stock: string
+  author: string
+  queryDate: string
+
+  options: EChartsOption = {}
 
   filteredOptions: Observable<string[]>;
 
@@ -60,23 +66,48 @@ export class KolchartP2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.queryForm = this.createForm()
+    if(this.route.snapshot.paramMap.get('author')) {
+      this.fromKOL = true
+      this.stock = this.route.snapshot.paramMap.get('stock')
+      this.author = this.route.snapshot.paramMap.get('author')
+      this.queryDate = this.route.snapshot.paramMap.get('date')
+      const year = this.queryDate.slice(0,4)
+      const month = this.queryDate.slice(5,6)
+      this.queryDailyPostChart(this.author, year, month)
+    }else {
+      this.fromKOL = false
+      this.queryForm = this.createForm()
+      this.filteredOptions = this.queryForm.controls['author'].valueChanges.pipe(
+        startWith(''),
+        map((value: string) => this._filter(value || '')),
+      );
+      this._adapter.setLocale(this._locale);
+    }
     // this.buildWordCloud()
+    // this.route.queryParamMap.subscribe((paramsMap) => {
+    //   if (paramsMap['params']['date']) {
+    //     this.date = paramsMap['params']['date']
+    //   }else if (paramsMap['params']['fromKOL']) {
+    //     this.fromKOL = true
+    //   }
+    // })
 
-    this.route.queryParamMap.subscribe((paramsMap) => {
-      if (paramsMap['params']['date']) {
-        this.date = paramsMap['params']['date']
-      }else if (paramsMap['params']['fromKOL']) {
-        this.fromKOL = true
-      }
-    })
-
-    this.filteredOptions = this.queryForm.controls['author'].valueChanges.pipe(
-      startWith(''),
-      map((value: string) => this._filter(value || '')),
-    );
-    this._adapter.setLocale(this._locale);
     // this.maskImage.src = '../../../../assets/image/silhouette_cloud.png'
+  }
+
+  queryDailyPostChart(author: string, year: string, month: string) {
+    this.socket.getDailyPostAPI(author, year, month).subscribe(rel => {
+      const data = JSON.parse(JSON.stringify(rel.response))
+      let xData = []
+      let yData = []
+
+      data.forEach(obj => {
+        xData.push(obj['日期'].replaceAll('-', '/'))
+        yData.push(obj['日發文數'])
+      });
+
+      this.options = this.cs.dailyPost(xData, yData)
+    })
   }
 
   queryWC() {

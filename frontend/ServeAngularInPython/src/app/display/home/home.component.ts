@@ -1,3 +1,4 @@
+import { FooterComponent } from './../../footer/footer.component';
 import { SocketService } from '../../helper/services/socket.service';
 import { ChartService } from '../../helper/services/chart.service';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -68,14 +69,14 @@ export class HomeComponent implements OnInit {
   options: EChartsOption = {}
 
   stock: string
-
-  title_text: string
+  queryDate: string
 
   constructor(
     private cs: ChartService,
     private socket: SocketService,
     private fb: FormBuilder,
-    private router: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private _adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
   ) {
@@ -92,7 +93,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.formData = this.createQueryForm()
     this.setMonthAndYear(this.formData.getRawValue().date)
-    this.stock = this.router.snapshot.paramMap.get('stock')
+    this.stock = this.route.snapshot.paramMap.get('stock')
+
     this._adapter.setLocale(this._locale);
     // this.parallax()
   }
@@ -120,6 +122,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  gokolchart1(author: string) {
+    this.router.navigateByUrl(`home/${this.stock}/${author}/${this.queryDate}/kolchart1`)
+  }
+
   private createQueryForm(): FormGroup {
     return this.fb.group({
       date: [moment(new Date('2022/05/31')), Validators.required]
@@ -131,7 +137,8 @@ export class HomeComponent implements OnInit {
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.formData.get('date').setValue(ctrlValue);
-    this.title_text = `${normalizedMonthAndYear.year()}年${normalizedMonthAndYear.month()+1}月`
+    this.queryDate = `${normalizedMonthAndYear.year()}年${normalizedMonthAndYear.month()+1}月`
+
     if(datepicker) {
       datepicker.close();
     }

@@ -15,7 +15,7 @@ type EChartsOption = echarts.EChartsOption;
 })
 export class KolchartP1Component implements OnInit {
 
-  fromKOL: string
+  fromKOL: boolean
 
   formData: FormGroup
 
@@ -26,6 +26,10 @@ export class KolchartP1Component implements OnInit {
 
   options: EChartsOption = {}
 
+  stock: string
+  author: string
+  queryDate: string
+
   constructor(
     private cs: ChartService,
     private socket: SocketService,
@@ -35,10 +39,17 @@ export class KolchartP1Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.formData = this.createQueryForm()
-    this.chr1DataBuild(this.formData.getRawValue().author)
-    console.log(this.route.snapshot.paramMap)
-    // this.route.
+    if(this.route.snapshot.paramMap.get('author')) {
+      this.stock = this.route.snapshot.paramMap.get('stock')
+      this.author = this.route.snapshot.paramMap.get('author')
+      this.queryDate = this.route.snapshot.paramMap.get('date')
+      this.fromKOL = true
+      this.chr1DataBuild(this.route.snapshot.paramMap.get('author'))
+    }else {
+      this.fromKOL = false
+      this.formData = this.createQueryForm()
+      this.chr1DataBuild(this.formData.getRawValue().author)
+    }
   }
 
   chr1DataBuild(author: any) {
@@ -83,12 +94,7 @@ export class KolchartP1Component implements OnInit {
 
   sendBarClick($event) {
     console.log($event.name)
-    this.router.navigate(['kolchart2'], {
-      queryParams: {
-        date: $event.name,
-        fromKOL: true
-      }
-    })
+    this.router.navigateByUrl(`home/${this.stock}/${this.author}/${this.queryDate}/kolchart2`)
   }
 
   private createQueryForm(): FormGroup {

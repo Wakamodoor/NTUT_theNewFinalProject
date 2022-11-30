@@ -38,8 +38,6 @@ input{
   right: 0;
 }
 
-
-
 .container_leaderboard {
   width: 90%;
   height: 1000px;
@@ -80,6 +78,7 @@ input{
   display: flex;
   transition: all .3s;
   position: relative;
+  margin-bottom: 3%;
   /* outline: 2px solid var(--main-color); */
 }
 

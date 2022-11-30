@@ -1,49 +1,60 @@
 <div class="body">
   <div class="container">
-    <div class="container-form">
-      <mat-label class="lebel">產生文字雲</mat-label>
-      <form class="queryform" [formGroup]="queryForm" *ngIf="!fromKOL">
-        <!-- 輸入作者名稱 -->
-        <mat-form-field class="query" appearance="outline" class="author">
-          <input type="text"
-                 placeholder="輸入作者名稱"
-                 matInput
-                 formControlName="author"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-
-        <!-- 輸入起始日期 -->
-        <mat-form-field appearance="outline" class="date">
-          <input type="text"
-                 placeholder="輸入起始日期"
-                 matInput
-                 [matDatepicker]="picker1"
-                 formControlName="startDate">
-          <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker1" class="dateIcon"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-
-        <!-- 輸入結束日期 -->
-        <mat-form-field appearance="outline" class="date">
-          <input type="text"
-                 placeholder="輸入結束日期"
-                 matInput
-                 [matDatepicker]="picker2"
-                 formControlName="endDate">
-          <mat-hint>YYYY/MM/DD</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker2" class="dateIcon"></mat-datepicker-toggle>
-          <mat-datepicker #picker2 color="primary"></mat-datepicker>
-        </mat-form-field>
-
-        <button mat-flat-button (click)="queryWC()" class="submit" style="height: 90%">查詢</button>
-      </form>
+    <div class="container-daily-post-chart">
+      <mat-label class="chart-title">{{ queryDate + '每日發文量'}}</mat-label>
+      <div echarts
+           class="chart" id="chart"
+           [options]="options"
+           style="width: 70%;height: 400px; margin:0 auto;">
+      </div>
     </div>
+    <ng-container *ngIf="fromKOL">
+      <div class="container-form">
+        <mat-label class="lebel">產生文字雲</mat-label>
+        <form class="queryform" [formGroup]="queryForm" *ngIf="!fromKOL">
+          <!-- 輸入作者名稱 -->
+          <mat-form-field class="query" appearance="outline" class="author">
+            <input type="text"
+                   placeholder="輸入作者名稱"
+                   matInput
+                   formControlName="author"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <!-- 輸入起始日期 -->
+          <mat-form-field appearance="outline" class="date">
+            <input type="text"
+                   placeholder="輸入起始日期"
+                   matInput
+                   [matDatepicker]="picker1"
+                   formControlName="startDate">
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1" class="dateIcon"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <!-- 輸入結束日期 -->
+          <mat-form-field appearance="outline" class="date">
+            <input type="text"
+                   placeholder="輸入結束日期"
+                   matInput
+                   [matDatepicker]="picker2"
+                   formControlName="endDate">
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2" class="dateIcon"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 color="primary"></mat-datepicker>
+          </mat-form-field>
+
+          <button mat-flat-button (click)="queryWC()" class="submit" style="height: 90%">查詢</button>
+        </form>
+      </div>
+    </ng-container>
+
     <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 500px; height: 500px;">
   </div>
 </div>

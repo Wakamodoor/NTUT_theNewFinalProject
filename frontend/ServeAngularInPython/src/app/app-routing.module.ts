@@ -22,7 +22,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'home/:stock/:author/kolchart1',
+    path: 'home/:stock/:author/:date/kolchart1',
     component: KolchartP1Component
   },
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
     component: KolchartP1Component
   },
   {
-    path: 'home/:stock/:author/kolchart2',
+    path: 'home/:stock/:author/:date/kolchart2',
     component: KolchartP2Component,
   },
   {

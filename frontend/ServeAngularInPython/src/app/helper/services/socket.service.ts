@@ -67,4 +67,11 @@ export class SocketService {
     })
   }
 
+  getDailyPostAPI(author: string, year: string, month: string) {
+    return ajax({
+      url:`http://localhost:5000/evegreen/dailypost/${author}?year=${year}&month=${month}`,
+      method: 'GET',
+      responseType: 'json'
+    })
+  }
 }

@@ -183,7 +183,26 @@ export class ChartService {
     };
   }
 
+  dailyPost(xData: Array<string>, yData: Array<number>) {
 
+    let options: EChartsOption = {
+      xAxis: {
+        type: 'category',
+        data: [...xData]
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [...yData],
+          type: 'line',
+          smooth: true
+        }
+        ]
+      };
+    return options
+  }
 }
 
 interface wordcloudData {

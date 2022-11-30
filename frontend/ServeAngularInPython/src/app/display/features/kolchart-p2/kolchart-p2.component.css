@@ -1,5 +1,35 @@
 .container {
+  outline: 1px solid #000;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 70px;
   width: 90%;
+  /* height: 500px; */
+  height: 70vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #fff;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  border-radius: 20px; */
+}
+
+.container-daily-post-chart {
+  outline: 1px solid #000;
+  width: 55%;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  border-radius: 20px;
+}
+
+.chart-title {
+  padding-bottom: 36px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 3px 2px var(--main-color) ;
+  text-align: center;
   
 }
 
