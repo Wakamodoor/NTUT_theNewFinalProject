@@ -12,7 +12,9 @@
     </div>
     <!-- 文字雲 -->
     <div class="container-wordcloud">
-      <mat-label class="chart-title">{{ queryDate + '文字雲'}}</mat-label>
+      <mat-label class="chart-title">
+        <span>{{ queryDate }}</span>文章熱門關鍵字
+      </mat-label>
       <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 90%; height: 80%;">
     </div>
   </div>

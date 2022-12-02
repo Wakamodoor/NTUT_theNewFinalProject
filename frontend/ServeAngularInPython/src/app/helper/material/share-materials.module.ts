@@ -7,6 +7,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 const materials = [
   MatSelectModule,
@@ -17,6 +21,9 @@ const materials = [
   MatMomentDateModule,
   MatFormFieldModule,
   MatInputModule,
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatTooltipModule,
 ]
 
 @NgModule({

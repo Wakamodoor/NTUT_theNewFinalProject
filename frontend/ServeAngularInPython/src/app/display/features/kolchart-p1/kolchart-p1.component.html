@@ -9,11 +9,14 @@
       </mat-form-field>
     </div>
     <!-- <button mat-button (click)="chr1DataBuild(author.value)">搜尋</button> -->
+    <h3 class="authorName">{{ '作者：' + author }}</h3>
     <div class="container-chart">
-      <mat-label class="chart-title">{{ queryDate + '發文量與平均月收盤價關係圖'}}</mat-label>
+      <mat-label class="chart-title">
+        發文量與平均月收盤價關係圖
+      </mat-label>
       <div echarts class="chart" id="chart" (chartClick)="sendBarClick($event)"
       [options]="options"
-      style="width: 70%;height: 400px; margin:0 auto;">
+      style="width: 70%;height: 400px; margin:0 auto; margin-top: 5%;">
       </div>
     </div>
   </div>

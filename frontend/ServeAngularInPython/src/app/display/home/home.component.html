@@ -19,6 +19,14 @@
       <!-- 標題 -->
       <h1 class="leaderboard-title">{{queryDate + '發文量排行榜'}}</h1>
 
+      <mat-icon fontIcon="info"
+                class="info"
+                [matTooltip]="getTooltipText()"
+                matTooltipPosition="right"
+      ></mat-icon>
+
+
+
       <!-- 發文量排行榜 -->
       <div class="leaderboard-rankcard-wrapper">
           <ng-container *ngFor="let kolData of leaderboardData">
@@ -40,8 +48,11 @@
         </div>
         <div class="container-month-wordcloud">
           <h1 class="monthWordcloud-title">{{queryDate + '文字雲'}}</h1>
-          <div echarts [options]="wordcloudOp" class="monthWordcloud" id="wordcloud" style="width: 90%; height: 80%;">
+          <div echarts [options]="wordcloudOp" *ngIf="finishLoading; else loading" class="monthWordcloud" id="wordcloud" style="width: 90%; height: 80%;">
         </div>
+        <ng-template #loading>
+          <mat-spinner></mat-spinner>
+        </ng-template>
       </div>
     </div>
   </div>

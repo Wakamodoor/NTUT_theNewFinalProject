@@ -71,6 +71,9 @@ export class HomeComponent implements OnInit {
   stock: string
   queryDate: string
 
+  finishLoading: boolean = false
+
+
   constructor(
     private cs: ChartService,
     private socket: SocketService,
@@ -108,6 +111,7 @@ export class HomeComponent implements OnInit {
   queryMonthWordcloud(year: string, month: string) {
     this.socket.getMonthWordcloudAPI(year, month).subscribe(rel => {
       console.log(rel.response)
+      this.finishLoading = true
       const data: any = JSON.parse(JSON.stringify(rel.response))
       let WCData: Array<wordcloudData> = []
 
@@ -158,6 +162,13 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getTooltipText() {
+    return `
+    發文量：作者單月總發文量
+      按讚數：作者單月發文獲得之總按讚數
+      留言數：作者單月發文獲得之總留言數
+    `
+  }
 
 }
 

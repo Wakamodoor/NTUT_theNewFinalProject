@@ -41,8 +41,8 @@
 .chart-title {
   padding-bottom: 36px;
   font-size: 2.5rem;
-  font-weight: 600;
-  text-shadow: 3px 2px var(--main-color) ;
+  font-weight: 500;
+  /* text-shadow: 3px 2px var(--main-color) ; */
   /* text-shadow: 3px 2px #F8DC8B; */
   text-align: center;
 }
@@ -60,7 +60,19 @@
 }
 
 .container-wordcloud .chart-title {
+  padding-bottom: 6px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  /* text-shadow: 3px 2px var(--main-color) ; */
+  text-align: center;
+  /* margin-left: 3.5%; */
+  border-bottom: 2px solid #000;
+  width: 80%;
+}
 
+.chart-title span {
+  font-weight: 900;
+  font-size: 1.75rem;
 }
 
 /*.lebel {
