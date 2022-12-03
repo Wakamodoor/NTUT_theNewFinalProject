@@ -80,14 +80,17 @@ export class WordcloudComponent implements OnInit {
 
   queryWC() {
     const form = this.queryForm.getRawValue()
+    console.log(form)
     if(!this.queryForm.valid) {
       console.log('欄位檢核錯誤')
       return
     }
     const author = form.author
     let startDate = form.startDate['_i']
+    console.log(startDate)
     startDate = `${startDate.year}-${startDate.month+1}-${startDate.date}`
     let endDate = form.endDate['_i']
+    console.log(endDate)
     endDate = `${endDate.year}-${endDate.month+1}-${endDate.date}`
     console.log(author)
     this.buildWordCloud(author, startDate, endDate)

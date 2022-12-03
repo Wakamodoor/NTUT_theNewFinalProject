@@ -112,7 +112,7 @@ export class ChartService {
 
           // A silhouette image which the white area will be excluded from drawing texts.
           // The shape option will continue to apply as the shape of the cloud to grow.
-          // maskImage: maskImage,
+          // maskImage: false,
 
           // Folllowing left/top/width/height/right/bottom are used for positioning the word cloud
           // Default to be put in the center and has 75% x 80% size.

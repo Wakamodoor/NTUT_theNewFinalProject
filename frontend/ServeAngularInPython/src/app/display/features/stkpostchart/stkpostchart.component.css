@@ -1,0 +1,80 @@
+.body {
+  background-image: radial-gradient(circle, #ffffff, #fdebfb, #ffd3e3, #ffbdb7, #ffb281, #f9b970, #edc360, #dacd56, #cdd67e, #c9dca4, #cee0c5, #dfe0df);
+}
+.chart1 {
+  position: relative;
+  padding-top: 20px;
+  margin: 0 auto;
+  margin-top: 70px;
+  width: 90%;
+  /* height: 500px; */
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  border-radius: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 8%;
+  max-width: 16%;
+}
+
+.form .lebel {
+  font-size: 18px;
+  font-weight: 900;
+  border-bottom: 5px solid var(--deco-color);
+  margin-bottom: 5px;
+}
+
+mat-form-field {
+  font-size: 8px;
+}
+
+.form mat-select {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.authorName {
+  position: absolute;
+  top: -5%;
+  left: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.container-chart {
+  position: absolute;
+  bottom: 0;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container-chart .chart-title{
+  padding-bottom: 6px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  /* text-shadow: 3px 2px var(--main-color) ; */
+  text-align: center;
+  margin-left: 3.5%;
+  border-bottom: 2px solid #000;
+  width: 66%;
+}
+
+.chart-title span {
+  font-weight: 900;
+  font-size: 1.5rem;
+  /* text-shadow: 3px 2px var(--main-color) ; */
+
+}
+
+
+

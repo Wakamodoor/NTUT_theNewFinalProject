@@ -1,0 +1,22 @@
+<div class="body">
+  <div class="chart1">
+    <div class="form" *ngIf="!fromKOL">
+      <mat-label class="lebel">選擇作者</mat-label>
+      <mat-form-field appearance="outline" [formGroup]="formData">
+        <mat-select formControlName="author" (selectionChange)="chr1DataBuild($event.value)">
+          <mat-option *ngFor="let name of everGreenKOL" [value]="name">{{name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- <button mat-button (click)="chr1DataBuild(author.value)">搜尋</button> -->
+    <div class="container-chart">
+      <mat-label class="chart-title">
+        發文量與平均月收盤價關係圖
+      </mat-label>
+      <div echarts class="chart" id="chart" (chartClick)="sendBarClick($event)"
+      [options]="options"
+      style="width: 70%;height: 400px; margin:0 auto; margin-top: 5%;">
+      </div>
+    </div>
+  </div>
+</div>

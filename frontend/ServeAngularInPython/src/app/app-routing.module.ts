@@ -1,3 +1,4 @@
+import { StkpostchartComponent } from './display/features/stkpostchart/stkpostchart.component';
 import { WordcloudComponent } from './display/features/wordcloud/wordcloud.component';
 import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.component';
 import { KolchartP1Component } from './display/features/kolchart-p1/kolchart-p1.component';
@@ -26,10 +27,6 @@ const routes: Routes = [
     component: KolchartP1Component
   },
   {
-    path: 'kolchart1',
-    component: KolchartP1Component
-  },
-  {
     path: 'home/:stock/:author/:date/kolchart2',
     component: KolchartP2Component,
   },
@@ -42,12 +39,16 @@ const routes: Routes = [
     component: WordcloudComponent
   },
   {
-    path: 'sorry',
-    component: ApologizeComponent,
+    path: "kolchart1",
+    component: StkpostchartComponent
   },
   {
     path: 'wordcloud',
     component: WordcloudComponent
+  },
+  {
+    path: 'sorry',
+    component: ApologizeComponent,
   },
   {
     path: '**',
