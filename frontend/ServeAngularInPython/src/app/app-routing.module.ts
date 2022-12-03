@@ -1,3 +1,4 @@
+import { HeaderComponent } from './header/header.component';
 import { StkpostchartComponent } from './display/features/stkpostchart/stkpostchart.component';
 import { WordcloudComponent } from './display/features/wordcloud/wordcloud.component';
 import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.component';
@@ -39,12 +40,16 @@ const routes: Routes = [
     component: WordcloudComponent
   },
   {
-    path: "kolchart1",
+    path: ":stock/kolchart1",
     component: StkpostchartComponent
   },
   {
-    path: 'wordcloud',
+    path: ':stock/wordcloud',
     component: WordcloudComponent
+  },
+  {
+    path: 'header',
+    component: HeaderComponent
   },
   {
     path: 'sorry',

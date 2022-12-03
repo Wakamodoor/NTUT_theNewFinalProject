@@ -18,6 +18,10 @@ div.nav--hidden {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 }
 
+/* .header:hover {
+  height: 140px;
+} */
+
 .logo {
   /* outline: 1px solid #fff; */
 }

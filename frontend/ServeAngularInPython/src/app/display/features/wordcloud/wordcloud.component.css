@@ -2,7 +2,7 @@
   position: relative;
   padding-top: 20px;
   margin: 0 auto;
-  margin-top: 70px;
+  margin-top: 40px;
   width: 90%;
   /* height: 500px; */
   height: 80vh;
@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
 .container-form {
@@ -95,7 +96,8 @@ input{
   padding: 10px 0 auto;
 }
 
-button.submitBtn {
+
+button.submitBtn, .preBtn {
   background: #fff;
   box-shadow: 0 0 1px rgba(0, 0, 0, .3);
   color: var(--main-color);
@@ -107,8 +109,17 @@ button.submitBtn {
   transition: all .3s;
 }
 
-button.submitBtn:hover {
+button.submitBtn:hover, .preBtn:hover {
   background: var(--main-color);
   color: #fff;
   font-weight: 700;
+}
+
+.preBtn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  border-radius: 0 5px 5px 0;
 }

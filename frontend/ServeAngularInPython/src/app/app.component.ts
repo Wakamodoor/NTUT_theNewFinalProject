@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ServeAngularInPython';
+
+  ifChoose: boolean
+
+  sendChooseEvent($event) {
+    console.log($event)
+  }
 }

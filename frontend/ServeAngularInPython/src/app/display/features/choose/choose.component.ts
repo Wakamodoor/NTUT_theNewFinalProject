@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnakebarComponent } from './../../../helper/tools/snakebar/snakebar.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -17,6 +17,8 @@ export class ChooseComponent implements OnInit {
   durationInSeconds: number = 3;
 
   isHome: boolean
+
+  @Output() ifChoose = new EventEmitter()
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -41,5 +43,10 @@ export class ChooseComponent implements OnInit {
         'snakebar-panel'
       ]
     });
+  }
+
+  sendChooseEvent(stock: string) {
+    // this.ifChoose.emit(true)
+    this.router.navigate(['/header'], {queryParams: {'ifChoose': true, 'stock': stock}})
   }
 }

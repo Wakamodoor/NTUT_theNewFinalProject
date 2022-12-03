@@ -26,6 +26,35 @@
   font-size: 1.25rem;
 }
 
+button, .preBtn {
+  background: #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+  color: var(--main-color);
+  /* background: var(--grey-color); */
+  /* color: var(--reverse-grey-text-color); */
+  font-weight: 400;
+  margin-left: 2%;
+  margin-top: 12.5%;
+  transition: all .3s;
+  display: block;
+  padding: 0;
+}
+
+button, .preBtn:hover {
+  background: var(--main-color);
+  color: #fff;
+  font-weight: 700;
+}
+
+.preBtn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  border-radius: 0 5px 5px 0;
+}
+
 .container-daily-post-chart {
   width: 55%;
   height: 100%;

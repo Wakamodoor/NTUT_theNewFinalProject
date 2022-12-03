@@ -3,8 +3,9 @@ import { SocketService } from '../../../helper/services/socket.service';
 import { ChartService } from '../../../helper/services/chart.service';
 import * as echarts from 'echarts';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
-import { concatMap, filter, forkJoin, map, range } from 'rxjs';
+import { concatMap, filter, forkJoin, map, Observable, range, startWith } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common'
 
 type EChartsOption = echarts.EChartsOption;
 
@@ -31,31 +32,35 @@ export class StkpostchartComponent implements OnInit {
   author: string
   queryDate: string
 
+  filteredOptions: Observable<string[]>;
+
+  authorList = ['阿土伯', 'E神']
+
+
   constructor(
     private cs: ChartService,
     private socket: SocketService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    if(this.route.snapshot.paramMap.get('author')) {
-      this.stock = this.route.snapshot.paramMap.get('stock')
-      this.author = this.route.snapshot.paramMap.get('author')
-      this.queryDate = this.route.snapshot.paramMap.get('date')
-      this.fromKOL = true
-      this.chr1DataBuild(this.route.snapshot.paramMap.get('author'))
-    }else {
-      this.fromKOL = false
-      this.formData = this.createQueryForm()
-      this.chr1DataBuild(this.formData.getRawValue().author)
-    }
+    this.formData = this.createQueryForm()
+    this.stock = this.route.snapshot.paramMap.get('stock')
+    this.chr1DataBuild(this.formData.getRawValue()['author'])
+
+    this.filteredOptions = this.formData.controls['author'].valueChanges.pipe(
+      startWith(''),
+      map((value: string) => this._filter(value || '')),
+    );
   }
 
   chr1DataBuild(author: any) {
     // const author = this.formData.getRawValue().autohor
     // console.log(author)
+    this.author = author
     this.socket.getAPI('chart_1', author).pipe(
       map(arr => {
         let newArr: any = arr.response
@@ -94,14 +99,24 @@ export class StkpostchartComponent implements OnInit {
   }
 
   sendBarClick($event) {
-    console.log($event.name)
-    this.router.navigateByUrl(`home/${this.stock}/${this.author}/${this.queryDate}/kolchart2`)
+    const queryDate = ($event.name).replace('/', '月') + '日'
+    this.router.navigateByUrl(`home/${this.stock}/${this.author}/${queryDate}/kolchart2`)
+  }
+
+  backPrePage() {
+    this.router.navigateByUrl(`home/${this.stock}`)
   }
 
   private createQueryForm(): FormGroup {
     return this.fb.group({
       author: ['阿土伯']
     });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.authorList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
 }

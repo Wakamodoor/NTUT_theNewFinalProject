@@ -5,6 +5,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import * as echarts from 'echarts'
 import 'echarts-wordcloud';
 import { map, Observable, startWith } from 'rxjs';
+import { Location } from '@angular/common'
 
 import {
   MAT_MOMENT_DATE_FORMATS,
@@ -62,6 +63,7 @@ export class KolchartP2Component implements OnInit {
     private fb: FormBuilder,
     private _adapter: DateAdapter<any>,
     private route: ActivatedRoute,
+    private location: Location,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
   ) { }
 
@@ -136,7 +138,9 @@ export class KolchartP2Component implements OnInit {
     })
   }
 
-
+  backPrePage() {
+    this.location.back()
+  }
 
   private createForm(): FormGroup {
     return this.fb.group({

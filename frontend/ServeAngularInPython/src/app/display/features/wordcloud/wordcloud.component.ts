@@ -13,7 +13,7 @@ import {
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import 'moment/locale/ja';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface wordcloudData {
   name: string,
@@ -47,6 +47,8 @@ export class WordcloudComponent implements OnInit {
   fromKOL = false
   date: string
 
+  stock: string
+
   filteredOptions: Observable<string[]>;
 
   constructor(
@@ -55,12 +57,14 @@ export class WordcloudComponent implements OnInit {
     private fb: FormBuilder,
     private _adapter: DateAdapter<any>,
     private route: ActivatedRoute,
-    @Inject(MAT_DATE_LOCALE) private _locale: string,
+    private router: Router,
+    @Inject(MAT_DATE_LOCALE) private _locale: string
   ) { }
 
   ngOnInit(): void {
     this.queryForm = this.createForm()
     // this.buildWordCloud()
+    this.stock = this.route.snapshot.paramMap.get('stock')
 
     this.route.queryParamMap.subscribe((paramsMap) => {
       if (paramsMap['params']['date']) {
@@ -112,7 +116,9 @@ export class WordcloudComponent implements OnInit {
     })
   }
 
-
+  backPrePage() {
+    this.router.navigateByUrl(`home/${this.stock}`)
+  }
 
   private createForm(): FormGroup {
     return this.fb.group({

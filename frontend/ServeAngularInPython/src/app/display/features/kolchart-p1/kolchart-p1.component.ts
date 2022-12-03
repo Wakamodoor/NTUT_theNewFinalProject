@@ -97,6 +97,10 @@ export class KolchartP1Component implements OnInit {
     this.router.navigateByUrl(`home/${this.stock}/${this.author}/${this.queryDate}/kolchart2`)
   }
 
+  backPrePage() {
+    this.router.navigateByUrl(`home/${this.stock}`)
+  }
+
   private createQueryForm(): FormGroup {
     return this.fb.group({
       author: ['阿土伯']

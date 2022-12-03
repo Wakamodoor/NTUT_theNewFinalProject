@@ -1,14 +1,31 @@
 <div class="body">
   <div class="chart1">
     <div class="form" *ngIf="!fromKOL">
-      <mat-label class="lebel">選擇作者</mat-label>
+      <!-- <mat-label class="lebel">選擇作者</mat-label>
       <mat-form-field appearance="outline" [formGroup]="formData">
         <mat-select formControlName="author" (selectionChange)="chr1DataBuild($event.value)">
           <mat-option *ngFor="let name of everGreenKOL" [value]="name">{{name}}</mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
+      <div class="container-form-author">
+        <mat-label class="lebel">選擇作者</mat-label>
+        <!-- 輸入作者名稱 -->
+        <mat-form-field class="query" appearance="outline" class="author" [formGroup]="formData">
+          <input type="text"
+                 #author
+                 placeholder="輸入作者名稱"
+                 matInput
+                 formControlName="author"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <button mat-flat-button (click)="chr1DataBuild(author.value)" class="submitBtn" style="height: 90%">搜尋</button>
     </div>
-    <!-- <button mat-button (click)="chr1DataBuild(author.value)">搜尋</button> -->
     <div class="container-chart">
       <mat-label class="chart-title">
         發文量與平均月收盤價關係圖
@@ -18,5 +35,6 @@
       style="width: 70%;height: 400px; margin:0 auto; margin-top: 5%;">
       </div>
     </div>
+    <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回</button>
   </div>
 </div>
