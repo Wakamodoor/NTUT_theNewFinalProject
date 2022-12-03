@@ -1,5 +1,6 @@
 import decimal
 from flask import Flask , jsonify , request ,render_template
+import model
 import MySQLdb as mariadb
 import json
 from flask_cors import CORS
@@ -184,3 +185,14 @@ def get_monthlywordcloud():
     sorted_word_cnt = sorted(word_cnt.items(), key=lambda kv: kv[1], reverse=True)
 
     return(json.dumps(sorted_word_cnt))
+
+@app.route('/predict', methods=['POST'])
+def postInput():
+    # 取得前端傳過來的數值
+    insertValues = request.get_json()
+    article=insertValues['article']
+    input = str(article)
+
+
+    result = model.predict(input)
+    return jsonify({'發文者類型': result,'情緒意味':"看漲看跌"})
