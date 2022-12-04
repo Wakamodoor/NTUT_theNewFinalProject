@@ -74,4 +74,15 @@ export class SocketService {
       responseType: 'json'
     })
   }
+
+  getBertAPI(content: string) {
+    return ajax({
+      url:`http://localhost:5000/predict`,
+      method: 'POST',
+      responseType: 'json',
+      body: {
+        "article": content
+      }
+    })
+  }
 }

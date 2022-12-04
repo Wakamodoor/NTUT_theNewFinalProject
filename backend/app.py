@@ -15,8 +15,8 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         super(DecimalEncoder , self).default(o)
 
-#db = mariadb.connect(host="localhost",user="root",db="forumors")
-db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
+db = mariadb.connect(host="localhost",user="root",db="forumors")
+# db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 

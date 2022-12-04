@@ -21,6 +21,7 @@ import { KolchartP2Component } from './display/features/kolchart-p2/kolchart-p2.
 import { NgxSimpleParallaxJsModule } from 'ngx-simple-parallax-js';
 import { WordcloudComponent } from './display/features/wordcloud/wordcloud.component';
 import { StkpostchartComponent } from './display/features/stkpostchart/stkpostchart.component';
+import { BertComponent } from './display/features/bert/bert.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { StkpostchartComponent } from './display/features/stkpostchart/stkpostch
     KolchartP2Component,
     WordcloudComponent,
     StkpostchartComponent,
+    BertComponent,
   ],
   imports: [
     BrowserModule,

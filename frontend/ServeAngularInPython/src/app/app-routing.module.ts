@@ -1,3 +1,4 @@
+import { BertComponent } from './display/features/bert/bert.component';
 import { HeaderComponent } from './header/header.component';
 import { StkpostchartComponent } from './display/features/stkpostchart/stkpostchart.component';
 import { WordcloudComponent } from './display/features/wordcloud/wordcloud.component';
@@ -48,9 +49,13 @@ const routes: Routes = [
     component: WordcloudComponent
   },
   {
-    path: 'header',
-    component: HeaderComponent
+    path: ':stock/predict',
+    component: BertComponent
   },
+  // {
+  //   path: 'header',
+  //   component: HeaderComponent
+  // },
   {
     path: 'sorry',
     component: ApologizeComponent,
