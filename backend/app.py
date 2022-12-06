@@ -15,13 +15,11 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         super(DecimalEncoder , self).default(o)
 
-db = mariadb.connect(host="localhost",user="root",db="forumors")
-# db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
+#db = mariadb.connect(host="localhost",user="root",db="forumors")
+db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
-# jieba.load_userdict(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\jieba dict.txt')
-# stopwords = [line.strip() for line in open(r'C:\Users\Niennnnlee\Desktop\coding\大學專題\Flangular\backend\stopwords.txt', 'r', encoding='utf-8').readlines()]
 jieba.load_userdict(r'./jieba dict.txt')
 stopwords = [line.strip() for line in open(r'./stopwords.txt', 'r', encoding='utf-8').readlines()]
 
@@ -196,3 +194,32 @@ def postInput():
 
     result = model.predict(input)
     return jsonify({'發文者類型': result,'情緒意味':"看漲看跌"})
+
+@app.route('/evergreen/user/monthlywordcloud')
+def get_usermonthlywordcloud():
+
+    year=request.args.get('year')
+    month=request.args.get('month')
+
+    selectSQL = "SELECT username , count(*) AS 當月發文數 FROM `evergreencomment` where  YEAR(DATETIME) = " + "'" + "%s" + "'" + " AND MONTH(DATETIME) = " + "'" + "%s" + "'" + " GROUP BY username ORDER BY count(*) DESC"
+
+    cursor.execute(selectSQL %(year ,month))
+
+    result = cursor.fetchall()
+
+    return jsonify(result)
+
+@app.route('/evergreen/dailyprice')
+def get_evergreenprice():
+
+    year=request.args.get('year')
+    month=request.args.get('month')
+
+    selectSQL = "SELECT DATE(DATETIME) , endprice FROM evergreenprice WHERE YEAR(DATETIME) =" + "'" + "%s" + "'" + " AND MONTH(DATETIME) = " + "'" + "%s" + "'"
+
+    cursor.execute(selectSQL %(year ,month))
+
+    result = cursor.fetchall()
+
+    return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False ,default=str)
+
