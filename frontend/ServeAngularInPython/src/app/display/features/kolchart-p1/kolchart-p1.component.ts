@@ -93,8 +93,8 @@ export class KolchartP1Component implements OnInit {
   }
 
   sendBarClick($event) {
-    console.log($event.name)
-    this.router.navigateByUrl(`home/${this.stock}/${this.author}/${this.queryDate}/kolchart2`)
+    const date = ($event.name).replace('/', '月') + '日'
+    this.router.navigateByUrl(`home/${this.stock}/${this.author}/${date}/kolchart2`)
   }
 
   backPrePage() {
