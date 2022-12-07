@@ -1,2 +1,11 @@
 backend/__pycache__/app.cpython-39.pyc
 backend/__pycache__/model.cpython-39.pyc
+backend/outputs/config.json
+backend/outputs/eval_results.txt
+backend/outputs/model_args.json
+backend/outputs/pytorch_model.bin
+backend/outputs/special_tokens_map.json
+backend/outputs/tokenizer.json
+backend/outputs/tokenizer_config.json
+backend/outputs/training_args.bin
+backend/outputs/vocab.txt
