@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ajax } from 'rxjs/ajax';
-import { catchError, pipe } from 'rxjs';
+import { catchError, pipe, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -84,5 +84,25 @@ export class SocketService {
         "article": content
       }
     })
+  }
+
+  getDailyPriceAPI(year: string, month: string) {
+    return ajax({
+      url: `http://localhost:5000/evergreen/dailyprice?year=${year}&month=${month}`,
+      method: 'GET',
+      responseType: 'json'
+    }).pipe(
+      map(rel => {
+        const data = JSON.parse(JSON.stringify(rel.response))
+        let newData = []
+        data.forEach(obj => {
+          newData.push({
+            "DATE(DATETIME)": obj['DATE(DATETIME)'].replaceAll('-', '/'),
+            "endprice": obj['endprice']
+          })
+        });
+        return newData
+      })
+    )
   }
 }

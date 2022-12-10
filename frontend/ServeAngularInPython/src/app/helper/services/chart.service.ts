@@ -64,14 +64,20 @@ export class ChartService {
           name: '月發文量',
           type: 'bar',
           yAxisIndex: 1,
-          color: "#4C9E75"
+          color: "#4C9E75",
+          emphasis: {
+            focus: 'series'
+          },
         },
         {
           data: yData['avgClose'],
           name: '平均月收盤價',
           type: 'line',
           smooth: true,
-          color: '#9E3326'
+          color: '#9E3326',
+          emphasis: {
+            focus: 'series'
+          },
         }
       ]
     };
@@ -183,7 +189,13 @@ export class ChartService {
     };
   }
 
-  dailyPost(xData: Array<string>, yData: Array<number>) {
+  dailyPost(xData: Array<string>, yData_post: Array<number>, yData_closePrice: Array<number>) {
+    let closePrice = [];
+    yData_closePrice.forEach(obj => {
+      closePrice.push(obj[1])
+    });
+    const closePrice_max = Math.ceil(Math.max(...closePrice) * 1.05);
+    const closePrice_min = Math.floor(Math.min(...closePrice) * 0.95);
 
     let options: EChartsOption = {
       tooltip: {
@@ -193,36 +205,76 @@ export class ChartService {
         }
       },
       grid: {
-        right: '8%'
+        right: '8%',
+        left: '11%'
       },
       legend: {
-        data: ['每日發文量', '日期']
+        data: ['每日發文量', '每日收盤價']
       },
-      xAxis: {
-        type: 'category',
-        data: [...xData]
-      },
-      yAxis: {
-        type: 'value',
-          name: '每日發文量',
-          position: 'left',
+      xAxis: [
+        {
+          type: 'category',
+          data: [...xData],
+          position: 'bottom',
+        }
+      ],
+      yAxis:[
+        {
+          type: 'value',
+            name: '每日發文量',
+            position: 'left',
+            alignTicks: true,
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: '#4C9E75'
+              }
+            }
+        },
+        {
+          type: 'value',
+          name: '當日收盤價',
+          position: 'right',
+          alignTicks: true,
+          max: closePrice_max,
+          min: closePrice_min,
+          axisLabel: {
+            formatter: function(val) {
+              return `${val.toFixed(0)} 元`;
+            }
+          },
           axisLine: {
             show: true,
             lineStyle: {
               color: '#9E3326'
             }
           }
-      },
+        },
+      ],
       series: [
         {
-          data: [...yData],
+          data: [...yData_post],
           name: '每日發文量',
           type: 'line',
           smooth: true,
-          color: '#9E3326'
+          color: '#4C9E75',
+          emphasis: {
+            focus: 'series'
+          },
+        },
+        {
+          data: [...yData_closePrice],
+          name: '每日收盤價',
+          type: 'line',
+          smooth: true,
+          color: '#9E3326',
+          yAxisIndex: 1,
+          emphasis: {
+            focus: 'series'
+          },
         }
-        ]
-      };
+      ]
+    };
     return options
   }
 }

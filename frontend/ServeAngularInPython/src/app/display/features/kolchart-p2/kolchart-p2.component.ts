@@ -102,14 +102,25 @@ export class KolchartP2Component implements OnInit {
     this.socket.getDailyPostAPI(author, year, month).subscribe(rel => {
       const data = JSON.parse(JSON.stringify(rel.response))
       let xData = []
-      let yData = []
+      // let xData_post = []
+      let yData_post = []
+      // let xData_closePrice = []
+      let yData_closePrice = []
 
       data.forEach(obj => {
         xData.push(obj['日期'].replaceAll('-', '/'))
-        yData.push(obj['日發文數'])
+        yData_post.push(obj['日發文數'])
       });
 
-      this.options = this.cs.dailyPost(xData, yData)
+      this.socket.getDailyPriceAPI(year, month).subscribe(rel=> {
+        const data2 = JSON.parse(JSON.stringify(rel))
+
+        data2.forEach(obj => {
+          yData_closePrice.push([obj['DATE(DATETIME)'], obj['endprice']])
+        });
+        this.options = this.cs.dailyPost(xData, yData_post, yData_closePrice)
+      })
+
     })
   }
 

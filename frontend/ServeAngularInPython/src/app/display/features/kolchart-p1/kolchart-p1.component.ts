@@ -93,7 +93,7 @@ export class KolchartP1Component implements OnInit {
   }
 
   sendBarClick($event) {
-    const date = ($event.name).replace('/', '月') + '日'
+    const date = ($event.name).replace('/', '年') + '月'
     this.router.navigateByUrl(`home/${this.stock}/${this.author}/${date}/kolchart2`)
   }
 
