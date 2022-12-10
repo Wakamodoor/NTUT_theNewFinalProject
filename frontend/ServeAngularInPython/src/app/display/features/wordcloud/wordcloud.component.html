@@ -32,7 +32,7 @@
                      formControlName="startDate">
               <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker1" class="dateIcon"></mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
+              <mat-datepicker #picker1 [disabled]="false"></mat-datepicker>
             </mat-form-field>
 
             <!-- 輸入結束日期 -->
@@ -44,7 +44,7 @@
                      formControlName="endDate">
               <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker2" class="dateIcon"></mat-datepicker-toggle>
-              <mat-datepicker #picker2 color="primary"></mat-datepicker>
+              <mat-datepicker #picker2 color="primary" [disabled]="false"></mat-datepicker>
             </mat-form-field>
           </div>
         </div>
@@ -56,5 +56,5 @@
     </div>
     <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 500px; height: 500px;">
   </div>
-  <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回</button>
+  <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回首頁</button>
 </div>

@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit {
 
   private createQueryForm(): FormGroup {
     return this.fb.group({
-      date: [moment(new Date('2022/05/31')), Validators.required]
+      date: [{value: moment(new Date('2022/05/31')), disabled: true}, Validators.required]
     });
   }
 

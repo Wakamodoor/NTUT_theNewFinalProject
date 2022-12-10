@@ -123,8 +123,8 @@ export class WordcloudComponent implements OnInit {
   private createForm(): FormGroup {
     return this.fb.group({
       author: ['', Validators.required],
-      startDate: ['' , Validators.required],
-      endDate: ['' , Validators.required]
+      startDate: [{value: '', disabled: true}, Validators.required],
+      endDate: [{value: '', disabled: true} , Validators.required]
     })
   }
 

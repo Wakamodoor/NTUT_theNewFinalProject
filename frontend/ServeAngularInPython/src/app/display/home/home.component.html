@@ -11,7 +11,8 @@
           <mat-datepicker #dp
                           startView="multi-year"
                           (monthSelected)="setMonthAndYear($event, dp)"
-                          panelClass="example-month-picker">
+                          panelClass="example-month-picker"
+                          [disabled]="false">
           </mat-datepicker>
         </mat-form-field>
       </div>
@@ -50,8 +51,18 @@
           <h1 class="monthWordcloud-title">{{queryDate + '文字雲'}}</h1>
           <div echarts [options]="wordcloudOp" *ngIf="finishLoading; else loading" class="monthWordcloud" id="wordcloud" style="width: 90%; height: 80%;">
         </div>
-        <ng-template #loading>
+        <!-- <ng-template #loading>
           <mat-spinner></mat-spinner>
+        </ng-template> -->
+        <ng-template #loading>
+          <div class="title-container">
+            <div class="spinner">
+              <svg class='svg' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="46" />
+              </svg>
+            </div>
+            <h1 class="title">loading...</h1>
+          </div>
         </ng-template>
       </div>
     </div>
