@@ -28,45 +28,12 @@ app = Flask(__name__)
 app.debug=True
 CORS(app)
 
-stores = [
-    {
-        'name' : 'cool store',
-        'items' : [
-            {
-                'name':'cool item',
-                'price':9.99
-            }
-        ]
-    }
-]
-
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/store')
-def get_stores():
-    return jsonify({'store':stores})
-
-@app.route('/test')
-def get_test():
-
-    userid= "5351047"
-
-    selectSQL = "SELECT articleid,time FROM comment WHERE userid=%s "
-
-    cursor.execute(selectSQL %userid)
-
-    result = cursor.fetchall()
-
-    return jsonify(result)
-
 @app.route('/chart_evergreen' , methods=['GET'])
 def get_chart_evergreen():
 
     selectSQL = "SELECT year(datetime) AS year, MONTH(datetime) AS month ,sum(volume) AS sumVol ,round(avg(endprice),2) as avgClose,count(*) as countDay FROM evergreenprice GROUP BY  month,year order BY  datetime"
 
-    cursor.execute(selectSQL )
+    cursor.execute(selectSQL)
 
     result = cursor.fetchall()
 
@@ -102,7 +69,9 @@ def get_wordcould(username):
     for dic in result:
         totalstring+=dic['comment']
 
-    sentence_list = re.split(r'[^\w ]', totalstring)
+    onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',totalstring)
+
+    sentence_list = re.split(r'[^\w ]', onlychinesestring)
 
     word_list=[]
     for i in sentence_list:
@@ -168,7 +137,9 @@ def get_monthlywordcloud():
     for dic in result:
         totalstring+=dic['comment']
 
-    sentence_list = re.split(r'[^\w ]', totalstring)
+    onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',totalstring)
+
+    sentence_list = re.split(r'[^\w ]', onlychinesestring)
 
     word_list=[]
     for i in sentence_list:
@@ -222,4 +193,44 @@ def get_evergreenprice():
     result = cursor.fetchall()
 
     return json.dumps(result , cls = DecimalEncoder ,ensure_ascii=False ,default=str)
+
+@app.route('/evergreen/predict/people', methods=['POST'])
+def predictevergreenbypeople():
+
+    insertValues = request.get_json()
+    username=insertValues['username']
+    date=insertValues['date']
+
+    cursor.execute(f"SELECT comment FROM `evergreencomment` where username = \'{username}\' and date(datetime) = \'{date}\'")
+
+    result = cursor.fetchall()
+
+    a=0 ;b=0;c=0
+    for i in range(len(result)):
+        input_tuple=result[i]
+        input=str(input_tuple)
+        result_pred=model.predict(input)
+        if result_pred=="機器人":
+            a=a+1
+        elif result_pred=="分析師":
+            b=b+1
+        else:
+            c=c+1
+    #比大小
+    if a>b:
+        if a>c:
+            result='機器人'
+        else:
+            result='散戶'
+    elif a<b:
+        if b>c:
+            result='分析師'
+        else:
+            result='散戶'
+    else:
+        result='一樣'
+
+    return jsonify({'發文者類型':result,"機器人文章數":a,"分析師文章數":b,"散戶文章數":c})
+
+
 
