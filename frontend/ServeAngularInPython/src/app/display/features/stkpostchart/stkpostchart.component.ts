@@ -99,7 +99,8 @@ export class StkpostchartComponent implements OnInit {
   }
 
   sendBarClick($event) {
-    const queryDate = ($event.name).replace('/', '月') + '日'
+    const queryDate = ($event.name).replace('/', '年') + '月'
+    console.log(queryDate)
     this.router.navigateByUrl(`home/${this.stock}/${this.author}/${queryDate}/kolchart2`)
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatLine } from '@angular/material/core';
 import * as echarts from 'echarts';
+import { __values } from 'tslib';
 
 type EChartsOption = echarts.EChartsOption;
 
@@ -201,7 +202,7 @@ export class ChartService {
       tooltip: {
         trigger: 'axis',
         axisPointer: {
-          type: 'cross'
+          type: 'cross',
         }
       },
       grid: {
@@ -221,32 +222,45 @@ export class ChartService {
       yAxis:[
         {
           type: 'value',
-            name: '每日發文量',
-            position: 'left',
-            alignTicks: true,
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: '#4C9E75'
-              }
+          name: '每日發文量(篇)',
+          position: 'left',
+          // alignTicks: true,
+          axisLabel: {
+            formatter: function(val) {
+              return `${val.toFixed(0)}`;
             }
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#4C9E75'
+            }
+          }
         },
         {
           type: 'value',
-          name: '當日收盤價',
+          name: '當日收盤價(元)',
           position: 'right',
           alignTicks: true,
           max: closePrice_max,
           min: closePrice_min,
           axisLabel: {
             formatter: function(val) {
-              return `${val.toFixed(0)} 元`;
+              return `${val.toFixed(0)}`;
             }
           },
           axisLine: {
             show: true,
             lineStyle: {
               color: '#9E3326'
+            }
+          },
+          axisPointer: {
+            label: {
+              formatter(params) {
+                let val: number = params.value as number
+                return val.toFixed(2)
+              },
             }
           }
         },
