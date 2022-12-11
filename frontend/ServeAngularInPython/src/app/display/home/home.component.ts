@@ -162,12 +162,21 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  getTooltipText() {
-    return `
-    發文量：作者單月總發文量
-      按讚數：作者單月發文獲得之總按讚數
-      留言數：作者單月發文獲得之總留言數
-    `
+  getTooltipText(idx: number) {
+    switch (idx) {
+      case 1:
+        return `
+        發文量：作者單月總發文量
+          按讚數：作者單月發文獲得之總按讚數
+          留言數：作者單月發文獲得之總留言數
+        `
+      case 2:
+        return `
+        以本月所選股票(長榮/鴻海)之所有發文來做斷詞並計算詞頻，
+        文字雲中字越大者，代表詞頻越高，也代表是本月熱門關鍵字。
+      `
+    }
+    return 'nothing'
   }
 
 }

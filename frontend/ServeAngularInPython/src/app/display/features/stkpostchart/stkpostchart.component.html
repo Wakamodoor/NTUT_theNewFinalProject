@@ -1,5 +1,10 @@
 <div class="body">
   <div class="chart1">
+    <mat-icon fontIcon="info"
+      class="info"
+      [matTooltip]="getTooltipText(1)"
+      matTooltipPosition="left"
+    ></mat-icon>
     <div class="form" *ngIf="!fromKOL">
       <!-- <mat-label class="lebel">選擇作者</mat-label>
       <mat-form-field appearance="outline" [formGroup]="formData">

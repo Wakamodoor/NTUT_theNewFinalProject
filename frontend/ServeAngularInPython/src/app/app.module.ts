@@ -22,6 +22,7 @@ import { NgxSimpleParallaxJsModule } from 'ngx-simple-parallax-js';
 import { WordcloudComponent } from './display/features/wordcloud/wordcloud.component';
 import { StkpostchartComponent } from './display/features/stkpostchart/stkpostchart.component';
 import { BertComponent } from './display/features/bert/bert.component';
+import { NodatasnakebarComponent } from './helper/tools/nodatasnakebar/nodatasnakebar.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { BertComponent } from './display/features/bert/bert.component';
     WordcloudComponent,
     StkpostchartComponent,
     BertComponent,
+    NodatasnakebarComponent,
   ],
   imports: [
     BrowserModule,

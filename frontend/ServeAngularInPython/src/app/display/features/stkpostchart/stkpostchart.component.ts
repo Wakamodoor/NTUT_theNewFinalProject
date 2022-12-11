@@ -120,4 +120,16 @@ export class StkpostchartComponent implements OnInit {
     return this.authorList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+  getTooltipText(idx: number) {
+    switch (idx) {
+      case 1:
+        return `
+        可直接輸入作者名稱，或是以選單方式選擇
+        熱門KOL，來查詢作者有發文以來，每個月
+        的發文量與該月之平均收盤價關係圖。
+        `
+    }
+    return 'nothing'
+  }
+
 }

@@ -128,3 +128,24 @@ circle {
 	}
 }
 
+/* tooltip */
+.info {
+    font-size: 26px;
+    position: absolute;
+    right: 3%;
+    top: 3%;
+    text-align: left;
+}
+
+::ng-deep .mat-tooltip {
+    white-space: pre-line !important;
+}
+
+::ng-deep .mat-tooltip {
+    font-size: 15px;
+    white-space: pre-wrap;
+    color: gray !important;
+    background-color: rgba(255, 255, 255, .9);
+    border:1px solid gray;
+    max-width: unset !important;
+}

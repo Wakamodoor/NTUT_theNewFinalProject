@@ -1,3 +1,4 @@
+import { NodatasnakebarComponent } from './../../../helper/tools/nodatasnakebar/nodatasnakebar.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChartService } from './../../../helper/services/chart.service';
 import { SocketService } from './../../../helper/services/socket.service';
@@ -14,6 +15,7 @@ import {
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import 'moment/locale/ja';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface wordcloudData {
   name: string,
@@ -51,6 +53,8 @@ export class WordcloudComponent implements OnInit {
 
   filteredOptions: Observable<string[]>;
 
+  durationInSeconds: number = 3;
+
   constructor(
     private socket: SocketService,
     private cs: ChartService,
@@ -58,6 +62,7 @@ export class WordcloudComponent implements OnInit {
     private _adapter: DateAdapter<any>,
     private route: ActivatedRoute,
     private router: Router,
+    private _snackBar: MatSnackBar,
     @Inject(MAT_DATE_LOCALE) private _locale: string
   ) { }
 
@@ -103,6 +108,10 @@ export class WordcloudComponent implements OnInit {
   buildWordCloud(author: string, startDate: string, endDate: string) {
     this.socket.getWordcloudAPI(author, startDate, endDate).subscribe(rel => {
       const data: any = rel.response
+      if(data.length == 0) {
+        this.openSnackBar()
+        return
+      }
       let WCData: Array<wordcloudData> = []
 
       data.forEach(arr => {
@@ -132,5 +141,35 @@ export class WordcloudComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.authorList.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  openSnackBar() {
+    //   this._snackBar.open('研究資料來源：Cmoney股市同學會', '知道了！', {
+    //     horizontalPosition: this.horizontalPosition,
+    //     verticalPosition: this.verticalPosition,
+    //     duration: this.durationInSeconds * 1000,
+    //   });
+
+      this._snackBar.openFromComponent(NodatasnakebarComponent, {
+        duration: this.durationInSeconds * 1000,
+        panelClass: [
+          'snakebar-panel'
+        ]
+      });
+    }
+
+  getTooltipText(idx: number) {
+    switch (idx) {
+      case 1:
+        return `
+        可直接輸入作者名稱，或是以選單方式選擇
+        熱門KOL，並選擇一段期間，會以該作者在
+        所選期間內的發文做斷詞，用斷詞結果算出
+        詞頻，製作出文字雲，文字雲中字越大者，
+        代表詞頻越高，也代表是該作者在選擇期間
+        最常出現的關鍵字。
+        `
+    }
+    return 'nothing'
   }
 }

@@ -22,8 +22,8 @@
 
       <mat-icon fontIcon="info"
                 class="info"
-                [matTooltip]="getTooltipText()"
-                matTooltipPosition="right"
+                [matTooltip]="getTooltipText(1)"
+                matTooltipPosition="left"
       ></mat-icon>
 
 
@@ -48,6 +48,11 @@
           <h1 class="monthWordcloud-title">{{queryDate + '加權指數與發文量關係圖'}}</h1>
         </div>
         <div class="container-month-wordcloud">
+          <mat-icon fontIcon="info"
+            class="info"
+            [matTooltip]="getTooltipText(2)"
+            matTooltipPosition="left"
+          ></mat-icon>
           <h1 class="monthWordcloud-title">{{queryDate + '文字雲'}}</h1>
           <div echarts [options]="wordcloudOp" *ngIf="finishLoading; else loading" class="monthWordcloud" id="wordcloud" style="width: 90%; height: 80%;">
         </div>

@@ -1,6 +1,11 @@
 <div class="body">
 
   <div class="container">
+    <mat-icon fontIcon="info"
+      class="info"
+      [matTooltip]="getTooltipText(1)"
+      matTooltipPosition="left"
+    ></mat-icon>
     <div class="container-form">
       <form class="queryform" [formGroup]="queryForm" *ngIf="!fromKOL">
         <div class="container-form-author">

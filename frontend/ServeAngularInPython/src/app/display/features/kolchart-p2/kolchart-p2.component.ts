@@ -167,7 +167,17 @@ export class KolchartP2Component implements OnInit {
     return this.authorList.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-
+  getTooltipText(idx: number) {
+    switch (idx) {
+      case 1:
+        return `
+        以所選股票(長榮/鴻海)之該作者本月所有發文
+        來做斷詞並計算詞頻，文字雲中字越大者，代表
+        詞頻越高，也代表是該作者本月最常出現的關鍵字。
+        `
+    }
+    return 'nothing'
+  }
 
 
 

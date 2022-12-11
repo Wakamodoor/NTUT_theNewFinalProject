@@ -13,6 +13,11 @@
     </div>
     <!-- 文字雲 -->
     <div class="container-wordcloud">
+      <mat-icon fontIcon="info"
+        class="info"
+        [matTooltip]="getTooltipText(1)"
+        matTooltipPosition="left"
+      ></mat-icon>
       <mat-label class="chart-title">
         <span>{{ queryDate }}</span>文章熱門關鍵字
       </mat-label>
