@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NodatasnakebarComponent } from './../../../helper/tools/nodatasnakebar/nodatasnakebar.component';
 import { SocketService } from '../../../helper/services/socket.service';
 import { ChartService } from '../../../helper/services/chart.service';
 import * as echarts from 'echarts';
@@ -6,6 +7,7 @@ import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { concatMap, filter, forkJoin, map, Observable, range, startWith } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 type EChartsOption = echarts.EChartsOption;
 
@@ -43,6 +45,7 @@ export class StkpostchartComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private _snackBar: MatSnackBar,
     private location: Location
   ) { }
 
@@ -95,6 +98,9 @@ export class StkpostchartComponent implements OnInit {
         })
         this.options = this.cs.Chart1(xData, yData)
       })
+      if(rel.length === 0) {
+        this.openSnackBar()
+      }
     })
   }
 
@@ -132,4 +138,18 @@ export class StkpostchartComponent implements OnInit {
     return 'nothing'
   }
 
+  openSnackBar() {
+    //   this._snackBar.open('研究資料來源：Cmoney股市同學會', '知道了！', {
+    //     horizontalPosition: this.horizontalPosition,
+    //     verticalPosition: this.verticalPosition,
+    //     duration: this.durationInSeconds * 1000,
+    //   });
+
+    this._snackBar.openFromComponent(NodatasnakebarComponent, {
+      duration: 3000,
+      panelClass: [
+        'snakebar-panel'
+      ]
+    });
+  }
 }

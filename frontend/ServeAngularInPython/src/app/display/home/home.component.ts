@@ -1,4 +1,5 @@
 import { FooterComponent } from './../../footer/footer.component';
+import { NodatasnakebarComponent } from './../../helper/tools/nodatasnakebar/nodatasnakebar.component';
 import { SocketService } from '../../helper/services/socket.service';
 import { ChartService } from '../../helper/services/chart.service';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import SimpleParallax from 'simple-parallax-js';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const MY_FORMATS = {
   parse: {
@@ -81,6 +83,7 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private _adapter: DateAdapter<any>,
+    private _snackBar: MatSnackBar,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
   ) {
     // if( window.localStorage ) {
@@ -105,6 +108,9 @@ export class HomeComponent implements OnInit {
   queryKolrank(year: string, month: string) {
     this.socket.getKOLRankAPI(year, month).subscribe((rel) => {
       this.leaderboardData = JSON.parse(JSON.stringify(rel.response))
+      if(this.leaderboardData.length === 0) {
+        this.openSnackBar()
+      }
     })
   }
 
@@ -177,6 +183,21 @@ export class HomeComponent implements OnInit {
       `
     }
     return 'nothing'
+  }
+
+  openSnackBar() {
+    //   this._snackBar.open('研究資料來源：Cmoney股市同學會', '知道了！', {
+    //     horizontalPosition: this.horizontalPosition,
+    //     verticalPosition: this.verticalPosition,
+    //     duration: this.durationInSeconds * 1000,
+    //   });
+
+    this._snackBar.openFromComponent(NodatasnakebarComponent, {
+      duration: 3000,
+      panelClass: [
+        'snakebar-panel'
+      ]
+    });
   }
 
 }
