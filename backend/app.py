@@ -23,6 +23,8 @@ cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 jieba.load_userdict(r'./jieba dict.txt')
 stopwords = [line.strip() for line in open(r'./stopwords.txt', 'r', encoding='utf-8').readlines()]
 
+poswords =  [line.strip() for line in open(r'./our_dict_positive_v2.txt', 'r', encoding='utf-8').readlines()]
+negwords = [line.strip() for line in open(r'./our_dict_negative_v2.txt', 'r', encoding='utf-8').readlines()]
 
 app = Flask(__name__)
 app.debug=True
@@ -232,5 +234,41 @@ def predictevergreenbypeople():
 
     return jsonify({'發文者類型':result,"機器人文章數":a,"分析師文章數":b,"散戶文章數":c})
 
+@app.route('/evergreen/ranking/emotion/<string:username>')
+def getrankingpeopleemotion(username):
 
+    year=request.args.get('year')
+    month=request.args.get('month')
 
+    cursor.execute(f"SELECT comment FROM `evergreencomment` where username = \'{username}\' and year(datetime) = \'{year}\' and month(datetime) = \'{month}\'")
+
+    result = cursor.fetchall()
+
+    totalstring=''
+
+    for dic in result:
+        totalstring+=dic['comment']
+
+    onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',totalstring)
+
+    sentence_list = re.split(r'[^\w ]', onlychinesestring)
+
+    word_list=[]
+    for i in sentence_list:
+        seg_list = jieba.lcut(i)
+        for r in seg_list:
+            if r not in stopwords and r != ' ':
+                word_list.append(r)
+
+    print(word_list)
+    poswordstimes=0
+    negwordstimes=0
+    for word in word_list:
+        if word in poswords:
+            poswordstimes+=1
+        elif word in negwords:
+            negwordstimes+=1
+        else:
+            continue
+
+    return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes})
