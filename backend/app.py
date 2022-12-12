@@ -25,6 +25,8 @@ stopwords = [line.strip() for line in open(r'./stopwords.txt', 'r', encoding='ut
 
 poswords =  [line.strip() for line in open(r'./our_dict_positive_v2.txt', 'r', encoding='utf-8').readlines()]
 negwords = [line.strip() for line in open(r'./our_dict_negative_v2.txt', 'r', encoding='utf-8').readlines()]
+stawords = [line.strip() for line in open(r'./our_dict_v2.txt', 'r', encoding='utf-8').readlines()]
+
 
 app = Flask(__name__)
 app.debug=True
@@ -263,12 +265,13 @@ def getrankingpeopleemotion(username):
     print(word_list)
     poswordstimes=0
     negwordstimes=0
+    stawordstimes=0
     for word in word_list:
         if word in poswords:
             poswordstimes+=1
         elif word in negwords:
             negwordstimes+=1
-        else:
-            continue
+        elif word in stawords:
+            stawordstimes+=1
 
-    return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes})
+    return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes , "中立字詞次數":stawordstimes})
