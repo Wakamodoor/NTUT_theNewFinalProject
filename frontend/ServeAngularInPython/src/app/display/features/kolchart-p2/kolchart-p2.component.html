@@ -24,4 +24,24 @@
       <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 90%; height: 80%;">
     </div>
   </div>
+  <!-- 溫度計 -->
+  <div class="container-emotion-bar">
+    <div class="container-thermometer">
+      <div class="shape-head">
+        <div class="middle-deco"></div>
+      </div>
+      <div class="shape-body">
+        <div class="middle-deco">
+          <div class="positive" id='positive' [ngStyle]="{width: posPercent+'%'}"><span>{{posPercent + '%'}}</span></div>
+          <div class="negative" id='negative' [ngStyle]="{width: negPercent+'%'}"><span>{{negPercent + '%'}}</span></div>
+          <div class="neutrality" id='neutrality' [ngStyle]="{width: neuPercent+'%'}"><span>{{neuPercent + '%'}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="thermometer-desc">
+      <div class="desc-pos"><div></div>正向</div>
+      <div class="desc-neg"><div></div>負向</div>
+      <div class="desc-neu"><div></div>中立</div>
+    </div>
+  </div>
 </div>

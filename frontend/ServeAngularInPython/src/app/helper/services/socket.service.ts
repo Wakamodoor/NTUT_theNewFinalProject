@@ -105,4 +105,12 @@ export class SocketService {
       })
     )
   }
+
+  getAuthorEmotionalBarAPI(author: string, year: string, month: string) {
+    return ajax({
+      url:`http://localhost:5000/evergreen/ranking/emotion/${author}?year=${year}&month=${month}`,
+      method: 'GET',
+      responseType: 'json'
+    })
+  }
 }
