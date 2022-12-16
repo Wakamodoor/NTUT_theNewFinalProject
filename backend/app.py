@@ -533,3 +533,86 @@ def getfoxconnrankingpeopleemotion(username):
             stawordstimes+=1
 
     return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes , "中立字詞次數":stawordstimes})
+
+@app.route('/evergreen/monthly/emotion')
+def getevergreenmonthlyemotion():
+
+    year=request.args.get('year')
+    month=request.args.get('month')
+
+    print(f"SELECT year(datetime) AS year , month(datetime) AS month , comment FROM `evergreencomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\' groupby year and month")
+
+    cursor.execute(f"SELECT year(datetime) AS year , month(datetime) AS month , comment FROM `evergreencomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\' group by year and month")
+
+    result = cursor.fetchall()
+
+    print(result)
+
+    totalstring=''
+
+    for dic in result:
+        totalstring+=dic['comment']
+
+    onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',totalstring)
+
+    sentence_list = re.split(r'[^\w ]', onlychinesestring)
+
+    word_list=[]
+    for i in sentence_list:
+        seg_list = jieba.lcut(i)
+        for r in seg_list:
+            if r not in stopwords and r != ' ':
+                word_list.append(r)
+
+    poswordstimes=0
+    negwordstimes=0
+    stawordstimes=0
+    for word in word_list:
+        if word in poswords:
+            poswordstimes+=1
+        elif word in negwords:
+            negwordstimes+=1
+        elif word in stawords:
+            stawordstimes+=1
+
+    return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes , "中立字詞次數":stawordstimes})
+
+
+@app.route('/foxconn/monthly/emotion')
+def getfoxconnmonthlyemotion():
+
+    year=request.args.get('year')
+    month=request.args.get('month')
+
+    cursor.execute(f"SELECT comment FROM `foxconncomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\'")
+
+    result = cursor.fetchall()
+
+    totalstring=''
+
+    for dic in result:
+        totalstring+=dic['comment']
+
+    onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',totalstring)
+
+    sentence_list = re.split(r'[^\w ]', onlychinesestring)
+
+    word_list=[]
+    for i in sentence_list:
+        seg_list = jieba.lcut(i)
+        for r in seg_list:
+            if r not in stopwords and r != ' ':
+                word_list.append(r)
+
+    poswordstimes=0
+    negwordstimes=0
+    stawordstimes=0
+    for word in word_list:
+        if word in poswords:
+            poswordstimes+=1
+        elif word in negwords:
+            negwordstimes+=1
+        elif word in stawords:
+            stawordstimes+=1
+
+    return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes , "中立字詞次數":stawordstimes})
