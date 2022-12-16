@@ -106,7 +106,7 @@ export class WordcloudComponent implements OnInit {
   }
 
   buildWordCloud(author: string, startDate: string, endDate: string) {
-    this.socket.getWordcloudAPI(author, startDate, endDate).subscribe(rel => {
+    this.socket.getWordcloudAPI(author, startDate, endDate, this.stock).subscribe(rel => {
       const data: any = rel.response
       if(data.length == 0) {
         this.openSnackBar()

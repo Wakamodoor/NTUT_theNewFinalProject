@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit {
   }
 
   queryKolrank(year: string, month: string) {
-    this.socket.getKOLRankAPI(year, month).subscribe((rel) => {
+    this.socket.getKOLRankAPI(year, month, this.stock).subscribe((rel) => {
       this.leaderboardData = JSON.parse(JSON.stringify(rel.response))
       if(this.leaderboardData.length === 0) {
         this.openSnackBar()
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
   }
 
   queryMonthWordcloud(year: string, month: string) {
-    this.socket.getMonthWordcloudAPI(year, month).subscribe(rel => {
+    this.socket.getMonthWordcloudAPI(year, month, this.stock).subscribe(rel => {
       console.log(rel.response)
       this.finishLoading = true
       const data: any = JSON.parse(JSON.stringify(rel.response))

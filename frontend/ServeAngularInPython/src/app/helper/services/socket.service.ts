@@ -16,22 +16,38 @@ export class SocketService {
    * @param chrNum 第幾種圖表, ex:chart_1
    * @param who 哪位作者, ex:阿土伯
   */
-  getAPI(chrNum: string, who: string, stock: string = 'evergreen') {
-    return ajax({
-      url: `http://localhost:5000//${stock}/${chrNum}/${who}`,
-      method: 'GET',
-      responseType: 'json'
-    })
+  getAPI(chrNum: string, who: string, stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url: `http://localhost:5000//evergreen/${chrNum}/${who}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }else {
+      return ajax({
+        url: `http://localhost:5000//foxconn/${chrNum}/${who}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
   }
 
   /** GET: 月成交量&平均收盤價
   */
-  getCommonAPI() {
-    return ajax({
-      url: 'http://localhost:5000/chart_evergreen',
-      method: 'GET',
-      responseType: 'json'
-    })
+  getCommonAPI(stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url: 'http://localhost:5000/chart_evergreen',
+        method: 'GET',
+        responseType: 'json'
+      })
+    }else {
+      return ajax({
+        url: 'http://localhost:5000/chart_foxconn',
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
   }
 
    /** GET: 文字雲詞與詞頻
@@ -41,38 +57,69 @@ export class SocketService {
     * @param stock? 股票名稱 foxconn | evergreen
   */
   getWordcloudAPI(author: string, startDate: string, endDate: string, stock?: string) {
-    // stock: string = 'evergreen'
-    console.log(`http://localhost:5000/evergreen/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`)
-    return ajax({
-      url: `http://localhost:5000/evergreen/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`,
-      method: 'GET',
-      responseType: 'json'
-    })
+    if(stock === '2603') {
+      return ajax({
+        url: `http://localhost:5000/evergreen/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }else {
+      return ajax({
+        url: `http://localhost:5000/foxconn/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
   }
 
-  getKOLRankAPI(year: string, month: string) {
+  getKOLRankAPI(year: string, month: string, stock: string) {
     console.log(`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`)
-    return ajax({
-      url:`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`,
-      method: 'GET',
-      responseType: 'json'
-    })
+    if(stock === '2603') {
+      return ajax({
+        url:`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }else {
+      return ajax({
+        url:`http://localhost:5000/foxconn/ranking?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
   }
 
-  getMonthWordcloudAPI(year: string, month: string) {
-    return ajax({
-      url:`http://localhost:5000/evegreen/monthlywordcloud?year=${year}&month=${month}`,
-      method: 'GET',
-      responseType: 'json'
-    })
+  getMonthWordcloudAPI(year: string, month: string, stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url:`http://localhost:5000/evegreen/monthlywordcloud?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }else {
+      return ajax({
+        url:`http://localhost:5000/foxconn/monthlywordcloud?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
   }
 
-  getDailyPostAPI(author: string, year: string, month: string) {
-    return ajax({
-      url:`http://localhost:5000/evegreen/dailypost/${author}?year=${year}&month=${month}`,
-      method: 'GET',
-      responseType: 'json'
-    })
+  getDailyPostAPI(author: string, year: string, month: string, stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url:`http://localhost:5000/evegreen/dailypost/${author}?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+
+    }else {
+      return ajax({
+        url:`http://localhost:5000/foxconn/dailypost/${author}?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
   }
 
   getBertAPI(content: string) {
@@ -86,9 +133,10 @@ export class SocketService {
     })
   }
 
-  getDailyPriceAPI(year: string, month: string) {
+  getDailyPriceAPI(year: string, month: string, stock: string) {
+    const stockName = stock === '2603'? 'evergreen' : 'foxconn';
     return ajax({
-      url: `http://localhost:5000/evergreen/dailyprice?year=${year}&month=${month}`,
+      url: `http://localhost:5000/${stockName}/dailyprice?year=${year}&month=${month}`,
       method: 'GET',
       responseType: 'json'
     }).pipe(
@@ -106,11 +154,44 @@ export class SocketService {
     )
   }
 
-  getAuthorEmotionalBarAPI(author: string, year: string, month: string) {
-    return ajax({
-      url:`http://localhost:5000/evergreen/ranking/emotion/${author}?year=${year}&month=${month}`,
-      method: 'GET',
-      responseType: 'json'
-    })
+  getAuthorEmotionalBarAPI(author: string, year: string, month: string, stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url:`http://localhost:5000/evergreen/ranking/emotion/${author}?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+
+    }else {
+      return ajax({
+        url:`http://localhost:5000/foxconn/ranking/emotion/${author}?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
+  }
+
+  getAuthorADayBert(author: string, date: string, stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url:`http://localhost:5000/evergreen/predict/people`,
+        method: 'POST',
+        responseType: 'json',
+        body: {
+          "username": author,
+          "date": date
+        }
+      })
+    }else {
+      return ajax({
+        url:`http://localhost:5000/foxconn/predict/people`,
+        method: 'POST',
+        responseType: 'json',
+        body: {
+          "username": author,
+          "date": date
+        }
+      })
+    }
   }
 }

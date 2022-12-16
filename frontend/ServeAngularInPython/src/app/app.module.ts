@@ -23,6 +23,7 @@ import { WordcloudComponent } from './display/features/wordcloud/wordcloud.compo
 import { StkpostchartComponent } from './display/features/stkpostchart/stkpostchart.component';
 import { BertComponent } from './display/features/bert/bert.component';
 import { NodatasnakebarComponent } from './helper/tools/nodatasnakebar/nodatasnakebar.component';
+import { Bert2Component } from './display/features/bert/bert2/bert2.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NodatasnakebarComponent } from './helper/tools/nodatasnakebar/nodatasna
     StkpostchartComponent,
     BertComponent,
     NodatasnakebarComponent,
+    Bert2Component,
   ],
   imports: [
     BrowserModule,

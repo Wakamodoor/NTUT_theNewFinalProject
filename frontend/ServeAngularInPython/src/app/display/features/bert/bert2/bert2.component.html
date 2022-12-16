@@ -1,0 +1,75 @@
+<div class="body">
+  <div class="container">
+    <mat-icon fontIcon="info"
+      class="info"
+      [matTooltip]="getTooltipText()"
+      matTooltipPosition="left"
+    ></mat-icon>
+    <div class="container-form">
+      <form class="queryform" [formGroup]="queryForm">
+        <div class="container-form-author">
+          <mat-label class="lebel">選擇作者</mat-label>
+          <!-- 輸入作者名稱 -->
+          <mat-form-field class="query" appearance="outline" class="author">
+            <input type="text"
+                   placeholder="輸入作者名稱"
+                   matInput
+                   formControlName="author"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="container-form-date">
+          <mat-label class="lebel">選擇日期區間</mat-label>
+          <!-- 輸入起始日期 -->
+          <div class="container-form-date-wrapper">
+            <mat-form-field appearance="outline" class="date">
+              <input type="text"
+                     placeholder="輸入起始日期"
+                     matInput
+                     [matDatepicker]="picker1"
+                     formControlName="date">
+              <mat-hint>YYYY/MM/DD</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker1" class="dateIcon"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 [disabled]="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <button mat-flat-button class="submitBtn" style="height: 90%" (click)="queryBert2()">查詢</button>
+      </form>
+    </div>
+    <div class="container-result">
+      <div class="result" style="opacity: 0;">
+        <mat-label class="result-title">預測結果</mat-label>
+        <div class="result-wrapper">
+          <p>{{ result }}</p>
+        </div>
+        <p class="articleType">文章種類</p>
+        <div class="result-respectively-wrapper">
+          <p>{{'分析師：' + analyst}}</p>
+          <p>{{'機器人：' + robot}}</p>
+          <p>{{'散戶：　' + investors}}</p>
+        </div>
+      </div>
+      <div class="loading" style="opacity: 0;">
+        <div *ngTemplateOutlet="loading"></div>
+      </div>
+    </div>
+    <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回</button>
+  </div>
+  <ng-template #loading>
+    <div class="title-container">
+      <div class="spinner">
+        <svg class='svg' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" />
+        </svg>
+      </div>
+      <h1 class="title">loading...</h1>
+    </div>
+  </ng-template>
+</div>

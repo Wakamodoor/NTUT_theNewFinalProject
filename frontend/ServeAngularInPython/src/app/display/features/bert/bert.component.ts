@@ -13,6 +13,8 @@ export class BertComponent implements OnInit {
 
   stock: string
 
+  isBert2: boolean = true;
+
 
 
   constructor(
@@ -41,6 +43,14 @@ export class BertComponent implements OnInit {
 
   backPrePage() {
     this.router.navigateByUrl(`home/${this.stock}`)
+  }
+
+  returnPage() {
+    this.isBert2 = false;
+  }
+
+  goBert2Page() {
+    this.isBert2 = true;
   }
 
   getTooltipText(idx: number) {
