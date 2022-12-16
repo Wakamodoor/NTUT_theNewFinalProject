@@ -64,7 +64,7 @@ export class StkpostchartComponent implements OnInit {
     // const author = this.formData.getRawValue().autohor
     // console.log(author)
     this.author = author
-    this.socket.getAPI('chart_1', author).pipe(
+    this.socket.getAPI('chart_1', author, this.stock).pipe(
       map(arr => {
         let newArr: any = arr.response
         newArr.forEach((obj: object) => {
@@ -83,7 +83,7 @@ export class StkpostchartComponent implements OnInit {
         xData.push(obj['yearMonth']),
         yData['volOfMonth'].push(obj['volOfMonth'])
       })
-      this.socket.getCommonAPI().pipe(map(arr2 => {
+      this.socket.getCommonAPI(this.stock).pipe(map(arr2 => {
         let newArr2: any = arr2.response
         newArr2.forEach((obj: object) => {
           obj['yearMonth'] = `${obj['year']}/${obj['month']}`

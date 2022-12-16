@@ -2,7 +2,7 @@
   <div class="container">
     <h3 class="authorName">{{ '作者：' + author }}</h3>
     <!-- 每日發文量 -->
-    <div class="container-daily-post-chart">
+    <div class="container-daily-post-chart" id="daily-post-chart">
       <mat-label class="chart-title">{{ '每日發文量與收盤價關係圖' }}</mat-label>
       <div echarts
            class="chart" id="chart"
@@ -12,7 +12,7 @@
       <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回</button>
     </div>
     <!-- 文字雲 -->
-    <div class="container-wordcloud">
+    <div class="container-wordcloud" id="wordcloud">
       <mat-icon fontIcon="info"
         class="info"
         [matTooltip]="getTooltipText(1)"
@@ -21,7 +21,40 @@
       <mat-label class="chart-title">
         <span>{{ queryDate }}</span>文章熱門關鍵字
       </mat-label>
-      <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 90%; height: 80%;">
+      <ng-container *ngIf="!wcNoData">
+        <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 90%; height: 80%;"></div>
+      </ng-container>
+      <ng-container *ngIf="wcNoData">
+        <div class="wcNoData" style="width: 90%; height: 80%;"><p>資料量不足，導致無結果</p></div>
+      </ng-container>
+
+
+    </div>
+  </div>
+  <!-- 溫度計 -->
+  <div class="container-emotion-bar" id="emotion-bar">
+    <div class="emotionBar_title">本月溫度計</div>
+    <mat-icon fontIcon="info"
+        class="info"
+        [matTooltip]="getTooltipText(2)"
+        matTooltipPosition="right"
+    ></mat-icon>
+    <div class="container-thermometer">
+      <div class="shape-head">
+        <div class="middle-deco"></div>
+      </div>
+      <div class="shape-body">
+        <div class="middle-deco">
+          <div class="positive" id='positive' [ngStyle]="{width: posPercent+'%'}"><span>{{posPercent + '%'}}</span></div>
+          <div class="negative" id='negative' [ngStyle]="{width: negPercent+'%'}"><span>{{negPercent + '%'}}</span></div>
+          <div class="neutrality" id='neutrality' [ngStyle]="{width: neuPercent+'%'}"><span>{{neuPercent + '%'}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="thermometer-desc">
+      <div class="desc-pos"><div></div>正向</div>
+      <div class="desc-neg"><div></div>負向</div>
+      <div class="desc-neu"><div></div>中立</div>
     </div>
   </div>
 </div>

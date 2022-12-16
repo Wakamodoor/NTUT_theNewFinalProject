@@ -55,7 +55,7 @@ export class KolchartP1Component implements OnInit {
   chr1DataBuild(author: any) {
     // const author = this.formData.getRawValue().autohor
     // console.log(author)
-    this.socket.getAPI('chart_1', author).pipe(
+    this.socket.getAPI('chart_1', author, this.stock).pipe(
       map(arr => {
         let newArr: any = arr.response
         newArr.forEach((obj: object) => {
@@ -74,7 +74,7 @@ export class KolchartP1Component implements OnInit {
         xData.push(obj['yearMonth']),
         yData['volOfMonth'].push(obj['volOfMonth'])
       })
-      this.socket.getCommonAPI().pipe(map(arr2 => {
+      this.socket.getCommonAPI(this.stock).pipe(map(arr2 => {
         let newArr2: any = arr2.response
         newArr2.forEach((obj: object) => {
           obj['yearMonth'] = `${obj['year']}/${obj['month']}`
@@ -99,6 +99,16 @@ export class KolchartP1Component implements OnInit {
 
   backPrePage() {
     this.router.navigateByUrl(`home/${this.stock}`)
+  }
+
+  getTooltipText(idx: number) {
+    switch (idx) {
+      case 1:
+        return `
+        點擊圖中的柱狀體或資料點可以獲得更多資訊。
+        `
+    }
+    return 'nothing'
   }
 
   private createQueryForm(): FormGroup {

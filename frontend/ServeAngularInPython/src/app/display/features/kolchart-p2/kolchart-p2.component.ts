@@ -52,6 +52,15 @@ export class KolchartP2Component implements OnInit {
   stock: string
   author: string
   queryDate: string
+  year: string
+  month: string
+
+  negPercent: number;
+  posPercent: number;
+  neuPercent: number;
+
+  wcNoData: boolean = false;
+
 
   options: EChartsOption = {}
 
@@ -73,10 +82,11 @@ export class KolchartP2Component implements OnInit {
       this.stock = this.route.snapshot.paramMap.get('stock')
       this.author = this.route.snapshot.paramMap.get('author')
       this.queryDate = this.route.snapshot.paramMap.get('date')
-      const year = this.queryDate.slice(0,4)
-      const month = this.queryDate.slice(5,6)
-      this.queryDailyPostChart(this.author, year, month)
-      this.queryWordcloud(this.author, this.queryDate)
+      this.year = this.queryDate.slice(0,4)
+      this.month = this.queryDate.slice(5,7).replace('月', '')
+      this.queryDailyPostChart(this.author, this.year, this.month)
+      // this.queryWordcloud(this.author, this.queryDate)
+      // this.getEmotionalBar()
     }else {
       this.fromKOL = false
       this.queryForm = this.createForm()
@@ -99,8 +109,9 @@ export class KolchartP2Component implements OnInit {
   }
 
   queryDailyPostChart(author: string, year: string, month: string) {
-    this.socket.getDailyPostAPI(author, year, month).subscribe(rel => {
+    this.socket.getDailyPostAPI(author, year, month, this.stock).subscribe(rel => {
       const data = JSON.parse(JSON.stringify(rel.response))
+      console.log(data)
       let xData = []
       // let xData_post = []
       let yData_post = []
@@ -112,32 +123,38 @@ export class KolchartP2Component implements OnInit {
         yData_post.push(obj['日發文數'])
       });
 
-      this.socket.getDailyPriceAPI(year, month).subscribe(rel=> {
+      this.socket.getDailyPriceAPI(year, month, this.stock).subscribe(rel=> {
         const data2 = JSON.parse(JSON.stringify(rel))
 
         data2.forEach(obj => {
           yData_closePrice.push([obj['DATE(DATETIME)'], obj['endprice']])
         });
         this.options = this.cs.dailyPost(xData, yData_post, yData_closePrice)
+        document.getElementById('daily-post-chart').style.opacity = '1'
+        this.queryWordcloud(this.author, this.queryDate)
       })
 
     })
   }
 
   queryWordcloud(author: string, date: string) {
-    const year = date.slice(0, 4)
-    const month = date.slice(5, 6)
-    let startDate = `${year}-${month}-01`
-    let endDate = `${year}-${month}-31`
+    // const year = date.slice(0, 4)
+    // const month = date.slice(5, 6)
+    let startDate = `${this.year}-${this.month}-01`
+    let endDate = `${this.year}-${this.month}-31`
 
     this.buildWordCloud(author, startDate, endDate)
   }
 
   buildWordCloud(author: string, startDate: string, endDate: string) {
-    this.socket.getWordcloudAPI(author, startDate, endDate).subscribe(rel => {
+    this.socket.getWordcloudAPI(author, startDate, endDate, this.stock).subscribe(rel => {
       const data: any = rel.response
       let WCData: Array<wordcloudData> = []
       console.log(data)
+      if(data.length === 0) {
+        this.wcNoData = true
+        return
+      }
       data.forEach(arr => {
         const tmpObj = {
           name: arr[0],
@@ -146,6 +163,8 @@ export class KolchartP2Component implements OnInit {
         WCData.push(tmpObj)
       });
       this.wordcloudOp = this.cs.wordCloud(WCData, this.maskImage)
+      document.getElementById('wordcloud').style.opacity = '1'
+      this.getEmotionalBar()
     })
   }
 
@@ -175,8 +194,26 @@ export class KolchartP2Component implements OnInit {
         來做斷詞並計算詞頻，文字雲中字越大者，代表
         詞頻越高，也代表是該作者本月最常出現的關鍵字。
         `
+      case 2:
+        return `
+        溫度計呈現的是本月該作者所有文章的情緒正負向。
+        `
     }
     return 'nothing'
+  }
+
+  getEmotionalBar() {
+    this.socket.getAuthorEmotionalBarAPI(this.author, this.year, this.month, this.stock).subscribe((rel) => {
+      const data = JSON.parse(JSON.stringify((rel.response)))
+      const total = data['中立字詞次數'] + data['正向字詞次數'] + data['負向字詞次數']
+      this.posPercent = Math.floor((data['正向字詞次數'] / total)*100)
+      this.negPercent = Math.floor((data['負向字詞次數'] / total)*100)
+      this.neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
+      document.getElementById('emotion-bar').style.opacity = '1';
+      document.getElementById('positive').style.opacity = '1';
+      document.getElementById('negative').style.opacity = '1';
+      document.getElementById('neutrality').style.opacity = '1';
+    })
   }
 
 

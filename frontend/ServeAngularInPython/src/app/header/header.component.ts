@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   ifChoose: boolean = false
   stock: string
+  stockName: string
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
       }else {
         this. stock = router.snapshot.params['stock']
         this.ifChoose = true
+        this.stockName = this.stock === '2603'? '2603長榮' : '2317鴻海'
         // this.stock = this.route.snapshot.queryParams
       }
     })

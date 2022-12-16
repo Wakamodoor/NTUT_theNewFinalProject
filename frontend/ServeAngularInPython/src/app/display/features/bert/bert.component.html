@@ -1,4 +1,4 @@
-<div class="body">
+<div class="body" *ngIf="!isBert2">
   <div class="container">
     <mat-icon fontIcon="info"
       class="info"
@@ -25,9 +25,8 @@
       </div>
     </div>
     <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回首頁</button>
-
+    <button mat-flat-button class="nextBtn" style="width: 2%; height: 30%;" (click)="goBert2Page()">更多</button>
   </div>
-
   <ng-template #loading>
     <div class="title-container">
       <div class="spinner">
@@ -38,5 +37,10 @@
       <h1 class="title">loading...</h1>
     </div>
   </ng-template>
-
 </div>
+
+<app-bert2
+  *ngIf="isBert2"
+  (return)="returnPage()"
+  >
+</app-bert2>

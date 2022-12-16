@@ -2,6 +2,13 @@
   overflow: hidden;
 }
 
+.title {
+  margin: 15px 0 auto;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+}
+
 .imgGroup {
   margin: 0;
   width: 90%;
@@ -15,6 +22,7 @@
   right: 0;
   bottom: 0;
   margin: auto;
+  margin-top: 2%;
 }
 
 .stock2317 {
@@ -40,7 +48,7 @@
 
 .stock2317:hover{
   width: 50%;
-  height: 95%;
+  height: 90%;
   cursor: pointer;
 }
 
@@ -78,7 +86,7 @@
 
 .stock2603:hover{
   width: 50%;
-  height: 95%;
+  height: 90%;
   cursor: pointer;
 }
 
