@@ -13,7 +13,7 @@ export class BertComponent implements OnInit {
 
   stock: string
 
-  isBert2: boolean = true;
+  isBert2: boolean = false;
 
 
 

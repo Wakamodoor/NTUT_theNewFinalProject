@@ -9,4 +9,7 @@
     <button mat-flat-button disableRipple [routerLink]="stock + '/wordcloud'">文字雲</button>
     <button mat-flat-button disableRipple [routerLink]="stock + '/predict'">模型預測</button>
   </div>
+  <div class="stockInfo" *ngIf="ifChoose">
+    {{stockName}}
+  </div>
 </div>

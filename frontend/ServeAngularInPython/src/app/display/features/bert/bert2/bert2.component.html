@@ -25,12 +25,12 @@
         </div>
 
         <div class="container-form-date">
-          <mat-label class="lebel">選擇日期區間</mat-label>
+          <mat-label class="lebel">選擇日期</mat-label>
           <!-- 輸入起始日期 -->
           <div class="container-form-date-wrapper">
             <mat-form-field appearance="outline" class="date">
               <input type="text"
-                     placeholder="輸入起始日期"
+                     placeholder="輸入日期"
                      matInput
                      [matDatepicker]="picker1"
                      formControlName="date">
@@ -40,7 +40,7 @@
             </mat-form-field>
           </div>
         </div>
-        <button mat-flat-button class="submitBtn" style="height: 90%" (click)="queryBert2()">查詢</button>
+        <button mat-flat-button class="submitBtn" style="height: 90%" (click)="queryBert2()">預測</button>
       </form>
     </div>
     <div class="container-result">

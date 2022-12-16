@@ -64,3 +64,13 @@ div.nav--hidden {
   color: var(--main-color);
   text-decoration: underline var(--main-color) dotted 2.5px;
 }
+
+.stockInfo {
+  display: inline-block;
+  width: fit-content;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
