@@ -17,6 +17,7 @@ export class SocketService {
    * @param who 哪位作者, ex:阿土伯
   */
   getAPI(chrNum: string, who: string, stock: string) {
+    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url: `http://localhost:5000//evergreen/${chrNum}/${who}`,
@@ -35,6 +36,7 @@ export class SocketService {
   /** GET: 月成交量&平均收盤價
   */
   getCommonAPI(stock: string) {
+    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url: 'http://localhost:5000/chart_evergreen',
@@ -57,6 +59,10 @@ export class SocketService {
     * @param stock? 股票名稱 foxconn | evergreen
   */
   getWordcloudAPI(author: string, startDate: string, endDate: string, stock?: string) {
+    console.log(stock)
+    console.log(author)
+    console.log(startDate)
+    console.log(endDate)
     if(stock === '2603') {
       return ajax({
         url: `http://localhost:5000/evergreen/wordcloud/${author}?starttime=${startDate}&endtime=${endDate}`,
@@ -73,7 +79,7 @@ export class SocketService {
   }
 
   getKOLRankAPI(year: string, month: string, stock: string) {
-    console.log(`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`)
+    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url:`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`,
@@ -90,6 +96,7 @@ export class SocketService {
   }
 
   getMonthWordcloudAPI(year: string, month: string, stock: string) {
+    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url:`http://localhost:5000/evegreen/monthlywordcloud?year=${year}&month=${month}`,
@@ -106,6 +113,7 @@ export class SocketService {
   }
 
   getDailyPostAPI(author: string, year: string, month: string, stock: string) {
+    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url:`http://localhost:5000/evegreen/dailypost/${author}?year=${year}&month=${month}`,
@@ -134,7 +142,9 @@ export class SocketService {
   }
 
   getDailyPriceAPI(year: string, month: string, stock: string) {
+    console.log(stock)
     const stockName = stock === '2603'? 'evergreen' : 'foxconn';
+    console.log(`http://localhost:5000/${stockName}/dailyprice?year=${year}&month=${month}`)
     return ajax({
       url: `http://localhost:5000/${stockName}/dailyprice?year=${year}&month=${month}`,
       method: 'GET',
@@ -145,10 +155,11 @@ export class SocketService {
         let newData = []
         data.forEach(obj => {
           newData.push({
-            "DATE(DATETIME)": obj['DATE(DATETIME)'].replaceAll('-', '/'),
+            "DATE(DATETIME)": obj['DATE(DATETIME)'].replace(/\-/g, '/'),
             "endprice": obj['endprice']
           })
         });
+        console.log(newData)
         return newData
       })
     )

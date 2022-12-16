@@ -98,8 +98,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.formData = this.createQueryForm()
-    this.setMonthAndYear(this.formData.getRawValue().date)
     this.stock = this.route.snapshot.paramMap.get('stock')
+    this.setMonthAndYear(this.formData.getRawValue().date)
 
     this._adapter.setLocale(this._locale);
     // this.parallax()

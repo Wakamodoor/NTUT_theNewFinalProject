@@ -14,6 +14,10 @@ export class ChartService {
 
   // 發文量x平均月收盤價
   Chart1(xData: Array<string>, yData: object) {
+    let closePrice = yData['avgClose'];
+    const closePrice_max = Math.ceil(Math.max(...closePrice) * 1.05);
+    const closePrice_min = Math.floor(Math.min(...closePrice) * 0.95);
+
     let options: EChartsOption = {
       tooltip: {
         trigger: 'axis',
@@ -47,6 +51,9 @@ export class ChartService {
           type: 'value',
           name: '平均月收盤價',
           position: 'right',
+          alignTicks: true,
+          max: closePrice_max,
+          min: closePrice_min,
           axisLine: {
             show: true,
             lineStyle: {
@@ -54,7 +61,17 @@ export class ChartService {
             }
           },
           axisLabel: {
-            formatter: '{value} 元'
+            formatter: function(val) {
+              return `${val.toFixed(0)}元`;
+            }
+          },
+          axisPointer: {
+            label: {
+              formatter(params) {
+                let val: number = params.value as number
+                return val.toFixed(2)
+              },
+            }
           }
         }
       ]
@@ -64,7 +81,6 @@ export class ChartService {
           data: yData['volOfMonth'],
           name: '月發文量',
           type: 'bar',
-          yAxisIndex: 1,
           color: "#4C9E75",
           emphasis: {
             focus: 'series'
@@ -74,6 +90,7 @@ export class ChartService {
           data: yData['avgClose'],
           name: '平均月收盤價',
           type: 'line',
+          yAxisIndex: 1,
           smooth: true,
           color: '#9E3326',
           emphasis: {

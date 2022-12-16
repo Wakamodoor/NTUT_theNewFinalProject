@@ -101,6 +101,16 @@ export class KolchartP1Component implements OnInit {
     this.router.navigateByUrl(`home/${this.stock}`)
   }
 
+  getTooltipText(idx: number) {
+    switch (idx) {
+      case 1:
+        return `
+        點擊圖中的柱狀體或資料點可以獲得更多資訊。
+        `
+    }
+    return 'nothing'
+  }
+
   private createQueryForm(): FormGroup {
     return this.fb.group({
       author: ['阿土伯']

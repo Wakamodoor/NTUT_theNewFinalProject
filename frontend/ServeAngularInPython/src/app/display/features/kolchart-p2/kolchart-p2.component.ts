@@ -59,6 +59,8 @@ export class KolchartP2Component implements OnInit {
   posPercent: number;
   neuPercent: number;
 
+  wcNoData: boolean = false;
+
 
   options: EChartsOption = {}
 
@@ -83,8 +85,8 @@ export class KolchartP2Component implements OnInit {
       this.year = this.queryDate.slice(0,4)
       this.month = this.queryDate.slice(5,7).replace('月', '')
       this.queryDailyPostChart(this.author, this.year, this.month)
-      this.queryWordcloud(this.author, this.queryDate)
-      this.getEmotionalBar()
+      // this.queryWordcloud(this.author, this.queryDate)
+      // this.getEmotionalBar()
     }else {
       this.fromKOL = false
       this.queryForm = this.createForm()
@@ -128,16 +130,18 @@ export class KolchartP2Component implements OnInit {
           yData_closePrice.push([obj['DATE(DATETIME)'], obj['endprice']])
         });
         this.options = this.cs.dailyPost(xData, yData_post, yData_closePrice)
+        document.getElementById('daily-post-chart').style.opacity = '1'
+        this.queryWordcloud(this.author, this.queryDate)
       })
 
     })
   }
 
   queryWordcloud(author: string, date: string) {
-    const year = date.slice(0, 4)
-    const month = date.slice(5, 6)
-    let startDate = `${year}-${month}-01`
-    let endDate = `${year}-${month}-31`
+    // const year = date.slice(0, 4)
+    // const month = date.slice(5, 6)
+    let startDate = `${this.year}-${this.month}-01`
+    let endDate = `${this.year}-${this.month}-31`
 
     this.buildWordCloud(author, startDate, endDate)
   }
@@ -147,6 +151,10 @@ export class KolchartP2Component implements OnInit {
       const data: any = rel.response
       let WCData: Array<wordcloudData> = []
       console.log(data)
+      if(data.length === 0) {
+        this.wcNoData = true
+        return
+      }
       data.forEach(arr => {
         const tmpObj = {
           name: arr[0],
@@ -155,6 +163,8 @@ export class KolchartP2Component implements OnInit {
         WCData.push(tmpObj)
       });
       this.wordcloudOp = this.cs.wordCloud(WCData, this.maskImage)
+      document.getElementById('wordcloud').style.opacity = '1'
+      this.getEmotionalBar()
     })
   }
 
@@ -184,6 +194,10 @@ export class KolchartP2Component implements OnInit {
         來做斷詞並計算詞頻，文字雲中字越大者，代表
         詞頻越高，也代表是該作者本月最常出現的關鍵字。
         `
+      case 2:
+        return `
+        溫度計呈現的是本月該作者所有文章的情緒正負向。
+        `
     }
     return 'nothing'
   }
@@ -195,6 +209,7 @@ export class KolchartP2Component implements OnInit {
       this.posPercent = Math.floor((data['正向字詞次數'] / total)*100)
       this.negPercent = Math.floor((data['負向字詞次數'] / total)*100)
       this.neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
+      document.getElementById('emotion-bar').style.opacity = '1';
       document.getElementById('positive').style.opacity = '1';
       document.getElementById('negative').style.opacity = '1';
       document.getElementById('neutrality').style.opacity = '1';
