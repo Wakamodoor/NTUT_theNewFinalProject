@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
   formData: FormGroup
 
   wordcloudOp = {}
+  monthDailyEmotionOp = {}
 
   leaderboardData = []
 
@@ -74,6 +75,7 @@ export class HomeComponent implements OnInit {
   queryDate: string
 
   finishLoading: boolean = false
+  finishLoading2: boolean = true
 
 
   constructor(
@@ -132,6 +134,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  queryMonthDailyEmotion(year: string, month: string) {
+    // this.monthDailyEmotionOp = this.cs.monthDailyEmotion()
+  }
+
   gokolchart1(author: string) {
     this.router.navigateByUrl(`home/${this.stock}/${author}/${this.queryDate}/kolchart1`)
   }
@@ -155,6 +161,7 @@ export class HomeComponent implements OnInit {
 
     this.queryKolrank((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
     this.queryMonthWordcloud((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
+    this.queryMonthDailyEmotion((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
   }
 
   private parallax() {

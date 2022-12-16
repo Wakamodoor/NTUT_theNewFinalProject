@@ -308,6 +308,72 @@ export class ChartService {
     };
     return options
   }
+
+  monthDailyEmotion(xData: string[], posData: string[], negData: string, neuData: string[]) {
+    let options: EChartsOption = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          // Use axis to trigger tooltip
+          type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+        }
+      },
+      legend: {},
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: [...xData]
+      },
+      yAxis: {
+        type: 'value',
+
+      },
+      series: [
+        {
+          name: '正向',
+          type: 'bar',
+          stack: 'total',
+          // label: {
+          //   show: true
+          // },
+          emphasis: {
+            focus: 'series'
+          },
+          data: [...posData]
+        },
+        {
+          name: '負向',
+          type: 'bar',
+          stack: 'total',
+          // label: {
+          //   show: true
+          // },
+          emphasis: {
+            focus: 'series'
+          },
+          data: [...negData]
+        },
+        {
+          name: '中立',
+          type: 'bar',
+          stack: 'total',
+          // label: {
+          //   show: true
+          // },
+          emphasis: {
+            focus: 'series'
+          },
+          data: [...neuData]
+        }
+      ]
+    }
+    return options
+  }
 }
 
 interface wordcloudData {
