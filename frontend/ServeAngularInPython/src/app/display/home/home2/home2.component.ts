@@ -22,7 +22,7 @@ export class Home2Component implements OnInit {
   monthDailyEmotionOp = {}
 
   finishLoading: boolean = false
-  finishLoading2: boolean = true
+  finishLoading2: boolean = false
 
 
   constructor(
@@ -54,7 +54,20 @@ export class Home2Component implements OnInit {
   }
 
   queryMonthDailyEmotion(year: string, month: string) {
-    // this.monthDailyEmotionOp = this.cs.monthDailyEmotion()
+    this.socket.getMonthDailyEmotion(year, month, this.stock).subscribe((rel) => {
+      const data = JSON.parse(JSON.stringify(rel.response))
+      let xData = Object.keys(data).map(ele => ele.replace(/\-/g, '/'));
+      let posData = [];
+      let negData = [];
+      let neuData = [];
+      Object.keys(data).forEach(ele => {
+        posData.push(data[ele][0])
+        negData.push(data[ele][1])
+        neuData.push(data[ele][2])
+      });
+      this.monthDailyEmotionOp = this.cs.monthDailyEmotion(xData, posData, negData, neuData)
+      this.finishLoading2 = true
+    })
   }
 
   getTooltipText(idx: number) {

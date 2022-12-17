@@ -205,4 +205,21 @@ export class SocketService {
       })
     }
   }
+
+  getMonthDailyEmotion(year: string, month: string, stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url:`http://localhost:5000/evergreen/monthly/emotion?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+
+    }else {
+      return ajax({
+        url:`http://localhost:5000/foxconn/monthly/emotion?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+    }
+  }
 }

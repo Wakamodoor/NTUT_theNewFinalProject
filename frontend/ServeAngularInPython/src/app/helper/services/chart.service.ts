@@ -309,7 +309,7 @@ export class ChartService {
     return options
   }
 
-  monthDailyEmotion(xData: string[], posData: string[], negData: string, neuData: string[]) {
+  monthDailyEmotion(xData: string[], posData: any[], negData: any, neuData: any[]) {
     let options: EChartsOption = {
       tooltip: {
         trigger: 'axis',
