@@ -15,8 +15,8 @@ class DecimalEncoder(json.JSONEncoder):
             return float(o)
         super(DecimalEncoder , self).default(o)
 
-db = mariadb.connect(host="localhost",user="root",db="forumors")
-# db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
+#db = mariadb.connect(host="localhost",user="root",db="forumors")
+db = mariadb.connect(host="localhost",user="root",password="root",db="forumors")
 
 cursor = db.cursor(cursorclass=mariadb.cursors.DictCursor)
 
@@ -540,43 +540,60 @@ def getevergreenmonthlyemotion():
     year=request.args.get('year')
     month=request.args.get('month')
 
-    print(f"SELECT year(datetime) AS year , month(datetime) AS month , comment FROM `evergreencomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\' groupby year and month")
-
-    cursor.execute(f"SELECT year(datetime) AS year , month(datetime) AS month , comment FROM `evergreencomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\' group by year and month")
+    cursor.execute(f"SELECT date(datetime) as date, comment FROM `evergreencomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\' group by comment order by date")
 
     result = cursor.fetchall()
 
-    print(result)
+    resultlist = list(result)
 
-    totalstring=''
+    days=[]
+    comments=[]
 
-    for dic in result:
-        totalstring+=dic['comment']
+    daytimes = -1
 
-    onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',totalstring)
+    for i in range(len(resultlist)):
 
-    sentence_list = re.split(r'[^\w ]', onlychinesestring)
+        if resultlist[i]['date'] not in days:
+            days.append(resultlist[i]['date'])
+            comments.append(resultlist[i]['comment'])
+            daytimes+=1
+        else:
+            comments[daytimes]+=resultlist[i]['comment']
 
-    word_list=[]
-    for i in sentence_list:
-        seg_list = jieba.lcut(i)
+    emotiondic=[]
+
+    for r in range(len(comments)):
+
+        onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',comments[r])
+
+        sentence_list = re.split(r'[^\w ]', onlychinesestring)
+
+        word_list=[]
+        for i in sentence_list:
+            seg_list = jieba.lcut(i)
         for r in seg_list:
             if r not in stopwords and r != ' ':
                 word_list.append(r)
 
-    poswordstimes=0
-    negwordstimes=0
-    stawordstimes=0
-    for word in word_list:
-        if word in poswords:
-            poswordstimes+=1
-        elif word in negwords:
-            negwordstimes+=1
-        elif word in stawords:
-            stawordstimes+=1
+        poswordstimes=0
+        negwordstimes=0
+        stawordstimes=0
+        for word in word_list:
+            if word in poswords:
+                poswordstimes+=1
+            elif word in negwords:
+                negwordstimes+=1
+            elif word in stawords:
+                stawordstimes+=1
 
-    return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes , "中立字詞次數":stawordstimes})
+        emotiondic.append([poswordstimes , negwordstimes , stawordstimes])
 
+    returnlist = {}
+
+    for j in range(len(days)):
+        returnlist.setdefault(str(days[j]) , emotiondic[j] )
+
+    return json.dumps(returnlist)
 
 @app.route('/foxconn/monthly/emotion')
 def getfoxconnmonthlyemotion():
@@ -584,35 +601,57 @@ def getfoxconnmonthlyemotion():
     year=request.args.get('year')
     month=request.args.get('month')
 
-    cursor.execute(f"SELECT comment FROM `foxconncomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\'")
+    cursor.execute(f"SELECT date(datetime) as date, comment FROM `foxconncomment` where  year(datetime) = \'{year}\' and month(datetime) = \'{month}\' group by comment order by date")
 
     result = cursor.fetchall()
 
-    totalstring=''
+    resultlist = list(result)
 
-    for dic in result:
-        totalstring+=dic['comment']
+    days=[]
+    comments=[]
 
-    onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',totalstring)
+    daytimes = -1
 
-    sentence_list = re.split(r'[^\w ]', onlychinesestring)
+    for i in range(len(resultlist)):
 
-    word_list=[]
-    for i in sentence_list:
-        seg_list = jieba.lcut(i)
+        if resultlist[i]['date'] not in days:
+            days.append(resultlist[i]['date'])
+            comments.append(resultlist[i]['comment'])
+            daytimes+=1
+        else:
+            comments[daytimes]+=resultlist[i]['comment']
+
+    emotiondic=[]
+
+    for r in range(len(comments)):
+
+        onlychinesestring = re.sub ('[^\u4e00-\u9fa5]','',comments[r])
+
+        sentence_list = re.split(r'[^\w ]', onlychinesestring)
+
+        word_list=[]
+        for i in sentence_list:
+            seg_list = jieba.lcut(i)
         for r in seg_list:
             if r not in stopwords and r != ' ':
                 word_list.append(r)
 
-    poswordstimes=0
-    negwordstimes=0
-    stawordstimes=0
-    for word in word_list:
-        if word in poswords:
-            poswordstimes+=1
-        elif word in negwords:
-            negwordstimes+=1
-        elif word in stawords:
-            stawordstimes+=1
+        poswordstimes=0
+        negwordstimes=0
+        stawordstimes=0
+        for word in word_list:
+            if word in poswords:
+                poswordstimes+=1
+            elif word in negwords:
+                negwordstimes+=1
+            elif word in stawords:
+                stawordstimes+=1
 
-    return jsonify({ "正向字詞次數" : poswordstimes , "負向字詞次數" : negwordstimes , "中立字詞次數":stawordstimes})
+        emotiondic.append([poswordstimes , negwordstimes , stawordstimes])
+
+    returnlist = {}
+
+    for j in range(len(days)):
+        returnlist.setdefault(str(days[j]) , emotiondic[j] )
+
+    return json.dumps(returnlist)
