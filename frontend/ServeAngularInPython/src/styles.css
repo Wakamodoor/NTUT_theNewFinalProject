@@ -88,6 +88,17 @@ h1 {
 	transform: translate(-50%, -50%);
 }
 
+.title-container2 {
+  width: 30%;
+  height: 50%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
 .spinner {
 	display: flex;
 	justify-content: center;
