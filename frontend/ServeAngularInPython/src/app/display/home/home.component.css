@@ -5,21 +5,50 @@
 
 /* KOL排行榜 */
 .datepicker {
-  margin-left: 10%;
-  padding-top: 3%;
+  /* margin-left: 10%; */
+  /* padding-top: 3%; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -0.25% auto 9px 5%;
+  /* background: #FFD700; */
+  /* border: 3px dotted pink; */
+  box-shadow: 0 0 10px pink;
+  /* background: rgba(128, 128, 128, .2); */
+  background: #fff;
+
+  border-bottom: 0;
+  width: 25%;
+  border-radius: 10px;
+  padding: 5px 0 5px 0;
+
+  position: absolute;
+  top: 2.5%;
+  left: -2%;
 }
 
 .lebel {
   font-size: 18px;
   font-weight: 900;
-  border-bottom: 5px solid var(--deco-color);
-  margin-bottom: 5px;
-  max-width: 16%;
+  /* border-right: 5px solid var(--deco-color); */
+  border-right: 5px solid var(--main-color);
+  /* border-bottom: 5px solid var(--deco-color); */
+  /* margin-bottom: 5px; */
+  /* max-width: 16%; */
+  margin-right: 1%;
   display: block;
+  padding: 2px 0;
 }
 
 mat-form-field {
   font-size: 8px;
+  margin-left: 10px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding: 0;
+  margin: 0;
 }
 
 input{
@@ -40,29 +69,42 @@ input{
 
 
 .container_leaderboard {
-  width: 90%;
-  height: 1000px;
+  width: 100%;
+  /* width: 90%; */
+  height: 100vh;
   margin: 0 auto;
   padding-top: 10vh;
+  background: #fff;
   /* background-image: linear-gradient(to top, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7d3a3f, #73363e, #68333d, #60313f, #592f3f, #502e3f, #482c3e); */
-  background-image: radial-gradient(circle, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7c363f, #702f3f, #63293e, #552241, #441d42, #2f1942, #141740);
+  /* background-image: radial-gradient(circle, #c65c44, #b75444, #a74c43, #974542, #873e3f, #7c363f, #702f3f, #63293e, #552241, #441d42, #2f1942, #141740); */
+  /* background-image: linear-gradient(to left top, #c0c0c0, #d6cbd2, #f4d5d5, #ffe4cd, #fffacd); */
+  background-image: var(--background);
 }
 
 .container-leaderboard-wrapper {
   width: 80%;
-  margin: 5% auto 0 auto;
-  padding-bottom: 5%;
-  background-color: rgba(256, 256, 256, 1);
+  /* margin: 5% auto 0 auto; */
+  margin: 7.5px auto 0 auto;
+  /* padding-bottom: 5%; */
+  background-color: #696969;
+  /* background-color: #F5F5F5; */
+  /* background-color: rgba(256, 256, 256, 1); */
   border-radius: 10px;
-  box-shadow: 0 0 10px var(--main-color);
+  /* box-shadow: 0 0 10px var(--main-color); */
+  box-shadow: 0 0 20px pink;
   position: relative;
+
+  background: rgba(128, 128, 128, .2);
+
 }
 
 .info {
-  font-size: 26px;
+  font-size: 24px;
   position: absolute;
-  right: 3%;
-  top: 3%;
+  /* right: 3%;
+  top: 3%; */
+  right: 34%;
+  top: 8.2%;
   text-align: left;
 }
 
@@ -82,19 +124,22 @@ input{
 .leaderboard-title {
   font-size: 2.5rem;
   font-weight: 600;
-  text-shadow: 3px 2px var(--main-color) ;
+  text-shadow: 2px 2px var(--main-color) ;
   text-align: center;
   padding-top: 50px;
+  color: #000;
+  /* text-decoration: 5px underline solid var(--main-color); */
 }
 
 .leaderboard-rankcard-wrapper {
   width: 80%;
   padding: 20px;
   margin: 0 auto;
+  margin-top: 5px;
 }
 
 .leaderboard-rankcard {
-  width: 100%;
+  width: 90%;
   height: 75px;
   border-radius: 5px;
   overflow: hidden;
@@ -102,6 +147,9 @@ input{
   transition: all .3s;
   position: relative;
   margin-bottom: 3%;
+  margin: 0 auto 3% auto;
+  background: white;
+
   /* outline: 2px solid var(--main-color); */
 }
 
@@ -117,12 +165,17 @@ input{
 }
 
 .deco-rank {
-  background-color: red;
+  background-color: #F60B43;
+  /* background-color: #000; */
   width: 10%;
   height: 100%;
+  /* width: 60px;
+  height: 60px; */
+  /* margin: auto 0 auto 30px; */
   display: inline-block;
-  margin-right: 5%;
+  /* margin-right: 5%; */
   transition: all 1s;
+  /* border-radius: 50%; */
 }
 
 .deco-rank h2 {
@@ -130,7 +183,11 @@ input{
   font-weight: 900;
   text-align: center;
   margin: 0;
-  padding-top: 28%;
+  padding-top: 25%;
+  /* color: #F60B43; */
+  color: #000;
+  /* text-shadow: 2px 2px #000; */
+  /* color: var(--main-color); */
 }
 
 .rankcard-author {
@@ -139,15 +196,18 @@ input{
   height: 100%;
   box-sizing: border-box;
   display: flex;
-  justify-content: left;
+  justify-content: center;
+  /* justify-content: left; */
   align-items: center;
+
+  color: #000;
 }
 
 .rankcard-author h3 {
   margin: 0;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 600;
-  text-decoration: var(--deco-color) underline 5px;
+  /* text-decoration: var(--deco-color) underline 5px; */
   white-space: nowrap;
 }
 
@@ -159,6 +219,8 @@ input{
   align-items: center;
   justify-content: flex-start;
   padding-right: 15px;
+
+  color: #000;
 }
 
 .rankcard-postAmount h4 {
@@ -279,4 +341,33 @@ input{
 
 ::ng-deep .mat-spinner circle {
   stroke: var(--main-color);
+}
+
+
+button, .preBtn {
+  background: #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, .3) !important;
+  color: var(--main-color);
+  /* background: var(--grey-color); */
+  /* color: var(--reverse-grey-text-color); */
+  font-weight: 400;
+  margin-top: 7px;
+  transition: all .3s;
+  display: block;
+  padding: 0;
+}
+
+button:hover, .preBtn:hover {
+  background: var(--main-color);
+  color: #fff;
+  font-weight: 700;
+}
+
+.nextBtn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 0;
+  border-radius: 5px 0 0 5px;
 }

@@ -24,6 +24,7 @@ import { StkpostchartComponent } from './display/features/stkpostchart/stkpostch
 import { BertComponent } from './display/features/bert/bert.component';
 import { NodatasnakebarComponent } from './helper/tools/nodatasnakebar/nodatasnakebar.component';
 import { Bert2Component } from './display/features/bert/bert2/bert2.component';
+import { Home2Component } from './display/home/home2/home2.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { Bert2Component } from './display/features/bert/bert2/bert2.component';
     BertComponent,
     NodatasnakebarComponent,
     Bert2Component,
+    Home2Component,
   ],
   imports: [
     BrowserModule,

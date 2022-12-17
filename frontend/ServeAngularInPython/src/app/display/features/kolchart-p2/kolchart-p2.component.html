@@ -1,6 +1,6 @@
 <div class="body">
   <div class="container">
-    <h3 class="authorName">{{ '作者：' + author }}</h3>
+    <h3 class="authorName">{{ '作者：' + author}}&emsp;{{ '時間：' + queryDate}}</h3>
     <!-- 每日發文量 -->
     <div class="container-daily-post-chart" id="daily-post-chart">
       <mat-label class="chart-title">{{ '每日發文量與收盤價關係圖' }}</mat-label>
@@ -19,7 +19,7 @@
         matTooltipPosition="left"
       ></mat-icon>
       <mat-label class="chart-title">
-        <span>{{ queryDate }}</span>文章熱門關鍵字
+        本月文章熱門關鍵字
       </mat-label>
       <ng-container *ngIf="!wcNoData">
         <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 90%; height: 80%;"></div>
@@ -27,8 +27,6 @@
       <ng-container *ngIf="wcNoData">
         <div class="wcNoData" style="width: 90%; height: 80%;"><p>資料量不足，導致無結果</p></div>
       </ng-container>
-
-
     </div>
   </div>
   <!-- 溫度計 -->

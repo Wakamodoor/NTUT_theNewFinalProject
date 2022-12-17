@@ -1,3 +1,6 @@
+.body {
+  background-image: var(--background);
+}
 .container {
   position: relative;
   padding-top: 20px;
@@ -6,7 +9,7 @@
   width: 90%;
   /* height: 500px; */
   height: 80vh;
-  background-color: #fff;
+  background-color: var(--container-background);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
   border-radius: 20px;
   display: flex;

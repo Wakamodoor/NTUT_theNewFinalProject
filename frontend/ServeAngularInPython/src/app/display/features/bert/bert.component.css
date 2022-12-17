@@ -1,3 +1,7 @@
+.body {
+  background-image: var(--background);
+}
+
 .container {
   position: relative;
   padding-top: 20px;
@@ -10,7 +14,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--container-background);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
   border-radius: 20px;
 }

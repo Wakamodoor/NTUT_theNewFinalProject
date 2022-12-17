@@ -1,5 +1,5 @@
 .body {
-  background-image: radial-gradient(circle, #ffffff, #fdebfb, #ffd3e3, #ffbdb7, #ffb281, #f9b970, #edc360, #dacd56, #cdd67e, #c9dca4, #cee0c5, #dfe0df);
+  background-image: var(--background);
 }
 .chart1 {
   position: relative;
@@ -15,6 +15,7 @@
   background-color: #fff;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
   border-radius: 20px;
+  background: rgba(128, 128, 128, .2);
 }
 
 .form {
@@ -62,10 +63,10 @@ mat-form-field {
   padding-bottom: 6px;
   font-size: 1.5rem;
   font-weight: 600;
-  /* text-shadow: 3px 2px var(--main-color) ; */
+  text-shadow: 2px 2px var(--main-color) ;
   text-align: center;
   margin-left: 3.5%;
-  border-bottom: 2px solid #000;
+  /* border-bottom: 2px solid #000; */
   width: 66%;
 }
 

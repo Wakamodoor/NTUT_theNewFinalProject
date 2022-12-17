@@ -1,12 +1,12 @@
 <div class="body">
-  <div class="container_leaderboard">
+  <div class="container_leaderboard" *ngIf="!isHome2">
     <div class="container-leaderboard-wrapper">
       <!-- 選擇日期 -->
       <div class="datepicker">
-        <mat-label class="lebel">選擇日期</mat-label>
+        <mat-label class="lebel">選擇年/月</mat-label>
         <mat-form-field appearance="outline" [formGroup]="formData" class="date">
           <input matInput [matDatepicker]="dp" formControlName="date">
-          <mat-hint>YYYY/MM</mat-hint>
+          <!-- <mat-hint>YYYY/MM</mat-hint> -->
           <mat-datepicker-toggle matIconSuffix [for]="dp" class="dateIcon"></mat-datepicker-toggle>
           <mat-datepicker #dp
                           startView="multi-year"
@@ -16,18 +16,15 @@
           </mat-datepicker>
         </mat-form-field>
       </div>
-
       <!-- 標題 -->
-      <h1 class="leaderboard-title">{{queryDate + '發文量排行榜'}}</h1>
+      <h1 class="leaderboard-title">本月發文量排行榜</h1>
+      <!-- <h1 class="leaderboard-title">{{queryDate + '發文量排行榜'}}</h1> -->
 
       <mat-icon fontIcon="info"
                 class="info"
                 [matTooltip]="getTooltipText(1)"
-                matTooltipPosition="left"
+                matTooltipPosition="right"
       ></mat-icon>
-
-
-
       <!-- 發文量排行榜 -->
       <div class="leaderboard-rankcard-wrapper">
           <ng-container *ngFor="let kolData of leaderboardData">
@@ -38,53 +35,19 @@
               <div class="rankcard-hover-info"><h4>按讚數：<span>{{ kolData['SUM(commentlike)'] | number }}</span><br>留言數：<span>{{ kolData['SUM(commentresponse)'] | number}}</span></h4></div>
             </div>
           </ng-container>
-        </div>
-    </div>
-  </div>
-  <div class="container_chart">
-    <div class="parallax_img">
-      <div class="container-index-and-wordcloud">
-        <div class="container-month-daily-index">
-          <h1 class="monthWordcloud-title">{{queryDate + '每日情緒溫度計'}}</h1>
-          <div echarts [options]="monthDailyEmotionOp" *ngIf="finishLoading2; else loading2" class="monthDailyEmotion" id="monthDailyEmotion" style="width: 90%; height: 80%; margin: 0 auto;"></div>
-        </div>
-        <div class="container-month-wordcloud">
-          <mat-icon fontIcon="info"
-            class="info"
-            [matTooltip]="getTooltipText(2)"
-            matTooltipPosition="left"
-          ></mat-icon>
-          <h1 class="monthWordcloud-title">{{queryDate + '文字雲'}}</h1>
-          <div echarts [options]="wordcloudOp" *ngIf="finishLoading; else loading" class="monthWordcloud" id="wordcloud" style="width: 90%; height: 80%;"></div>
-        </div>
-
-        <!-- <ng-template #loading>
-          <mat-spinner></mat-spinner>
-        </ng-template> -->
       </div>
+      <button mat-flat-button class="nextBtn" style="width: 2%; height: 30%;" (click)="goHome2()">更多</button>
     </div>
   </div>
+  <app-home2
+    *ngIf="isHome2"
+    [year]="year"
+    [month]="month"
+    [queryDate]="queryDate"
+    [stock]="stock"
+    (return)="returnHome()"
+  ></app-home2>
 </div>
-<ng-template #loading>
-  <div class="title-container">
-    <div class="spinner">
-      <svg class='svg' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" />
-      </svg>
-    </div>
-    <h1 class="title">loading...</h1>
-  </div>
-</ng-template>
-<ng-template #loading2>
-  <div class="title-container2">
-    <div class="spinner">
-      <svg class='svg' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" />
-      </svg>
-    </div>
-    <h1 class="title">loading...</h1>
-  </div>
-</ng-template>
 
 
 
