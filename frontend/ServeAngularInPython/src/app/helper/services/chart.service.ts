@@ -124,14 +124,14 @@ export class ChartService {
           // cardioid (apple or heart shape curve, the most known polar equation), diamond (
           // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
 
-          shape: 'circle',
+          shape: 'pentagon',
 
           // A silhouette image which the white area will be excluded from drawing texts.
           // The shape option will continue to apply as the shape of the cloud to grow.
 
           // Keep aspect ratio of maskImage or 1:1 for shapes
           // This option is supported from echarts-wordcloud@2.1.0
-          keepAspect: false,
+          keepAspect: true,
 
 
           // A silhouette image which the white area will be excluded from drawing texts.
@@ -178,9 +178,9 @@ export class ChartService {
               // Color can be a callback function or a color string
               color: () => {
                 return 'rgb('+[
-                  244 + Math.round(Math.random() * 10),
-                  187 + Math.round(Math.random() * 50),
-                  14 + Math.round(Math.random() * 200)
+                  95 + Math.round(Math.random() * 10),
+                  158 + Math.round(Math.random() * 50),
+                  160 + Math.round(Math.random() * 200)
                 ]
               }
               // color: function () {
@@ -286,8 +286,8 @@ export class ChartService {
         {
           data: [...yData_post],
           name: '每日發文量',
-          type: 'line',
-          smooth: true,
+          type: 'bar',
+          // smooth: true,
           color: '#4C9E75',
           emphasis: {
             focus: 'series'
@@ -326,12 +326,12 @@ export class ChartService {
         containLabel: true
       },
       xAxis: {
-        type: 'category',
-        data: [...xData]
-      },
-      yAxis: {
         type: 'value',
 
+      },
+      yAxis: {
+        type: 'category',
+        data: [...xData].reverse()
       },
       series: [
         {
@@ -344,7 +344,8 @@ export class ChartService {
           emphasis: {
             focus: 'series'
           },
-          data: [...posData]
+          data: [...posData].reverse(),
+          color: '#FF0000'
         },
         {
           name: '負向',
@@ -356,7 +357,8 @@ export class ChartService {
           emphasis: {
             focus: 'series'
           },
-          data: [...negData]
+          data: [...negData].reverse(),
+          color: '#5C16CF'
         },
         {
           name: '中立',
@@ -368,7 +370,8 @@ export class ChartService {
           emphasis: {
             focus: 'series'
           },
-          data: [...neuData]
+          data: [...neuData].reverse(),
+          color: '#696969'
         }
       ]
     }

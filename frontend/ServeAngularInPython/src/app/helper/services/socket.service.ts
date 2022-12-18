@@ -170,14 +170,16 @@ export class SocketService {
       return ajax({
         url:`http://localhost:5000/evergreen/ranking/emotion/${author}?year=${year}&month=${month}`,
         method: 'GET',
-        responseType: 'json'
+        responseType: 'json',
+        async: true
       })
 
     }else {
       return ajax({
         url:`http://localhost:5000/foxconn/ranking/emotion/${author}?year=${year}&month=${month}`,
         method: 'GET',
-        responseType: 'json'
+        responseType: 'json',
+        async: true
       })
     }
   }

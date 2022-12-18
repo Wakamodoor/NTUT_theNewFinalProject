@@ -196,7 +196,7 @@ export class KolchartP2Component implements OnInit {
         `
       case 2:
         return `
-        溫度計呈現的是本月該作者所有文章的情緒正負向。
+        溫度計為本月該作者所有文章的情緒正負向。
         `
     }
     return 'nothing'

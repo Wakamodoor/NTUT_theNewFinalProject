@@ -27,8 +27,35 @@
       ></mat-icon>
       <!-- 發文量排行榜 -->
       <div class="leaderboard-rankcard-wrapper">
-          <ng-container *ngFor="let kolData of leaderboardData">
+          <ng-container *ngFor="let kolData of leaderboardData; let idx = index">
             <div class="leaderboard-rankcard" (click)="gokolchart1(kolData['username'])">
+              <!-- 溫度計 -->
+              <div class="container-emotion-bar" [id]="'emotion-bar'+idx">
+                <div class="emotionBar_title">本月溫度計</div>
+                <mat-icon fontIcon="info"
+                    class="info"
+                    [matTooltip]="getTooltipText(3)"
+                    matTooltipPosition="above"
+                ></mat-icon>
+                <div class="container-thermometer">
+                  <div class="shape-head">
+                    <div class="middle-deco"></div>
+                  </div>
+                  <div class="shape-body">
+                    <div class="middle-deco">
+                      <div class="positive flex-jc-center" [id]='"positive"+idx'  [ngStyle]="{width: kolData['posPercent']+'%'}"><span>{{kolData['posPercent'] + '%'}}</span></div>
+                      <div class="negative flex-jc-center" [id]='"negative"+idx' [ngStyle]="{width: kolData['negPercent']+'%'}"><span>{{kolData['negPercent'] + '%'}}</span></div>
+                      <div class="neutrality flex-jc-center" [id]='"neutrality"+idx' [ngStyle]="{width: kolData['neuPercent']+'%'}"><span>{{kolData['neuPercent'] + '%'}}</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="thermometer-desc">
+                  <div class="desc-pos"><div></div>正向</div>
+                  <div class="desc-neg"><div></div>負向</div>
+                  <div class="desc-neu"><div></div>中立</div>
+                </div>
+              </div>
+
               <div class="deco-rank"><h2>{{ kolData['ranking'] }}</h2></div>
               <div class="rankcard-author"><h3>{{ kolData['username'] }}</h3></div>
               <div class="rankcard-postAmount"><h4>發文量：<span>{{ kolData['commentbymonth'] | number }}</span></h4></div>

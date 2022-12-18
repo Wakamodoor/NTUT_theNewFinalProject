@@ -106,10 +106,24 @@ export class HomeComponent implements OnInit {
       if(this.leaderboardData.length === 0) {
         this.openSnackBar()
       }
-    })
+      this.leaderboardData.forEach((obj, idx) => {
+        this.socket.getAuthorEmotionalBarAPI(obj['username'], this.year, this.month, this.stock).subscribe((rel) => {
+          const data = JSON.parse((JSON.stringify(rel.response)))
+          const total = data['中立字詞次數'] + data['正向字詞次數'] + data['負向字詞次數']
+          const posPercent = Math.floor((data['正向字詞次數'] / total)*100)
+          const negPercent = Math.floor((data['負向字詞次數'] / total)*100)
+          const neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
+          // document.getElementById(`emotion-bar${idx}`).style.opacity = '1';
+          // document.getElementById(`'positive${idx}`).style.opacity = '1';
+          // document.getElementById(`negative${idx}`).style.opacity = '1';
+          // document.getElementById(`neutrality${idx}`).style.opacity = '1';
+          this.leaderboardData[idx]['posPercent'] = posPercent;
+          this.leaderboardData[idx]['negPercent'] = negPercent;
+          this.leaderboardData[idx]['neuPercent'] = neuPercent;
+        })
+      })
+    });
   }
-
-
 
   gokolchart1(author: string) {
     this.router.navigateByUrl(`home/${this.stock}/${author}/${this.queryDate}/kolchart1`)
@@ -166,6 +180,10 @@ export class HomeComponent implements OnInit {
           // 文字雲中字越大者，也代表是本月熱門關鍵字。
           // `
         // }
+      case 3:
+        return`
+        溫度計為本月該作者所有文章的情緒正負向。
+        `
     }
     return 'nothing'
   }

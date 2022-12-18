@@ -1,6 +1,9 @@
 <div class="body">
   <div class="container">
-    <h3 class="authorName">{{ '作者：' + author}}&emsp;{{ '時間：' + queryDate}}</h3>
+    <div class="author_date_info">
+      <h3 class="authorName">{{ '作者：' + author}}&emsp;{{ '時間：' + queryDate}}</h3>
+      <mat-icon fontIcon="arrow_forward_ios" class="arrow_info"></mat-icon>
+    </div>
     <!-- 每日發文量 -->
     <div class="container-daily-post-chart" id="daily-post-chart">
       <mat-label class="chart-title">{{ '每日發文量與收盤價關係圖' }}</mat-label>
@@ -31,23 +34,25 @@
   </div>
   <!-- 溫度計 -->
   <div class="container-emotion-bar" id="emotion-bar">
-    <div class="emotionBar_title">本月溫度計</div>
-    <mat-icon fontIcon="info"
-        class="info"
-        [matTooltip]="getTooltipText(2)"
-        matTooltipPosition="right"
-    ></mat-icon>
-    <div class="container-thermometer">
-      <div class="shape-head">
-        <div class="middle-deco"></div>
-      </div>
-      <div class="shape-body">
-        <div class="middle-deco">
-          <div class="positive" id='positive' [ngStyle]="{width: posPercent+'%'}"><span>{{posPercent + '%'}}</span></div>
-          <div class="negative" id='negative' [ngStyle]="{width: negPercent+'%'}"><span>{{negPercent + '%'}}</span></div>
-          <div class="neutrality" id='neutrality' [ngStyle]="{width: neuPercent+'%'}"><span>{{neuPercent + '%'}}</span></div>
+    <div class="row-wrapper">
+      <div class="emotionBar_title">本月溫度計</div>
+      <div class="container-thermometer">
+        <div class="shape-head">
+          <div class="middle-deco"></div>
+        </div>
+        <div class="shape-body">
+          <div class="middle-deco">
+            <div class="positive flex-jc-center" id='positive' [ngStyle]="{width: posPercent+'%'}"><span>{{posPercent + '%'}}</span></div>
+            <div class="negative flex-jc-center" id='negative' [ngStyle]="{width: negPercent+'%'}"><span>{{negPercent + '%'}}</span></div>
+            <div class="neutrality flex-jc-center" id='neutrality' [ngStyle]="{width: neuPercent+'%'}"><span>{{neuPercent + '%'}}</span></div>
+          </div>
         </div>
       </div>
+      <mat-icon fontIcon="info"
+        class="info_self"
+        [matTooltip]="getTooltipText(2)"
+        matTooltipPosition="right"
+      ></mat-icon>
     </div>
     <div class="thermometer-desc">
       <div class="desc-pos"><div></div>正向</div>
