@@ -20,13 +20,15 @@
 }
 
 .author_date_info {
+  /* max-width: 500px; */
   display: flex;
   justify-content: center;
   align-items: flex-start;
   position: absolute;
   top: -7%;
   left: 0;
-  transform: translateX(-38rem);
+  /* transform: translateX(-38rem); */
+  transform: translateX(-48rem);
   transition: all .3s;
   /* background: #B0E0E6; */
   background-image: linear-gradient(to left, #bbdcf2, #b0e2f7, #a4e9f9, #9aeff7, #94f5f1, #96f8e6, #9efada, #aafbcc, #bcf9bc, #cff7ae, #e4f3a2, #f8ee9a);
@@ -34,15 +36,18 @@
 }
 
 .authorName {
+  display: inline-block;
   font-weight: 600;
   font-size: 1.25rem;
+  min-width: 500px;
+  text-align: left;
   padding-left: 200px;
   margin: 0;
 }
 
 .arrow_info {
   color: #000;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .author_date_info:hover {
