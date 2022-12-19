@@ -14,16 +14,19 @@
       </mat-form-field>
     </div>
     <!-- <button mat-button (click)="chr1DataBuild(author.value)">搜尋</button> -->
-    <h3 class="authorName">{{ '作者：' + author }}</h3>
+    <div class="author_date_info">
+      <h3 class="authorName">{{ '作者：' + author }}</h3>
+      <mat-icon fontIcon="arrow_forward_ios" class="arrow_info"></mat-icon>
+    </div>
     <div class="container-chart">
       <mat-label class="chart-title">
         發文量與平均月收盤價關係圖
       </mat-label>
       <div echarts class="chart" id="chart" (chartClick)="sendBarClick($event)"
       [options]="options"
-      style="width: 70%;height: 400px; margin:0 auto; margin-top: 5%;">
+      style="width: 90%;height: 430px; margin:0 auto; margin-top: 5%;">
       </div>
     </div>
-    <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回首頁</button>
+    <button mat-flat-button class="preBtn" disableRipple style="width: 2%; height: 30%;" (click)="backPrePage()">返回首頁</button>
   </div>
 </div>

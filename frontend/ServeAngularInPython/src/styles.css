@@ -2,11 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
 :root {
-  --main-color: #F4BB0E;
+  --main-color: #FFD700;
+  /* --main-color: #F4BB0E; */
   --deco-color: #006E61;
   --grey-color: #DFE0DF;
   --reverse-grey-text-color: #4E4637;
-
+  --background: radial-gradient(circle, #dcdcdc, #e0e1e5, #e2e7ee, #e2eef6, #e1f5fc, #def9fc, #dcfcfa, #ddfff6, #dfffed, #e5ffe2, #f0fdd6, #fffacd);
+  --container-background: rgba(128, 128, 128, .2);
   /* 預備色
     藍色: #00C2E4;
     綠色: #409130 #00AF98 #00754B #4C9E75;
@@ -159,4 +161,42 @@ circle {
     background-color: rgba(255, 255, 255, .9);
     border:1px solid gray;
     max-width: unset !important;
+}
+
+/* button */
+.preBtn {
+  background: rgba(255, 255, 255, .5);
+  /* box-shadow: 0 0 1px rgba(0, 0, 0, .3); */
+  color: var(--main-color);
+  /* background: var(--grey-color); */
+  /* color: var(--reverse-grey-text-color); */
+  font-weight: 400;
+  margin-left: 2%;
+  margin-top: 12.5%;
+  transition: all .3s;
+  display: block;
+  padding: 0;
+}
+
+.preBtn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  border-radius: 0 5px 5px 0;
+}
+
+.preBtn:hover {
+  background: whitesmoke;
+  color: var(--main-color);
+  font-weight: 700;
+  box-shadow: 5px 5px 0px var(--main-color) !important;
+  transform: translateX(-3px) translateY(-3px);
+}
+
+.preBtn:active {
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
 }

@@ -10,7 +10,7 @@
       <!-- 輸入文章or句子 -->
       <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
         <textarea matInput #content style="height: 400px; max-height: 425px;"></textarea>
-        <button mat-flat-button style="width: 100%" (click)="queryPredict(content.value)">預測</button>
+        <button mat-flat-button disableRipple style="width: 100%" (click)="queryPredict(content.value)">預測</button>
       </mat-form-field>
     </div>
     <div class="container-result">
@@ -24,8 +24,8 @@
         <div *ngTemplateOutlet="loading"></div>
       </div>
     </div>
-    <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回首頁</button>
-    <button mat-flat-button class="nextBtn" style="width: 2%; height: 30%;" (click)="goBert2Page()">更多</button>
+    <button mat-flat-button class="preBtn" disableRipple style="width: 2%; height: 30%;" (click)="backPrePage()">返回首頁</button>
+    <button mat-flat-button class="nextBtn" disableRipple style="width: 2%; height: 30%;" (click)="goBert2Page()">更多</button>
   </div>
   <ng-template #loading>
     <div class="title-container">

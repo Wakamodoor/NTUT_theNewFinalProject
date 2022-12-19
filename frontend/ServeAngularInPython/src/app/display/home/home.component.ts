@@ -35,12 +35,6 @@ export const MY_FORMATS = {
 
 type EChartsOption = echarts.EChartsOption;
 
-interface wordcloudData {
-  name: string,
-  value: number
-}
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -59,9 +53,6 @@ export class HomeComponent implements OnInit {
 
   formData: FormGroup
 
-  wordcloudOp = {}
-  monthDailyEmotionOp = {}
-
   leaderboardData = []
 
   everGreenKOL = ['阿土伯', 'E神']
@@ -74,9 +65,10 @@ export class HomeComponent implements OnInit {
   stock: string
   queryDate: string
 
-  finishLoading: boolean = false
-  finishLoading2: boolean = true
+  isHome2: boolean =  false;
 
+  year: any;
+  month: any;
 
   constructor(
     private cs: ChartService,
@@ -113,29 +105,23 @@ export class HomeComponent implements OnInit {
       if(this.leaderboardData.length === 0) {
         this.openSnackBar()
       }
-    })
-  }
-
-  queryMonthWordcloud(year: string, month: string) {
-    this.socket.getMonthWordcloudAPI(year, month, this.stock).subscribe(rel => {
-      console.log(rel.response)
-      this.finishLoading = true
-      const data: any = JSON.parse(JSON.stringify(rel.response))
-      let WCData: Array<wordcloudData> = []
-
-      data.forEach(arr => {
-        const tmpObj = {
-          name: arr[0],
-          value: arr[1]
-        }
-        WCData.push(tmpObj)
-      });
-      this.wordcloudOp = this.cs.wordCloud(WCData)
-    })
-  }
-
-  queryMonthDailyEmotion(year: string, month: string) {
-    // this.monthDailyEmotionOp = this.cs.monthDailyEmotion()
+      this.leaderboardData.forEach((obj, idx) => {
+        this.socket.getAuthorEmotionalBarAPI(obj['username'], this.year, this.month, this.stock).subscribe((rel) => {
+          const data = JSON.parse((JSON.stringify(rel.response)))
+          const total = data['中立字詞次數'] + data['正向字詞次數'] + data['負向字詞次數']
+          const posPercent = Math.floor((data['正向字詞次數'] / total)*100)
+          const negPercent = Math.floor((data['負向字詞次數'] / total)*100)
+          const neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
+          // document.getElementById(`emotion-bar${idx}`).style.opacity = '1';
+          // document.getElementById(`'positive${idx}`).style.opacity = '1';
+          // document.getElementById(`negative${idx}`).style.opacity = '1';
+          // document.getElementById(`neutrality${idx}`).style.opacity = '1';
+          this.leaderboardData[idx]['posPercent'] = posPercent;
+          this.leaderboardData[idx]['negPercent'] = negPercent;
+          this.leaderboardData[idx]['neuPercent'] = neuPercent;
+        })
+      })
+    });
   }
 
   gokolchart1(author: string) {
@@ -158,10 +144,9 @@ export class HomeComponent implements OnInit {
     if(datepicker) {
       datepicker.close();
     }
-
+    this.year = (normalizedMonthAndYear.year()).toString()
+    this.month = (normalizedMonthAndYear.month()+1).toString()
     this.queryKolrank((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
-    this.queryMonthWordcloud((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
-    this.queryMonthDailyEmotion((normalizedMonthAndYear.year()).toString(), (normalizedMonthAndYear.month()+1).toString())
   }
 
   private parallax() {
@@ -184,10 +169,20 @@ export class HomeComponent implements OnInit {
           留言數：作者單月發文獲得之總留言數
         `
       case 2:
-        return `
-        以本月所選股票(長榮/鴻海)之所有發文來做斷詞並計算詞頻，
-        文字雲中字越大者，代表詞頻越高，也代表是本月熱門關鍵字。
-      `
+        // if(this.stock === '2603') {
+          return `
+          當月份文章熱搜關鍵字
+          `
+        // }else {
+          // return`
+          // 以本月鴻海之所有發文來做斷詞並計算詞頻，
+          // 文字雲中字越大者，也代表是本月熱門關鍵字。
+          // `
+        // }
+      case 3:
+        return`
+        溫度計為本月該作者所有文章的情緒正負向。
+        `
     }
     return 'nothing'
   }
@@ -205,6 +200,14 @@ export class HomeComponent implements OnInit {
         'snakebar-panel'
       ]
     });
+  }
+
+  goHome2() {
+    this.isHome2 = true;
+  }
+
+  returnHome() {
+    this.isHome2 = false;
   }
 
 }

@@ -1,0 +1,44 @@
+<div class="container_chart">
+  <!-- <div class="parallax_img"> -->
+  <div class="container-chart-wrapper">
+    <div class="container-index-and-wordcloud">
+      <div class="container-month-daily-index">
+        <h1 class="monthWordcloud-title">{{queryDate + '每日情緒溫度計'}}</h1>
+        <div echarts [options]="monthDailyEmotionOp" *ngIf="finishLoading2; else loading2" class="monthDailyEmotion" id="monthDailyEmotion" style="width: 90%; height: 80%; margin: 0 auto;"></div>
+      </div>
+      <div class="container-month-wordcloud">
+        <mat-icon fontIcon="info"
+          class="info"
+          [matTooltip]="getTooltipText(1)"
+          matTooltipPosition="left"
+        ></mat-icon>
+        <h1 class="monthWordcloud-title">{{queryDate + '文字雲'}}</h1>
+        <div echarts [options]="wordcloudOp" *ngIf="finishLoading; else loading" class="monthWordcloud" id="wordcloud" style="width: 90%; height: 80%;"></div>
+      </div>
+      <!-- <ng-template #loading>
+        <mat-spinner></mat-spinner>
+      </ng-template> -->
+    </div>
+    <button mat-flat-button class="preBtn" style="width: 2%; height: 30%;" (click)="backPrePage()">返回</button>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="title-container">
+    <div class="spinner">
+      <svg class='svg' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" />
+      </svg>
+    </div>
+    <h1 class="title">loading...</h1>
+  </div>
+</ng-template>
+<ng-template #loading2>
+  <div class="title-container2">
+    <div class="spinner">
+      <svg class='svg' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" />
+      </svg>
+    </div>
+    <h1 class="title">loading...</h1>
+  </div>
+</ng-template>

@@ -1,11 +1,11 @@
 .body {
-  background-image: radial-gradient(circle, #ffffff, #fdebfb, #ffd3e3, #ffbdb7, #ffb281, #f9b970, #edc360, #dacd56, #cdd67e, #c9dca4, #cee0c5, #dfe0df);
+  background-image: var(--background)
 }
 
 .container {
   position: relative;
   margin: 0 auto;
-  margin-top: 70px;
+  margin-top: 48px;
   width: 90%;
   /* height: 500px; */
   height: 70vh;
@@ -19,17 +19,45 @@
   border-radius: 20px; */
 }
 
-.authorName {
+.author_date_info {
+  /* max-width: 500px; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   position: absolute;
-  top: -5%;
+  top: -7%;
   left: 0;
+  /* transform: translateX(-38rem); */
+  transform: translateX(-48rem);
+  transition: all .3s;
+  /* background: #B0E0E6; */
+  background-image: linear-gradient(to left, #bbdcf2, #b0e2f7, #a4e9f9, #9aeff7, #94f5f1, #96f8e6, #9efada, #aafbcc, #bcf9bc, #cff7ae, #e4f3a2, #f8ee9a);
+  border-radius: 0 10px 10px 0;
+}
+
+.authorName {
+  display: inline-block;
   font-weight: 600;
   font-size: 1.25rem;
+  min-width: 500px;
+  text-align: left;
+  padding-left: 200px;
+  margin: 0;
+}
+
+.arrow_info {
+  color: #000;
+  margin-top: 1px;
+}
+
+.author_date_info:hover {
+  transform: translateX(-12rem);
+  cursor: pointer;
 }
 
 button, .preBtn {
-  background: #fff;
-  box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+  background: rgba(255, 255, 255, .5);
+  /* box-shadow: 0 0 1px rgba(0, 0, 0, .3); */
   color: var(--main-color);
   /* background: var(--grey-color); */
   /* color: var(--reverse-grey-text-color); */
@@ -39,21 +67,26 @@ button, .preBtn {
   transition: all .3s;
   display: block;
   padding: 0;
-}
-
-button, .preBtn:hover {
-  background: var(--main-color);
-  color: #fff;
-  font-weight: 700;
-}
-
-.preBtn {
   position: absolute;
   top: 0;
   bottom: 0;
   margin: auto;
   left: 0;
   border-radius: 0 5px 5px 0;
+}
+
+button:hover, .preBtn:hover {
+  background: whitesmoke;
+  color: var(--main-color);
+  font-weight: 700;
+  box-shadow: 5px 5px 0px var(--main-color) !important;
+  transform: translateX(-3px) translateY(-3px);
+}
+
+.preBtn:active {
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
 }
 
 .container-daily-post-chart {
@@ -72,9 +105,9 @@ button, .preBtn:hover {
 
 .chart-title {
   padding-bottom: 36px;
-  font-size: 2.5rem;
-  font-weight: 500;
-  /* text-shadow: 3px 2px var(--main-color) ; */
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-shadow: 2px 2px var(--main-color) ;
   /* text-shadow: 3px 2px #F8DC8B; */
   text-align: center;
 }
@@ -94,20 +127,20 @@ button, .preBtn:hover {
 }
 
 .container-wordcloud .chart-title {
-  padding-bottom: 6px;
+  padding-bottom: 36px;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: ˊ00;
   /* text-shadow: 3px 2px var(--main-color) ; */
   text-align: center;
   /* margin-left: 3.5%; */
-  border-bottom: 2px solid #000;
+  /* border-bottom: 2px solid #000; */
   width: 80%;
 }
 
-.chart-title span {
+/* .chart-title span {
   font-weight: 900;
   font-size: 1.75rem;
-}
+} */
 
 .wcNoData p{
   text-align: center;
@@ -120,8 +153,9 @@ button, .preBtn:hover {
 
 .container-emotion-bar {
   width: 50%;
-  height: 15vh;
+  height: 11vh;
   margin: 2% auto;
+  margin-top: 14px;
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
@@ -139,6 +173,12 @@ button, .preBtn:hover {
   align-items: center;
 }
 
+.row-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .shape-head {
   width: 45px;
   height: 45px;
@@ -152,7 +192,7 @@ button, .preBtn:hover {
 .shape-head .middle-deco {
   width: 30px;
   height: 30px;
-  background: red;
+  background: #FFABBD;
   border-radius: 50%;
   position: absolute;
   top: 0;
@@ -190,7 +230,7 @@ button, .preBtn:hover {
 .positive {
   width: 0px;
   height: 100%;
-  background: red;
+  background: #FFABBD;
   transition: all .5s;
   opacity: 0;
 }
@@ -198,7 +238,7 @@ button, .preBtn:hover {
 .negative {
   width: 0px;
   height: 100%;
-  background: blue;
+  background: #7BD0B8;
   transition: all .5s .1s;
   opacity: 0;
 }
@@ -206,10 +246,14 @@ button, .preBtn:hover {
 .neutrality {
   width: 0px;
   height: 100%;
-  background: green;
+  background: #DCDCDC;
   transition: all .5s .15s;
   border-radius: 0 30px 30px 0;
   opacity: 0;
+}
+
+.positive span, .negative span, .neutrality span {
+  color: #000;
 }
 
 .thermometer-desc {
@@ -230,7 +274,7 @@ button, .preBtn:hover {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: red;
+  background: #FFABBD;
 }
 
 .desc-neg div {
@@ -238,7 +282,7 @@ button, .preBtn:hover {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: blue;
+  background: #7BD0B8;
 }
 
 .desc-neu div {
@@ -246,23 +290,30 @@ button, .preBtn:hover {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: green;
+  background: #DCDCDC;
 }
 
-.container-emotion-bar .emotionBar_title {
+.row-wrapper .emotionBar_title {
   font-size: 1rem;
-  font-weight: 700;
-  position: absolute;
-  top: 10%;
-  left: 46%;
+  font-weight: 600;
+  text-shadow: 2px 2px var(--main-color) ;
+  /* position: absolute; */
+  top: 37%;
+  left: 2%;
   margin: auto;
+  margin-right: 10px;
 }
 
-.container-emotion-bar .info {
-  margin-top: 1%;
+.row-wrapper .info_self {
+  /* margin-top: 3.5%;
+  margin-right: 7.5%; */
+  margin-left: 3px;
 }
 
-
+.flex-jc-center {
+  display: flex;
+  justify-content: center;
+}
 /*.lebel {
   font-size: 18px;
   font-weight: 900;

@@ -1,3 +1,7 @@
+.body {
+  background-image: var(--background);
+}
+
 .container {
   position: relative;
   padding-top: 20px;
@@ -6,7 +10,7 @@
   width: 80%;
   /* height: 500px; */
   height: 80vh;
-  background-color: #fff;
+  background-color: var(--container-background);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
   border-radius: 20px;
   display: flex;
@@ -91,8 +95,8 @@ input{
 }
 
 button, .submitBtn, .preBtn {
-  background: #fff;
-  box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+  background: rgba(255, 255, 255, .5);
+  /* box-shadow: 0 0 1px rgba(0, 0, 0, .3); */
   color: var(--main-color);
   /* background: var(--grey-color); */
   /* color: var(--reverse-grey-text-color); */
@@ -118,6 +122,20 @@ button.submitBtn:hover, .preBtn:hover {
   margin: auto;
   left: 0;
   border-radius: 0 5px 5px 0;
+}
+
+.preBtn:hover {
+  background: whitesmoke;
+  color: var(--main-color);
+  font-weight: 700;
+  box-shadow: 5px 5px 0px var(--main-color) !important;
+  transform: translateX(-3px) translateY(-3px);
+}
+
+.preBtn:active {
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
 }
 
 .info {

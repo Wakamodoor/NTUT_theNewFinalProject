@@ -170,14 +170,16 @@ export class SocketService {
       return ajax({
         url:`http://localhost:5000/evergreen/ranking/emotion/${author}?year=${year}&month=${month}`,
         method: 'GET',
-        responseType: 'json'
+        responseType: 'json',
+        async: true
       })
 
     }else {
       return ajax({
         url:`http://localhost:5000/foxconn/ranking/emotion/${author}?year=${year}&month=${month}`,
         method: 'GET',
-        responseType: 'json'
+        responseType: 'json',
+        async: true
       })
     }
   }
@@ -202,6 +204,23 @@ export class SocketService {
           "username": author,
           "date": date
         }
+      })
+    }
+  }
+
+  getMonthDailyEmotion(year: string, month: string, stock: string) {
+    if(stock === '2603') {
+      return ajax({
+        url:`http://localhost:5000/evergreen/monthly/emotion?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
+      })
+
+    }else {
+      return ajax({
+        url:`http://localhost:5000/foxconn/monthly/emotion?year=${year}&month=${month}`,
+        method: 'GET',
+        responseType: 'json'
       })
     }
   }
