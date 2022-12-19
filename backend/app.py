@@ -32,6 +32,9 @@ app = Flask(__name__)
 app.debug=True
 CORS(app)
 
+if __name__ =='__main__':
+    app.run(threaded=True)
+
 #長榮股價
 @app.route('/chart_evergreen' , methods=['GET'])
 def get_chart_evergreen():
