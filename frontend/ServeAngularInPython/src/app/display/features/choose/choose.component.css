@@ -112,3 +112,41 @@
   bottom: 0;
   margin: auto;
 }
+
+/* new logo group */
+.newImgGroup {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  justify-content: space-evenly;
+}
+
+.img_2317 {
+  background: transparent;
+  background-image: var(--background);
+
+  width: 60%;
+  margin: 0 auto 0 auto;
+  border-radius: 25px;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.img_2603 {
+  background: transparent;
+  background-image: var(--background);
+  width: 60%;
+  height: 188.55px;
+  margin: 0 auto 0 auto;
+  border-radius: 25px;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img_2603 img {
+  width: 100%;
+  padding-bottom: 15%;
+}
