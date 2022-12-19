@@ -14,7 +14,7 @@
   margin: -0.25% auto 9px 5%;
   /* background: #FFD700; */
   /* border: 3px dotted pink; */
-  box-shadow: 0 0 10px pink;
+  /* box-shadow: 0 0 10px pink; */
   /* background: rgba(128, 128, 128, .2); */
   background: #fff;
 
@@ -26,6 +26,13 @@
   position: absolute;
   top: 2.5%;
   left: -2%;
+
+  transition: all .3s;
+}
+
+.datepicker:hover {
+  box-shadow: -5px 5px 0px var(--main-color);
+  transform: translateY(-3px) translateX(3px);
 }
 
 .lebel {
@@ -90,11 +97,17 @@ input{
   /* background-color: rgba(256, 256, 256, 1); */
   border-radius: 10px;
   /* box-shadow: 0 0 10px var(--main-color); */
-  box-shadow: 0 0 20px pink;
+  /* box-shadow: 0 0 20px pink; */
+  /* box-shadow: -8px 6px 1px pink; */
   position: relative;
 
   background: rgba(128, 128, 128, .2);
+  transition: all .3s;
+}
 
+.container-leaderboard-wrapper:hover  {
+  box-shadow: -8px 8px 1px var(--main-color);
+  transform: translateX(3px) translateY(-3px);
 }
 
 .info {
@@ -147,7 +160,7 @@ input{
   position: relative;
   margin-bottom: 3%;
   margin: 0 auto 3% auto;
-  background: white;
+  background: whitesmoke
 
   /* outline: 2px solid var(--main-color); */
 }
@@ -349,8 +362,9 @@ input{
 
 
 button, .preBtn {
-  background: #fff;
-  box-shadow: 0 0 1px rgba(0, 0, 0, .3) !important;
+  background: rgba(255, 255, 255, .5);
+  /* background: #fff; */
+  /* box-shadow: 0 0 1px rgba(0, 0, 0, .3) !important; */
   color: var(--main-color);
   /* background: var(--grey-color); */
   /* color: var(--reverse-grey-text-color); */
@@ -362,9 +376,18 @@ button, .preBtn {
 }
 
 button:hover, .preBtn:hover {
-  background: var(--main-color);
-  color: #fff;
+  background: whitesmoke;
+  /* background: var(--main-color); */
+  color: var(--main-color);
   font-weight: 700;
+  /* box-shadow: -1px 1px 3px rgb(0 0 0 / 30%) !important; */
+  box-shadow: -5px 5px 0px var(--main-color) !important;
+  transform: translateX(3px) translateY(-3px);
+}
+
+.nextBtn:active {
+  transform: translateX(1px) translateY(-1px);
+  box-shadow: -3px 3px 0px var(--main-color) !important;
 }
 
 .nextBtn {

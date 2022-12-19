@@ -345,7 +345,7 @@ export class ChartService {
             focus: 'series'
           },
           data: [...posData].reverse(),
-          color: '#FF0000'
+          color: '#FFABBD'
         },
         {
           name: '負向',
@@ -358,7 +358,7 @@ export class ChartService {
             focus: 'series'
           },
           data: [...negData].reverse(),
-          color: '#5C16CF'
+          color: '#7BD0B8'
         },
         {
           name: '中立',
@@ -371,7 +371,7 @@ export class ChartService {
             focus: 'series'
           },
           data: [...neuData].reverse(),
-          color: '#696969'
+          color: '#DCDCDC'
         }
       ]
     }

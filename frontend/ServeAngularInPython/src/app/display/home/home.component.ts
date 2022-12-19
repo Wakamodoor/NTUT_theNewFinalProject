@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
   year: any;
   month: any;
 
-
   constructor(
     private cs: ChartService,
     private socket: SocketService,
