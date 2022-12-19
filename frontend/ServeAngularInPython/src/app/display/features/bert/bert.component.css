@@ -40,8 +40,8 @@
 }
 
 button, .preBtn {
-  background: #fff;
-  box-shadow: 0 0 1px rgba(0, 0, 0, .3) !important;
+  background: rgba(255, 255, 255, .5);
+  /* box-shadow: 0 0 1px rgba(0, 0, 0, .3) !important; */
   color: var(--main-color);
   /* background: var(--grey-color); */
   /* color: var(--reverse-grey-text-color); */
@@ -56,6 +56,38 @@ button:hover, .preBtn:hover {
   background: var(--main-color);
   color: #fff;
   font-weight: 700;
+}
+
+.preBtn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  border-radius: 0 5px 5px 0;
+}
+
+.preBtn:hover {
+  background: whitesmoke;
+  color: var(--main-color);
+  font-weight: 700;
+  box-shadow: 5px 5px 0px var(--main-color) !important;
+  transform: translateX(-3px) translateY(-3px);
+}
+
+.preBtn:active {
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
+}
+
+.nextBtn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 0;
+  border-radius: 5px 0 0 5px;
 }
 
 .container-result {
@@ -116,23 +148,6 @@ button:hover, .preBtn:hover {
   bottom: 40%;
 }
 
-.preBtn {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  left: 0;
-  border-radius: 0 5px 5px 0;
-}
-
-.nextBtn {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  right: 0;
-  border-radius: 5px 0 0 5px;
-}
 
 
 /* .container-input {

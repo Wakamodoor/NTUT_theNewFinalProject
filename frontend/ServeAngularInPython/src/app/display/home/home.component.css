@@ -97,7 +97,7 @@ input{
   /* background-color: rgba(256, 256, 256, 1); */
   border-radius: 10px;
   /* box-shadow: 0 0 10px var(--main-color); */
-  /* box-shadow: 0 0 20px pink; */
+  box-shadow: 0 0 20px pink;
   /* box-shadow: -8px 6px 1px pink; */
   position: relative;
 
@@ -105,10 +105,10 @@ input{
   transition: all .3s;
 }
 
-.container-leaderboard-wrapper:hover  {
+/* .container-leaderboard-wrapper:hover  {
   box-shadow: -8px 8px 1px var(--main-color);
   transform: translateX(3px) translateY(-3px);
-}
+} */
 
 .info {
   font-size: 24px;
@@ -388,6 +388,7 @@ button:hover, .preBtn:hover {
 .nextBtn:active {
   transform: translateX(1px) translateY(-1px);
   box-shadow: -3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
 }
 
 .nextBtn {
