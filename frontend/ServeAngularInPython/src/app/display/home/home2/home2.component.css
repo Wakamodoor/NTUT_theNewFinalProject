@@ -60,7 +60,6 @@
 }
 
 .container-month-wordcloud {
-  outline: 1px solid #000;
   width: 43%;
   height: 85%;
   border-radius: 10px;
@@ -97,8 +96,8 @@
 
 
 button, .preBtn {
-  background: #fff;
-  box-shadow: 0 0 1px rgba(0, 0, 0, .3) !important;
+  background: rgba(255, 255, 255, .5);
+  /* box-shadow: 0 0 1px rgba(0, 0, 0, .3) !important; */
   color: var(--main-color);
   /* background: var(--grey-color); */
   /* color: var(--reverse-grey-text-color); */
@@ -110,9 +109,11 @@ button, .preBtn {
 }
 
 button:hover, .preBtn:hover {
-  background: var(--main-color);
-  color: #fff;
+  background: whitesmoke;
+  color: var(--main-color);
   font-weight: 700;
+  box-shadow: 5px 5px 0px var(--main-color) !important;
+  transform: translateX(-3px) translateY(-3px);
 }
 
 .preBtn {
@@ -122,4 +123,10 @@ button:hover, .preBtn:hover {
   margin: auto;
   left: 0;
   border-radius: 0 5px 5px 0;
+}
+
+.preBtn:active {
+  transform: translateX(-1px) translateY(-1px);
+  box-shadow: 3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
 }
