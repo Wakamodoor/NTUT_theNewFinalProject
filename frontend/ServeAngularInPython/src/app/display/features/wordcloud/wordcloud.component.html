@@ -34,7 +34,6 @@
                      matInput
                      [matDatepicker]="picker1"
                      formControlName="startDate">
-              <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker1" class="dateIcon"></mat-datepicker-toggle>
               <mat-datepicker #picker1 [disabled]="false"></mat-datepicker>
             </mat-form-field>
@@ -46,7 +45,6 @@
                      matInput
                      [matDatepicker]="picker2"
                      formControlName="endDate">
-              <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker2" class="dateIcon"></mat-datepicker-toggle>
               <mat-datepicker #picker2 color="primary" [disabled]="false"></mat-datepicker>
             </mat-form-field>
@@ -54,11 +52,11 @@
         </div>
         <!-- query按鈕 -->
         <!-- <div class="container-form-btn">\\ -->
-          <button mat-flat-button (click)="queryWC()" class="submitBtn" style="height: 90%">查詢</button>
+          <button mat-flat-button (click)="queryWC()" class="submitBtn" disableRipple style="height: 90%">查詢</button>
         <!-- </div> -->
       </form>
     </div>
-    <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 500px; height: 500px;">
+    <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 70%; height: 450px;">
   </div>
   <button mat-flat-button class="preBtn" disableRipple style="width: 2%; height: 30%;" (click)="backPrePage()">返回首頁</button>
 </div>

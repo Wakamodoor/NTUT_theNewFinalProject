@@ -55,6 +55,11 @@
   cursor: pointer;
 }
 
+.author_date_info_start {
+  transform: translateX(-12rem);
+  cursor: pointer;
+}
+
 button, .preBtn {
   background: rgba(255, 255, 255, .5);
   /* box-shadow: 0 0 1px rgba(0, 0, 0, .3); */
@@ -93,7 +98,7 @@ button:hover, .preBtn:hover {
   width: 55%;
   height: 100%;
   background-color: #fff;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  /* box-shadow: 1px 1px 3px rgba(0, 0, 0, .3); */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -116,7 +121,7 @@ button:hover, .preBtn:hover {
   width: 40%;
   height: 100%;
   background-color: #fff;
-  box-shadow: -1px 1px 3px rgba(0, 0, 0, .3);
+  /* box-shadow: -1px 1px 3px rgba(0, 0, 0, .3); */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -124,6 +129,7 @@ button:hover, .preBtn:hover {
   align-items: center;
   opacity: 0;
   transition: all .3s;
+  position: relative;
 }
 
 .container-wordcloud .chart-title {
@@ -158,7 +164,7 @@ button:hover, .preBtn:hover {
   margin-top: 14px;
   border-radius: 20px;
   background-color: #fff;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  /* box-shadow: 1px 1px 3px rgba(0, 0, 0, .3); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,6 +172,21 @@ button:hover, .preBtn:hover {
   opacity: 0;
   transition: all .3s;
 }
+
+.container-daily-post-chart,
+.container-wordcloud,
+.container-emotion-bar {
+  box-shadow: -2px 2px 1px rgba(0, 0, 0, .1);
+}
+
+.container-daily-post-chart:hover,
+.container-wordcloud:hover,
+.container-emotion-bar:hover {
+  transform: translateY(-5px) translateX(5px);
+  box-shadow: -7px 7px 0px var(--main-color);
+}
+
+
 
 /* 溫度計本人 */
 .container-thermometer {
@@ -314,6 +335,7 @@ button:hover, .preBtn:hover {
   display: flex;
   justify-content: center;
 }
+
 /*.lebel {
   font-size: 18px;
   font-weight: 900;

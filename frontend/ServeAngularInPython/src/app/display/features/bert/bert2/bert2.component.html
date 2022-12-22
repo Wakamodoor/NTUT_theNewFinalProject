@@ -34,13 +34,12 @@
                      matInput
                      [matDatepicker]="picker1"
                      formControlName="date">
-              <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker1" class="dateIcon"></mat-datepicker-toggle>
               <mat-datepicker #picker1 [disabled]="false"></mat-datepicker>
             </mat-form-field>
           </div>
         </div>
-        <button mat-flat-button class="submitBtn" style="height: 90%" (click)="queryBert2()">預測</button>
+        <button mat-flat-button class="submitBtn" disableRipple style="height: 90%" (click)="queryBert2()">預測</button>
       </form>
     </div>
     <div class="container-result">

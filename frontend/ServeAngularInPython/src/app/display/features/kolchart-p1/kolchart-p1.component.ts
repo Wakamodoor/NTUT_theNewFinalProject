@@ -45,6 +45,12 @@ export class KolchartP1Component implements OnInit {
       this.queryDate = this.route.snapshot.paramMap.get('date')
       this.fromKOL = true
       this.chr1DataBuild(this.route.snapshot.paramMap.get('author'))
+      setTimeout(() => {
+        document.getElementById('author_date_info').setAttribute('class', 'author_date_info author_date_info_start')
+      }, 1000);
+      setTimeout(() => {
+        document.getElementById('author_date_info').setAttribute('class', 'author_date_info')
+      }, 4000);
     }else {
       this.fromKOL = false
       this.formData = this.createQueryForm()

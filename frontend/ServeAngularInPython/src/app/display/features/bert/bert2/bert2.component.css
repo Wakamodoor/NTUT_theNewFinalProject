@@ -11,7 +11,8 @@
   /* height: 500px; */
   height: 80vh;
   background-color: var(--container-background);
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  box-shadow: var(--container-box-shadow);
+  /* box-shadow: 1px 1px 3px rgba(0, 0, 0, .3); */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -27,6 +28,12 @@
 .container-form-author {
   width: 26.2%;
   margin-right: 5%;
+
+  background: #fff;
+  transition: all .3s;
+  border-radius: 10px;
+  padding: 10px 20px 0 20px;
+  box-shadow: -2px 2px 1px rgba(0, 0, 0, .1);
 }
 
 .container-form-date {
@@ -34,6 +41,18 @@
   /* display: flex;
   flex-direction: column;
   align-items: flex-start; */
+
+  background: #fff;
+  transition: all .3s;
+  border-radius: 10px;
+  padding: 10px 20px 0 20px;
+  box-shadow: -2px 2px 1px rgba(0, 0, 0, .1);
+}
+
+.container-form-author:hover,
+.container-form-date:hover {
+  box-shadow: -5px 5px 0px var(--main-color);
+  transform: translateY(-3px) translateX(3px);
 }
 
 .container-form-date-wrapper {
@@ -46,7 +65,7 @@
 .lebel {
   font-size: 18px;
   font-weight: 900;
-  border-bottom: 5px solid var(--deco-color);
+  border-bottom: 5px solid var(--main-color);
   margin-bottom: 5px;
   max-width: 100%;
   display: block;
@@ -108,11 +127,11 @@ button, .submitBtn, .preBtn {
   padding: 0;
 }
 
-button.submitBtn:hover, .preBtn:hover {
+/* button.submitBtn:hover, .preBtn:hover {
   background: var(--main-color);
   color: #fff;
   font-weight: 700;
-}
+} */
 
 .preBtn {
   text-align: center;
@@ -135,6 +154,20 @@ button.submitBtn:hover, .preBtn:hover {
 .preBtn:active {
   transform: translateX(-1px) translateY(-1px);
   box-shadow: 3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
+}
+
+.submitBtn:hover {
+  background: whitesmoke;
+  color: var(--main-color);
+  font-weight: 700;
+  box-shadow: -4px 4px 0px var(--main-color) !important;
+  transform: translateX(3px) translateY(-3px);
+}
+
+.submitBtn:active {
+  transform: translateX(1px) translateY(-1px);
+  box-shadow: -2px 2px 0px var(--main-color) !important;
   font-weight: 700;
 }
 
@@ -186,6 +219,7 @@ button.submitBtn:hover, .preBtn:hover {
   align-items: center;
   justify-content: center;
   box-shadow: 0.5px 0.5px 4px rgba(0, 0, 0, .3);
+  background: whitesmoke;
 }
 
 .result-wrapper p {
@@ -198,6 +232,10 @@ button.submitBtn:hover, .preBtn:hover {
 .articleType {
   padding-top: 16px;
   font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.result-respectively-wrapper p {
   font-weight: 900;
 }
 

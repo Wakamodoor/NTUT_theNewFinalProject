@@ -2,9 +2,29 @@
   background-image: var(--background)
 }
 
+.form {
+  display: flex;
+  flex-direction: row;
+  /* flex-direction: column; */
+  position: absolute;
+  left: 8%;
+  width: 20%;
+}
+
 .container-form-author {
   max-width: 100%;
   margin-right: 7%;
+
+  background: #fff;
+  transition: all .3s;
+  border-radius: 10px;
+  padding: 10px 20px 0 20px;
+  box-shadow: -2px 2px 1px rgba(0, 0, 0, .1);
+}
+
+.container-form-author:hover {
+  box-shadow: -5px 5px 0px var(--main-color);
+  transform: translateY(-3px) translateX(3px);
 }
 
 .chart1 {
@@ -20,40 +40,22 @@
   align-items: center;
   /* background-color: white; */
   background-color: var(--container-background);
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+  /* box-shadow: 1px 1px 3px rgba(0, 0, 0, .3); */
+  box-shadow: var(--container-box-shadow);
   border-radius: 20px;
-}
-
-.form {
-  display: flex;
-  flex-direction: row;
-  /* flex-direction: column; */
-  position: absolute;
-  left: 8%;
-  width: 20%;
-
-  background: #fff;
-  transition: all .3s;
-  border-radius: 10px;
-  padding: 1% 2% 0 2%;
-}
-
-.form:hover {
-  box-shadow: -5px 5px 0px var(--main-color);
-  transform: translateY(-3px) translateX(3px);
 }
 
 .form .lebel {
   font-size: 18px;
   font-weight: 900;
-  border-bottom: 5px solid var(--deco-color);
+  border-bottom: 5px solid var(--main-color);
   margin-bottom: 5px;
 }
 
 .lebel {
   font-size: 18px;
   font-weight: 900;
-  border-bottom: 5px solid var(--deco-color);
+  border-bottom: 5px solid var(--main-color);
   margin-bottom: 5px;
   width: 100.5%;
   display: block;
@@ -82,12 +84,12 @@ button, .submitBtn, .preBtn {
   display: block;
   padding: 0;
 }
-
-button.submitBtn:hover, .preBtn:hover {
+/*
+button:hover, .preBtn:hover {
   background: var(--main-color);
   color: #fff;
   font-weight: 700;
-}
+} */
 
 .preBtn {
   position: absolute;
@@ -109,6 +111,20 @@ button.submitBtn:hover, .preBtn:hover {
 .preBtn:active {
   transform: translateX(-1px) translateY(-1px);
   box-shadow: 3px 3px 0px var(--main-color) !important;
+  font-weight: 700;
+}
+
+.submitBtn:hover {
+  background: whitesmoke;
+  color: var(--main-color);
+  font-weight: 700;
+  box-shadow: -4px 4px 0px var(--main-color) !important;
+  transform: translateX(3px) translateY(-3px);
+}
+
+.submitBtn:active {
+  transform: translateX(1px) translateY(-1px);
+  box-shadow: -2px 2px 0px var(--main-color) !important;
   font-weight: 700;
 }
 
@@ -138,10 +154,10 @@ button.submitBtn:hover, .preBtn:hover {
   padding-bottom: 6px;
   font-size: 1.5rem;
   font-weight: 600;
-  /* text-shadow: 3px 2px var(--main-color) ; */
+  text-shadow: 2px 2px var(--main-color) ;
   text-align: center;
   margin-left: 3.5%;
-  border-bottom: 2px solid #000;
+  /* border-bottom: 2px solid #000; */
   width: 66%;
 }
 
@@ -149,7 +165,6 @@ button.submitBtn:hover, .preBtn:hover {
   font-weight: 900;
   font-size: 1.5rem;
   /* text-shadow: 3px 2px var(--main-color) ; */
-
 }
 
 

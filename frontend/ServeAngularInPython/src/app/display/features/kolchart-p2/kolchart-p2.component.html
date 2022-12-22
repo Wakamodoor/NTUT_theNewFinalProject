@@ -1,6 +1,6 @@
 <div class="body">
   <div class="container">
-    <div class="author_date_info">
+    <div class="author_date_info" id="author_date_info">
       <h3 class="authorName">{{ '作者：' + author}}&emsp;{{ '時間：' + queryDate}}</h3>
       <mat-icon fontIcon="arrow_forward_ios" class="arrow_info"></mat-icon>
     </div>
@@ -25,7 +25,7 @@
         本月文章熱門關鍵字
       </mat-label>
       <ng-container *ngIf="!wcNoData">
-        <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 90%; height: 80%;"></div>
+        <div echarts [options]="wordcloudOp" class="wordcloud" id="wordcloud" style="width: 90%; height: 76%; margin-bottom: 4%;"></div>
       </ng-container>
       <ng-container *ngIf="wcNoData">
         <div class="wcNoData" style="width: 90%; height: 80%;"><p>資料量不足，導致無結果</p></div>

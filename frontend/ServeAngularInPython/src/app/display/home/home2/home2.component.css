@@ -27,7 +27,7 @@
   /* background-color: rgba(256, 256, 256, 1); */
   border-radius: 10px;
   /* box-shadow: 0 0 10px var(--main-color); */
-  box-shadow: 0 0 20px pink;
+  box-shadow: var(--container-box-shadow);
   position: relative;
 
   background: rgba(128, 128, 128, .2);
@@ -55,8 +55,10 @@
   height: 85%;
   border-radius: 10px;
   background-color: #fff;
-  box-shadow: 0 0 10px var(--main-color);
+  /* box-shadow: 0 0 10px var(--main-color); */
   position: relative;
+
+  transition: all .3s;
 }
 
 .container-month-wordcloud {
@@ -64,8 +66,15 @@
   height: 85%;
   border-radius: 10px;
   background-color: #fff;
-  box-shadow: 0 0 10px var(--main-color);
+  /* box-shadow: 0 0 10px var(--main-color); */
   position: relative;
+
+  transition: all .3s;
+}
+
+.container-month-daily-index:hover, .container-month-wordcloud:hover {
+  transform: translateY(-5px) translateX(5px);
+  box-shadow: -7px 7px 0px var(--main-color);
 }
 
 .monthWordcloud-title {

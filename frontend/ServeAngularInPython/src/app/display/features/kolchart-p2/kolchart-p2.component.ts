@@ -85,6 +85,12 @@ export class KolchartP2Component implements OnInit {
       this.year = this.queryDate.slice(0,4)
       this.month = this.queryDate.slice(5,7).replace('月', '')
       this.queryDailyPostChart(this.author, this.year, this.month)
+      setTimeout(() => {
+        document.getElementById('author_date_info').setAttribute('class', 'author_date_info author_date_info_start')
+      }, 1000);
+      setTimeout(() => {
+        document.getElementById('author_date_info').setAttribute('class', 'author_date_info')
+      }, 4000);
       // this.queryWordcloud(this.author, this.queryDate)
       // this.getEmotionalBar()
     }else {

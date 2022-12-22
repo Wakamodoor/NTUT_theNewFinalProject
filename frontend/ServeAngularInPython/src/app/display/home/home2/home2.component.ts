@@ -1,6 +1,6 @@
 import { ChartService } from './../../../helper/services/chart.service';
 import { SocketService } from './../../../helper/services/socket.service';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 
 interface wordcloudData {
   name: string,
@@ -12,7 +12,7 @@ interface wordcloudData {
   templateUrl: './home2.component.html',
   styleUrls: ['./home2.component.css']
 })
-export class Home2Component implements OnInit {
+export class Home2Component implements OnInit, OnChanges {
   @Input() year: any;
   @Input() month: any;
   @Input() stock: string;
@@ -31,6 +31,9 @@ export class Home2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(): void {
     this.queryMonthWordcloud(this.year, this.month)
     this.queryMonthDailyEmotion(this.year, this.month)
   }

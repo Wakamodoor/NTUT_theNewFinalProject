@@ -105,22 +105,22 @@ export class HomeComponent implements OnInit {
       if(this.leaderboardData.length === 0) {
         this.openSnackBar()
       }
-      this.leaderboardData.forEach((obj, idx) => {
-        this.socket.getAuthorEmotionalBarAPI(obj['username'], this.year, this.month, this.stock).subscribe((rel) => {
-          const data = JSON.parse((JSON.stringify(rel.response)))
-          const total = data['中立字詞次數'] + data['正向字詞次數'] + data['負向字詞次數']
-          const posPercent = Math.floor((data['正向字詞次數'] / total)*100)
-          const negPercent = Math.floor((data['負向字詞次數'] / total)*100)
-          const neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
-          // document.getElementById(`emotion-bar${idx}`).style.opacity = '1';
-          // document.getElementById(`'positive${idx}`).style.opacity = '1';
-          // document.getElementById(`negative${idx}`).style.opacity = '1';
-          // document.getElementById(`neutrality${idx}`).style.opacity = '1';
-          this.leaderboardData[idx]['posPercent'] = posPercent;
-          this.leaderboardData[idx]['negPercent'] = negPercent;
-          this.leaderboardData[idx]['neuPercent'] = neuPercent;
-        })
-      })
+      // this.leaderboardData.forEach((obj, idx) => {
+      //   this.socket.getAuthorEmotionalBarAPI(obj['username'], this.year, this.month, this.stock).subscribe((rel) => {
+      //     const data = JSON.parse((JSON.stringify(rel.response)))
+      //     const total = data['中立字詞次數'] + data['正向字詞次數'] + data['負向字詞次數']
+      //     const posPercent = Math.floor((data['正向字詞次數'] / total)*100)
+      //     const negPercent = Math.floor((data['負向字詞次數'] / total)*100)
+      //     const neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
+      //     // document.getElementById(`emotion-bar${idx}`).style.opacity = '1';
+      //     // document.getElementById(`'positive${idx}`).style.opacity = '1';
+      //     // document.getElementById(`negative${idx}`).style.opacity = '1';
+      //     // document.getElementById(`neutrality${idx}`).style.opacity = '1';
+      //     this.leaderboardData[idx]['posPercent'] = posPercent;
+      //     this.leaderboardData[idx]['negPercent'] = negPercent;
+      //     this.leaderboardData[idx]['neuPercent'] = neuPercent;
+      //   })
+      // })
     });
   }
 

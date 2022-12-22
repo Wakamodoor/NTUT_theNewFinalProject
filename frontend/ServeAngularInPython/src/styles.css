@@ -9,6 +9,7 @@
   --reverse-grey-text-color: #4E4637;
   --background: radial-gradient(circle, #dcdcdc, #e0e1e5, #e2e7ee, #e2eef6, #e1f5fc, #def9fc, #dcfcfa, #ddfff6, #dfffed, #e5ffe2, #f0fdd6, #fffacd);
   --container-background: rgba(128, 128, 128, .2);
+  --container-box-shadow: 0 0 13px 6px rgba(255, 192, 203, .5);
   /* 預備色
     藍色: #00C2E4;
     綠色: #409130 #00AF98 #00754B #4C9E75;
