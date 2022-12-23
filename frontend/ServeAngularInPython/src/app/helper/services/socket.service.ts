@@ -132,7 +132,7 @@ export class SocketService {
 
   getBertAPI(content: string) {
     return ajax({
-      url:`http://localhost:5000/predict`,
+      url:`http://localhost:5001/predict`,
       method: 'POST',
       responseType: 'json',
       body: {
@@ -187,7 +187,7 @@ export class SocketService {
   getAuthorADayBert(author: string, date: string, stock: string) {
     if(stock === '2603') {
       return ajax({
-        url:`http://localhost:5000/evergreen/predict/people`,
+        url:`http://localhost:5001/evergreen/predict/people`,
         method: 'POST',
         responseType: 'json',
         body: {
@@ -197,7 +197,7 @@ export class SocketService {
       })
     }else {
       return ajax({
-        url:`http://localhost:5000/foxconn/predict/people`,
+        url:`http://localhost:5001/foxconn/predict/people`,
         method: 'POST',
         responseType: 'json',
         body: {
