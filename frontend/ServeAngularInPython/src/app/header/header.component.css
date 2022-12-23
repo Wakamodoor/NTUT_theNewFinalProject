@@ -87,3 +87,9 @@ div.nav--hidden {
   right: 0;
   margin: auto;
 }
+
+.clicked {
+  color: var(--main-color) !important;
+  text-decoration: underline var(--main-color) dotted 2.5px !important;
+  font-weight: 900;
+}

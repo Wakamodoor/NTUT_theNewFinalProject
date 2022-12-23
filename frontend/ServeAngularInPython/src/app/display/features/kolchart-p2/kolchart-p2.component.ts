@@ -168,8 +168,8 @@ export class KolchartP2Component implements OnInit {
         }
         WCData.push(tmpObj)
       });
-      this.wordcloudOp = this.cs.wordCloud(WCData, this.maskImage)
-      document.getElementById('wordcloud').style.opacity = '1'
+      this.wordcloudOp = this.cs.wordCloud(WCData, this.maskImage);
+      document.getElementById('container-wordcloud').style.opacity = "1";
       this.getEmotionalBar()
     })
   }

@@ -135,7 +135,7 @@ button:hover, .preBtn:hover {
 .container-wordcloud .chart-title {
   padding-bottom: 36px;
   font-size: 1.5rem;
-  font-weight: ˊ00;
+  font-weight: 600;
   /* text-shadow: 3px 2px var(--main-color) ; */
   text-align: center;
   /* margin-left: 3.5%; */
