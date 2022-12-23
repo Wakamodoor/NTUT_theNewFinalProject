@@ -25,7 +25,6 @@ export class BertComponent implements OnInit {
 
   ngOnInit(): void {
     this.stock = this.route.snapshot.paramMap.get('stock')
-
   }
 
   queryPredict(content: string) {

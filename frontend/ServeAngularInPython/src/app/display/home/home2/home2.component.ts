@@ -1,6 +1,7 @@
 import { ChartService } from './../../../helper/services/chart.service';
 import { SocketService } from './../../../helper/services/socket.service';
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { switchAll, switchMap } from 'rxjs';
 
 interface wordcloudData {
   name: string,
@@ -17,6 +18,7 @@ export class Home2Component implements OnInit, OnChanges {
   @Input() month: any;
   @Input() stock: string;
   @Input() queryDate: string;
+  @Input() coming: boolean;
   @Output() return = new EventEmitter<any>();
   wordcloudOp = {}
   monthDailyEmotionOp = {}
@@ -31,18 +33,27 @@ export class Home2Component implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
+
   }
 
-  ngOnChanges(): void {
-    this.queryMonthWordcloud(this.year, this.month)
-    this.queryMonthDailyEmotion(this.year, this.month)
+  ngOnChanges(changes): void {
+    console.log(changes)
+    if(changes.coming?.firstChange !== true && changes.coming) {
+      this.queryMonthWordcloud(this.year, this.month)
+      this.queryMonthDailyEmotion(this.year, this.month)
+    }
+    // if(this.emoBarDone) {
+    //   console.log('lets go')
+    //   this.queryMonthWordcloud(this.year, this.month)
+    //   this.queryMonthDailyEmotion(this.year, this.month)
+    // }
   }
 
   queryMonthWordcloud(year: string, month: string) {
+    console.log('wordcloud gogo')
     this.socket.getMonthWordcloudAPI(year, month, this.stock).subscribe(rel => {
-      console.log(rel.response)
       this.finishLoading = true
-      const data: any = JSON.parse(JSON.stringify(rel.response))
+      const data: any = JSON.parse(JSON.stringify(rel))
       let WCData: Array<wordcloudData> = []
 
       data.forEach(arr => {
@@ -53,12 +64,14 @@ export class Home2Component implements OnInit, OnChanges {
         WCData.push(tmpObj)
       });
       this.wordcloudOp = this.cs.wordCloud(WCData)
+      console.log(this.queryDate,'wordcloud done!!')
     })
   }
 
   queryMonthDailyEmotion(year: string, month: string) {
+    console.log('emobar gogo')
     this.socket.getMonthDailyEmotion(year, month, this.stock).subscribe((rel) => {
-      const data = JSON.parse(JSON.stringify(rel.response))
+      const data = JSON.parse(JSON.stringify(rel))
       let xData = Object.keys(data).map(ele => ele.replace(/\-/g, '/'));
       let posData = [];
       let negData = [];
@@ -70,6 +83,8 @@ export class Home2Component implements OnInit, OnChanges {
       });
       this.monthDailyEmotionOp = this.cs.monthDailyEmotion(xData, posData, negData, neuData)
       this.finishLoading2 = true
+      console.log(this.queryDate,'emobars done!!')
+
     })
   }
 

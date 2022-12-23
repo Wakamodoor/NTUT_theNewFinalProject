@@ -63,7 +63,7 @@
             </div>
           </ng-container>
       </div>
-      <button mat-flat-button class="nextBtn" disableRipple style="width: 2%; height: 30%;" (click)="goHome2()">更多</button>
+      <button mat-flat-button class="nextBtn" disableRipple style="width: 2%; height: 30%;" (click)="goHome2(); coming = true">更多</button>
     </div>
   </div>
   <app-home2
@@ -72,6 +72,7 @@
     [month]="month"
     [queryDate]="queryDate"
     [stock]="stock"
+    [coming]="coming"
     (return)="returnHome()"
   ></app-home2>
 </div>

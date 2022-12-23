@@ -5,7 +5,7 @@ import { ChartService } from '../../helper/services/chart.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
-import { concatMap, filter, forkJoin, map, range } from 'rxjs';
+import { concatAll, concatMap, filter, forkJoin, map, range, catchError } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_MOMENT_DATE_FORMATS,
@@ -70,6 +70,8 @@ export class HomeComponent implements OnInit {
   year: any;
   month: any;
 
+  coming: boolean = false;
+
   constructor(
     private cs: ChartService,
     private socket: SocketService,
@@ -105,22 +107,49 @@ export class HomeComponent implements OnInit {
       if(this.leaderboardData.length === 0) {
         this.openSnackBar()
       }
-      // this.leaderboardData.forEach((obj, idx) => {
-      //   this.socket.getAuthorEmotionalBarAPI(obj['username'], this.year, this.month, this.stock).subscribe((rel) => {
-      //     const data = JSON.parse((JSON.stringify(rel.response)))
-      //     const total = data['中立字詞次數'] + data['正向字詞次數'] + data['負向字詞次數']
-      //     const posPercent = Math.floor((data['正向字詞次數'] / total)*100)
-      //     const negPercent = Math.floor((data['負向字詞次數'] / total)*100)
-      //     const neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
-      //     // document.getElementById(`emotion-bar${idx}`).style.opacity = '1';
-      //     // document.getElementById(`'positive${idx}`).style.opacity = '1';
-      //     // document.getElementById(`negative${idx}`).style.opacity = '1';
-      //     // document.getElementById(`neutrality${idx}`).style.opacity = '1';
-      //     this.leaderboardData[idx]['posPercent'] = posPercent;
-      //     this.leaderboardData[idx]['negPercent'] = negPercent;
-      //     this.leaderboardData[idx]['neuPercent'] = neuPercent;
-      //   })
-      // })
+      let dataCount: number = 0;
+      this.leaderboardData.forEach((obj, idx) => {
+        console.log(obj)
+        this.socket.getAuthorEmotionalBarAPI(obj['username'], this.year, this.month, this.stock).subscribe({
+          next: (rel) => {
+            const data = JSON.parse(rel.response as any)
+            // const data = JSON.parse(JSON.stringify(rel.response))
+
+            console.log(obj['username'],data)
+
+            const total = data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] + data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] + data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"]
+            const posPercent = Math.floor((data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+            const negPercent = Math.floor((data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+            const neuPercent = Math.floor((data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+            // const total = data["正向字詞次數"] + data["負向字詞次數"] + data["中立字詞次數"]
+            // const posPercent = Math.floor((data["正向字詞次數"] / total)*100)
+            // const negPercent = Math.floor((data["負向字詞次數"] / total)*100)
+            // const neuPercent = Math.floor((data["中立字詞次數"] / total)*100)
+            // document.getElementById(`emotion-bar${idx}`).style.opacity = '1';
+            // document.getElementById(`'positive${idx}`).style.opacity = '1';
+            // document.getElementById(`negative${idx}`).style.opacity = '1';
+            // document.getElementById(`neutrality${idx}`).style.opacity = '1';
+            this.leaderboardData[idx]['posPercent'] = posPercent;
+            this.leaderboardData[idx]['negPercent'] = negPercent;
+            this.leaderboardData[idx]['neuPercent'] = neuPercent;
+            setTimeout(() => {
+              console.log('send emo')
+            }, 1000);
+          },
+          complete: () => {
+            // dataCount++
+            // console.log(dataCount)
+            // if(dataCount === 5) {
+            //   setTimeout(() => {
+            //     console.log('done')
+            //     this.emoBarDone = true
+            //   }, 2000);
+            // }
+          }
+        }
+        )
+      })
+
     });
   }
 
@@ -130,7 +159,7 @@ export class HomeComponent implements OnInit {
 
   private createQueryForm(): FormGroup {
     return this.fb.group({
-      date: [{value: moment(new Date('2022/05/31')), disabled: true}, Validators.required]
+      date: [{value: moment(new Date('2022/03/31')), disabled: true}, Validators.required]
     });
   }
 

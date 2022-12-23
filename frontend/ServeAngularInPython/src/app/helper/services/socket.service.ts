@@ -79,36 +79,34 @@ export class SocketService {
   }
 
   getKOLRankAPI(year: string, month: string, stock: string) {
-    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url:`http://localhost:5000/evergreen/ranking?year=${year}&month=${month}`,
         method: 'GET',
-        responseType: 'json'
+        responseType: 'json',
       })
     }else {
       return ajax({
         url:`http://localhost:5000/foxconn/ranking?year=${year}&month=${month}`,
         method: 'GET',
-        responseType: 'json'
+        responseType: 'json',
       })
     }
   }
 
   getMonthWordcloudAPI(year: string, month: string, stock: string) {
-    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url:`http://localhost:5000/evegreen/monthlywordcloud?year=${year}&month=${month}`,
         method: 'GET',
         responseType: 'json'
-      })
+      }).pipe(map((rel) => rel.response))
     }else {
       return ajax({
         url:`http://localhost:5000/foxconn/monthlywordcloud?year=${year}&month=${month}`,
         method: 'GET',
         responseType: 'json'
-      })
+      }).pipe(map((rel) => rel.response))
     }
   }
 
@@ -171,7 +169,7 @@ export class SocketService {
         url:`http://localhost:5000/evergreen/ranking/emotion/${author}?year=${year}&month=${month}`,
         method: 'GET',
         responseType: 'json',
-        async: true
+        async: false
       })
 
     }else {
@@ -179,12 +177,13 @@ export class SocketService {
         url:`http://localhost:5000/foxconn/ranking/emotion/${author}?year=${year}&month=${month}`,
         method: 'GET',
         responseType: 'json',
-        async: true
+        async: false
       })
     }
   }
 
   getAuthorADayBert(author: string, date: string, stock: string) {
+    console.log(stock)
     if(stock === '2603') {
       return ajax({
         url:`http://localhost:5001/evergreen/predict/people`,
@@ -214,14 +213,14 @@ export class SocketService {
         url:`http://localhost:5000/evergreen/monthly/emotion?year=${year}&month=${month}`,
         method: 'GET',
         responseType: 'json'
-      })
+      }).pipe(map((rel) => rel.response))
 
     }else {
       return ajax({
         url:`http://localhost:5000/foxconn/monthly/emotion?year=${year}&month=${month}`,
         method: 'GET',
         responseType: 'json'
-      })
+      }).pipe(map((rel) => rel.response))
     }
   }
 }
