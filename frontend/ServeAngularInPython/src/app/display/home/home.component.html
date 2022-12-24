@@ -32,11 +32,6 @@
               <!-- 溫度計 -->
               <div class="container-emotion-bar" [id]="'emotion-bar'+idx">
                 <div class="emotionBar_title">本月溫度計</div>
-                <mat-icon fontIcon="info"
-                    class="info"
-                    [matTooltip]="getTooltipText(3)"
-                    matTooltipPosition="above"
-                ></mat-icon>
                 <div class="container-thermometer">
                   <div class="shape-head">
                     <div class="middle-deco"></div>
@@ -49,6 +44,11 @@
                     </div>
                   </div>
                 </div>
+                <mat-icon fontIcon="info"
+                    class="emo-info"
+                    [matTooltip]="getTooltipText(3)"
+                    matTooltipPosition="above"
+                ></mat-icon>
                 <div class="thermometer-desc">
                   <div class="desc-pos"><div></div>正向</div>
                   <div class="desc-neg"><div></div>負向</div>

@@ -117,14 +117,14 @@ export class HomeComponent implements OnInit {
 
             console.log(obj['username'],data)
 
-            const total = data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] + data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] + data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"]
-            const posPercent = Math.floor((data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] / total)*100)
-            const negPercent = Math.floor((data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
-            const neuPercent = Math.floor((data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
-            // const total = data["正向字詞次數"] + data["負向字詞次數"] + data["中立字詞次數"]
-            // const posPercent = Math.floor((data["正向字詞次數"] / total)*100)
-            // const negPercent = Math.floor((data["負向字詞次數"] / total)*100)
-            // const neuPercent = Math.floor((data["中立字詞次數"] / total)*100)
+            // const total = data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] + data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] + data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"]
+            // const posPercent = Math.floor((data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+            // const negPercent = Math.floor((data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+            // const neuPercent = Math.floor((data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+            const total = data["正向字詞次數"] + data["負向字詞次數"] + data["中立字詞次數"]
+            const posPercent = Math.floor((data["正向字詞次數"] / total)*100)
+            const negPercent = Math.floor((data["負向字詞次數"] / total)*100)
+            const neuPercent = Math.floor((data["中立字詞次數"] / total)*100)
             // document.getElementById(`emotion-bar${idx}`).style.opacity = '1';
             // document.getElementById(`'positive${idx}`).style.opacity = '1';
             // document.getElementById(`negative${idx}`).style.opacity = '1';
@@ -159,7 +159,7 @@ export class HomeComponent implements OnInit {
 
   private createQueryForm(): FormGroup {
     return this.fb.group({
-      date: [{value: moment(new Date('2022/03/31')), disabled: true}, Validators.required]
+      date: [{value: moment(new Date('2022/02/28')), disabled: true}, Validators.required]
     });
   }
 

@@ -69,6 +69,7 @@ input{
 
 mat-form-field {
   font-size: 8px;
+  /* margin: .25rem 0 !important; */
 }
 
 button, .submitBtn, .preBtn {

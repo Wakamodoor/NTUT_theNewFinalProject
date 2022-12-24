@@ -210,11 +210,17 @@ export class KolchartP2Component implements OnInit {
 
   getEmotionalBar() {
     this.socket.getAuthorEmotionalBarAPI(this.author, this.year, this.month, this.stock).subscribe((rel) => {
-      const data = JSON.parse(JSON.stringify((rel.response)))
+      const data = JSON.parse(rel.response as any)
+      // const data = JSON.parse(JSON.stringify((rel.response)))
       const total = data['中立字詞次數'] + data['正向字詞次數'] + data['負向字詞次數']
       this.posPercent = Math.floor((data['正向字詞次數'] / total)*100)
       this.negPercent = Math.floor((data['負向字詞次數'] / total)*100)
       this.neuPercent = Math.floor((data['中立字詞次數'] / total)*100)
+      console.log(data)
+      // const total = data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] + data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] + data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"]
+      // const posPercent = Math.floor((data["\u4e2d\u7acb\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+      // const negPercent = Math.floor((data["\u6b63\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
+      // const neuPercent = Math.floor((data["\u8ca0\u5411\u5b57\u8a5e\u6b21\u6578"] / total)*100)
       document.getElementById('emotion-bar').style.opacity = '1';
       document.getElementById('positive').style.opacity = '1';
       document.getElementById('negative').style.opacity = '1';

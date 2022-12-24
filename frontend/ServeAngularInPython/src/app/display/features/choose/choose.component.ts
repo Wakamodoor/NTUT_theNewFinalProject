@@ -28,6 +28,12 @@ export class ChooseComponent implements OnInit {
   ngOnInit(): void {
     this.openSnackBar()
     this.isHome = false
+    setTimeout(() => {
+      document.getElementById('author_date_info').setAttribute('class', 'author_date_info author_date_info_start')
+    }, 1000);
+    setTimeout(() => {
+      document.getElementById('author_date_info').setAttribute('class', 'author_date_info')
+    }, 4000);
   }
 
   openSnackBar() {

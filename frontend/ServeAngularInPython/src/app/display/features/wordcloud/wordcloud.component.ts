@@ -122,7 +122,7 @@ export class WordcloudComponent implements OnInit {
         WCData.push(tmpObj)
       });
       this.wordcloudOp = this.cs.wordCloud(WCData, this.maskImage)
-      document.getElementById('wordcloud').style.opacity = '1'
+      document.getElementById('wordcloud-opacity').style.opacity = "1";
     })
   }
 

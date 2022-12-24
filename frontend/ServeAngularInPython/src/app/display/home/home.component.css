@@ -421,7 +421,7 @@ button:hover, .preBtn:hover {
   /* opacity: 0; */
   transition: all .3s;
   top: -94px;
-  left: 86px;
+  left: 94px;
 }
 
 .container-thermometer {
@@ -556,9 +556,13 @@ button:hover, .preBtn:hover {
   margin: auto;
 }
 
-.container-emotion-bar .info {
+.container-emotion-bar .emo-info {
   /* margin-top: 1%; */
-  margin: 3.5% -30% auto 0;
+  /* margin: 3.5% -30% auto 3px; */
+  display: block;
+  position: relative;
+  margin-left: 10px;
+  /* margin: auto 10px auto 0; */
 }
 
 .flex-jc-center {

@@ -57,7 +57,10 @@ body {
 h1 {
   margin: 0;
 }
-
+/* 
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0 !important;
+} */
 /* -----------copy來的loading效果----------- */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap");
